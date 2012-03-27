@@ -2,10 +2,10 @@
 %%% @author Shahzad Bhatti
 %%% @doc Compute square root for 16-bit integer numbers
 %%%     erlc compute_square_root.erl
-%%%     erl -noshell -s compute_square_root test_compute_square_root. -s init stop
+%%%     erl -noshell -s compute_square_root test_compute_square_root -s init stop
 %%%--------------------------------------------------------------------------------------------------%%%
 
--module(compute_square_root.).
+-module(compute_square_root).
 -export([compute_square_root/1, test_compute_square_root/0]).
 
 

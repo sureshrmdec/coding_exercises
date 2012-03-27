@@ -2,7 +2,7 @@
 %%% @author Shahzad Bhatti
 %%% @doc Binary Search an ordered list
 %%%     erlc binary_search.erl
-%%%     erl -noshell -s algorithms test_binary_search -s init stop
+%%%     erl -noshell -s binary_search test_binary_search -s init stop
 %%%--------------------------------------------------------------------------------------------------%%%
 
 -module(binary_search).
