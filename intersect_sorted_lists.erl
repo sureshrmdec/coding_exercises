@@ -1,6 +1,6 @@
 %%%--------------------------------------------------------------------------------------------------%%%
 %%% @author Shahzad Bhatti
-%%% @doc Compute square root for 16-bit integer numbers
+%%% @doc Given two sorted arrays, return intersection of two lists
 %%%     erlc intersect_sorted_lists.erl
 %%%     erl -noshell -s intersect_sorted_lists test_intersect_sorted_lists -s init stop
 %%%--------------------------------------------------------------------------------------------------%%%
