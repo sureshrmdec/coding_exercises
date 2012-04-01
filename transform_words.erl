@@ -4,6 +4,7 @@
 %       into another by changing one letter at a time.
 %%%     erlc transform_words.erl
 %%%     erl -noshell -s transform_words test_transform_words -s init stop
+%%% not yet complete
 %%%--------------------------------------------------------------------------------------------------%%%
 
 -module(transform_words).
