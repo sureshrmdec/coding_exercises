@@ -53,7 +53,7 @@ class RunSeq
             end
         end
         pk = lists[-1]
-        finalLists = []
+        run_list = []
         for list in lists
             index = 0
             sets = []
@@ -79,10 +79,10 @@ class RunSeq
                 end
             end
             if sets.size == m
-                finalLists << sets
+                run_list << sets
             end
         end
-        finalLists 
+        run_list 
     end
 end
 
