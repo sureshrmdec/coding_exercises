@@ -39,7 +39,7 @@ root.right = Node.new(20)
 root.right.left = Node.new(6)
 root.right.right = Node.new(21)
 
-puts "#{root.print} #{root.validate?}\n\n"
+puts "SHOULD BE FALSE #{root.print} #{root.validate?}\n\n"
 
 
 root = Node.new(10)
@@ -48,4 +48,30 @@ root.right = Node.new(20)
 root.right.left = Node.new(15)
 root.right.right = Node.new(21)
 
-puts "#{root.print} #{root.validate?}\n\n"
+puts "SHOULD BE TRUE #{root.print} #{root.validate?}\n\n"
+
+root = Node.new(8)
+root.left = Node.new(3)
+root.left.left = Node.new(1)
+root.left.right = Node.new(6)
+root.left.right.left = Node.new(4)
+root.left.right.right = Node.new(7)
+
+root.right = Node.new(10)
+root.right.right = Node.new(14)
+root.right.right.left = Node.new(13)
+
+puts "SHOULD BE TRUE #{root.print} #{root.validate?}\n\n"
+
+root = Node.new(8)
+root.left = Node.new(3)
+root.left.left = Node.new(1)
+root.left.right = Node.new(6)
+root.left.right.left = Node.new(4)
+root.left.right.right = Node.new(7)
+
+root.right = Node.new(10)
+root.right.right = Node.new(14)
+root.right.right.left = Node.new(3)
+
+puts "SHOULD BE FALSE #{root.print} #{root.validate?}\n\n"
