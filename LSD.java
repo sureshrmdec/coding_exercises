@@ -1,3 +1,4 @@
+// N + R running time -- sort 1 million 32-bit integers
 public class LSD {
     public static void sort(String[] a, int W) {
         int R = 256; // radix R
