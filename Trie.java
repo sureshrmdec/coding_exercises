@@ -1,3 +1,7 @@
+// design a data struture to perform efficient spell checking
+// solution: build a 26-way trie(key = word, value = bit)
+// to delete key, find node with corresponding node to key and set value 
+// to null. If node has all null links, remove that node and recur.
 public class Trie<T> {
     private static final int R = 256;
     private static class Node<T> {
