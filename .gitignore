@@ -1,3 +1,4 @@
 *.beam
 *.dump
-*.class
+*.class 
+target
