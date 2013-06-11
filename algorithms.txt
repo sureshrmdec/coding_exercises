@@ -1,0 +1,285 @@
+
+http://opentsdb.net/
+http://www.guardian.co.uk/uk/2013/may/02/birmingham-murder-racially-motivated-police
+http://www.motherjones.com/politics/2013/05/ak-47-semi-automatic-rifle-building-party
+ 
+
+Specialised NoSQL database systems are used a lot for time series storage, particularly for tick data:
+
+Kx / Kdb is one prominent solution; from Arthur Whitney et al who did A+ at Morgan Stanley
+Onetick is another, newer entrant, which has traces back to Goldman Sachs
+Voltdb is something by serial database inventer Michael Stonebreaker
+SciDB is another recent Stonebreaker project, trying 'commercial open source' but more for science apps (at least for now?)
+
+There are many specialised products for HF tick data. In addition to KDB which you mentioned, there is OneTick, Vertica, Infobright, and some open-source ones like MonetDB etc. (see http://en.wikipedia.org/wiki/Column-oriented_DBMS).
+
+
+
+Crescent Lake, WA
+
+Kachess Lake, wa
+Cle Elum Lake
+Lake Samish Drive, , WA
+Lake Cushman, wa
+
+
+L P S O CG
+Lexical analysis + Parsing + Semantic analysis + Optimization + Code generation
+
+
+
+
+
+
+https://gist.github.com/anonymous/5133829/raw/9340a6fdc354537b878291f591987e27c1605335/SimCityUI.js
+
+http://www.huffingtonpost.co.uk/2012/10/11/physicists-may-have-evide_n_1957777.html#slide=1160617
+
+Min-cut
+   max number of cuts for n nodes is 2^n
+   min-number of edges for n vertices: n-1
+   max-number of edges (m) for n vertices: n(n-1)/2
+   compute fewest number of crossing edges
+   apps: weaknesses in network, community detection, image segmentation
+   sparse graph - closer to n-1 edges
+   dense graph - closer to n(n-1)/2
+
+   adjacency matrix
+   A[i j] = 1 if there is edge from i to j
+   you can also save weight
+   for directed graph use + if edge is from i to j and - for j to i
+   space required for adjacency matrix is O(n^2)
+   not efficient for sparse graph
+
+  adjacency list
+   array of nodes
+   array of edges
+   each edge points to end-points
+   each vertex points to edge incident on it
+   space required is O(n+m)
+
+  min-cut algorithm - compute a cut with fewest number of crossing edges
+   while there are more than 2-vertices
+      pick a edge (u, v) randomly 
+      merge or contract u, v into single vertex
+      remove self-loops (both start and end vertex is same node)
+   return cut represented by final two vertex (does not always work)
+   probability of success
+      let m is number of edges, n number of vertices, F number of cross cutting edges and let A and B are two groups
+      if an edge F is contracted, this will not output A, B, i.e, probability of success = Pr[never contracts an edge of F]
+      If k is number of crossing edges, then probability of picking those edges is k/m
+      If n is number of vertices, degree of each vertex x is at least K (# of incident edge)
+      Sum(degree of vertices) = 2 * m and sum of degrees is at least kn
+      m >= kn/2
+      since Pr[s1] = k/m, Pr[s1] <= 2/n
+      Pr[second iteration] = Pr[s2|s1] . Pr[s1], where Pr[s1] >= (1-2/n) and Pr[s2|s1] = 1 - (k/# of edges), convert this expr into vertices instead of edges
+      Pr[s2|s1] = 1 - 2/(n-1)
+      Overall prob of success = (1-2/n) . (1 - 2/(n-1)) . (1 - 2/(n-2)) ..
+            = n-2/n . n-3/n-1 . n-4/n-2 .. 2/4 . 1/3 = 2 / n.(n-1) >= 2/n^2
+
+      Run this algorithm multiple times, remember smallest cuts we saw, how many trials for n vertices
+         max 1+x <= e^x, so if N = n^2, prob[fail] <= e^-1/n^2 ^ n^2 = 1/e
+         if we take N = n^2 . lgn, Pr = (1/e)^lgn = 1/n
+
+   What is largest number of min-cuts that graph with n vertices can have: n(n-1) / 2
+   Lower bound - cycle
+   
+   Graph search
+      bacon number4wq
+      drive directions
+      soduku puzzle
+      clustering
+      goal O(M+N)
+   BFS
+      queue = []
+      queue.push(first_vertex)
+      while queue not empty
+         v = remove the first node of queue
+         for each edge(v, w)
+            if w unexplored 
+               mark w to explore and add to queue
+   shortest path
+      Use BFS 
+      In addition to marking explore, calculate distance, dist(w) = dist(v) + 1
+      
+
+   connected components
+      all nodes unexplored
+      assume labeled 1 to n
+      for i = 1 to n
+         if i not explored
+            bfs(G, i)7                    
+
+   Kruskal algorithm for MST
+      sort edges by weight (asc)
+      add edge to MST as long as it doesn't create a cycle
+      # of edges = V-1
+      union find data structure
+      maintain a set of connected components
+      if v and w are in same set, then it will create a cycle
+      To add v->w to T, merge sets containing v and w
+      kruskal(EdgeWeightedGraph G) {
+         Queue<Edge> met = new Queue<Edge>();
+         MinPQ<Edge> pq = new MinPQ<Edge>();
+         for (Edge e : G.edges) pq.insert(e);
+         UF uf = new UF(G.V());
+         while (!pq.isEmpty() && mst.size() < G.V()-1)  {
+            Edge e = pq.delMin();
+            int v = e.either; int w = e.other(v);
+            if (!uf.connected(v, w)) {
+               uf.union(v, w);
+               msq.enqueue(e);
+            }
+         }
+         return met;
+      }
+
+      O(E log(E))
+      build PQ = E
+      delete Min = LogE
+      union     = log* V
+      connected = log* V
+
+   Prims' algorithm for MST
+      find min-weight edge with exactly one endpoint in T
+      maintain a PQ of edges with at least one endpoint in T
+      delete min-edge to determine next edge
+
+      lazy algorithm - add all edges for each vertex that is discovered
+      
+      boolean[] marked = new boolean(G.V());
+      Queue<Edge> met = new Queue<Edge>();
+      MinPQ<Edge> pq = new MinPQ<Edge>();
+      visit(G, 0);
+      while (!pq.isEmpty()) {
+         Edge e = pq.delMin();
+         int v = e.either; w = e.other(v);
+         if (marked[v] && marked[w]) continue;
+         mst.enqueue(e);
+         if (!marked[v]) visit(G, v);
+         if (!marked[w]) visit(G, w);
+      }
+
+      visit(WeightedGraph G, int v) {
+         marked[v] = true;
+         for (Edge e : G.adj(v)) {
+            if (!marked[e.other(v)]) {
+               pq.insert(e);
+            }
+         }
+      }
+
+      ~ E Log E
+      
+
+   Eager algorithm - clear obsolete edges to reduce memory overhead
+   IndexedMinPQ
+      
+
+   Shortest Path
+      DirectedEdge
+      v = e.from(), w = e.to()
+      
+      EdgeWeightedDigraph(int V)
+      addEdge(DirectedEdge)
+      adj(int v) -> Iterable<DirectedEdge>
+      
+      EdgeWeightedDigraph
+         int V
+         Bag<Edge>[] adj
+
+         public EdgeWeightedDigraph(int V) {
+            this.V = V;
+            adj = new Bag[V];
+            for (int i=0; i<V; i++) adj[i] = new Bag<Edge>();
+         }
+         void addEdge(Edge e) {
+            int v = e.from();
+            adj[v].add(e);
+         }
+
+      
+      SPT
+      double distTo(int v) {
+         return distTo[v];
+      }
+      Iterable<DirectedEdge> pathTo(int v) {
+         Stack<DirectedEdge> path = new Stack<DirectedEdge>();
+         for (DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()]) {
+            path.push(e);
+         }
+      }
+
+
+void (^logMessage)(void) = ^{
+  NSLog(@"Hello from inside the block");
+};
+
+void (^sumNumbers)(NSUInteger, NSUInteger) = ^(NSUInteger num1, NSUInteger num2){
+  NSLog(@"The sum of the numbers is %lu", num1 + num2);
+};
+
+void (^myFirstBlock)(NSString *) = ^(NSString *msg) {
+  NSLog(msg);
+};
+
+myFirstBlock(@"Hello");
+myFirstBlock(@"World");
+
+[funnyWords enumerateObjectsUsingBlock:
+  ^(NSString *word, NSUInteger index, BOOL *stop){
+    NSLog(@"%@ is a funny word", word);  
+  }
+];
+
+
+void (^enumeratingBlock)(NSString *, NSUInteger, BOOL *) = 
+  ^(NSString *word, NSUInteger index, BOOL *stop){
+    NSLog(@"%@ is a funny word", word);
+  };
+                         
+[funnyWords enumerateObjectsUsingBlock:enumeratingBlock];
+
+
+@implementation Person
+- (Person *) copyWithZone:(NSZone *)zone;
+{
+    Person *personCopy = [[Person allocWithZone:zone] init];
+    return personCopy;
+}
+@end
+
+
+chess strategy and tactics
+
+geometric series
+   (1-x^n)/(1-x)
+
+arithmetic series
+   sum of numbers from 0<=k<n
+   n(n-1)/2
+
+binomial upper
+   (n+1 m+1)
+
+binomial theorem 
+   (x+y)^n
+
+harmonic theorem
+   sum of 1/k from 1 to n = Hn
+
+vandermonde convolution
+   (n+m t)
+
+
+
+
+
+
+
+
+
+
+
+
+
