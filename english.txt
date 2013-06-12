@@ -1,0 +1,208 @@
+nouns
+	place/things
+
+pronouns
+	take place of nouns - I/his/she/they
+
+adjectives
+	modify noun or pronoun (e.g. talented, modern, best)
+
+
+verbs
+	action
+
+adverbs
+	modify verbs or other adverbs (ly)
+
+Prepositions
+	show relationships
+	condition, direction, location or time
+	e.g. behind, on, in spite of, across, with
+
+Conjunctions
+	join words, phrases and clauses
+	coordinating, correlative, adverbial, subordinative
+	coordinating -- fanboys (for, and, nor, but, or, yet, so)
+	corelative - comparisons, e.g. not only but also, either nor, either or, whether or, both and
+	adverbial conjunction - hot (however, otherwise, therefor), shot (similarly, hence, on the other hand, thus), cat (consequently, also, then).
+			Other adverbial conjections are: in addition, accordingly, in contrast, more over, in fact
+	subordinate conjection - change/subboridnate one sentence to another, e.g. as, because, since, although, whereas, even though, while
+
+
+Interjections
+	show emotion or surprise, e.g. duh!, huh!, wow!, ouch!, hey!, ugh!
+
+
+Parts of speech
+	Subject & Verb (e.g. The seals performed) use action verbs.
+	subject pronouns - I/his/you/he
+	indefinite pronouns - everyone, anyone, each, somebody, anybody
+
+Three types of verbs
+	action verbs (dramatic), e.g. leaped, barked, napped, sniffed, played
+		just add ed for past, e.g. I asked, I had (past participle)
+	linking verbs - link noun to subject, pronoun to subject, adjective to subject, or preposition. Such as feel, look, sound, smell, taste, seem, appear, remain, grow, e.g. his father was a colonel
+		he felt ill
+	helping verbs - appear before the main verb, e.g. can, will, might, e.g she can balance on the slake line
+		
+	iregular verb - present, past and past participle are different buy/bought, choose/chose/chosen
+
+Subject and verb need to agree, e.g. singular/plural, same tenses (either present or past)
+	active voice -- subject is clearly responsible for verb
+
+
+Clause - a group of related words containing a subject and verb
+	Independent clause (complete idea) -- stand on its own, e.g. The tutor discussed the paper with the student.
+	Subbordinate/Dependent clause (incomplete idea), e.g. Once I find the axe; Although you lost the keys
+		Adjective subbordinate clause - modify a noun in a sentence. They generally start with
+			who, whom, that, which, whose, when, where, e.g.
+			Lyida, who was an expert climber, needed less coaching than Ava.
+		Adverb subbordinate clause - modify verbs, ajectives and possibly other adverbs
+			They include: how, when, where, under which condition, what is happening to someone
+			They begin with: because, since, after, while, when, although
+			e.g. After she finsihed the interview, Emma felt releived.
+
+Phrase - A word or group of related words lacking a subject and verb
+	Two or more words
+	Noun phrases
+		contains nouns
+		three types:
+			prepositional phrases
+				contains preposition and at lease one noun, e.g. From my vantage point, I can see two eagles.
+				"From my vantage point" is prepositional phrase
+			absolute phrases
+				modify entire sentence and they can be in begging, middle or end and good for adding details
+				e.g. Feet rooted to the spot, the hunter listened for sounds of movement in the forest.
+				"Feet rooted to the spot" is absolute phrase
+			appositive phrases
+				adds details to noun, modifies only noun, e.g.
+				His car, a rusty 1982 Ford Mustang, chugged down the road like an old mule.
+				"a rusty 1982 Ford Mustang" is appositive phrase
+	Verb phrases
+		typically begin with verb
+		infinitive phrases
+			to + verb, e.g. to swim
+			e.g. To swim the length of the pool under water, he had to hold his breath for two full minutes.
+			"to swith the length of the pool under water" is infinitive phrase.
+			It is useful when making a plea that something needs to happen
+		participle phrases
+			present participle - begins with verb+ing
+				e.g. running out of time, she wrote the first word that came to mind.
+			past participle - typically ends with -ed
+				Exhaused by the long day of rowing, he fell asleep immediately.
+
+Four types of sentences:
+	Simple sentences
+		contains only one independent clause - complete ida (single subject, single verb)
+		You can use conjunction, semicolon or semicolon and adverbial conjunction
+
+		e.g. The roses grew quickly in the wet, fertile soil.
+		e.g. Peacock boulevard, a deserted stretch of abondoned storefronts, waited paitiently for new life.
+		e.g. Rushing by wildly, the river, swollen with the rain water, threatened to flood the village.
+
+	Compound sentences
+		When you join two independent sentences
+		e.g. The old car spluttered to the top of the hill, so we were all relieved.
+		In above example, "so" is coordinating conjunction and put comma before so
+		e.g. The old car spluttered to the top of the hill; we were all relieved.
+		e.g. The old car spluttered to the top of the hill; therefore, we were all relived.
+		In above example, we used semicolon with adverbial conjunction and "therefore" is adverbial conjunction
+		e.g. Eyes burning from staring at the computer screen, the writer smiled, for he had finished.
+
+	Complex Sentences
+		Combine independent clause with dependent clause
+		You can use adverbial conjunction where subordinate clause precede independent clause.
+		e.g. Because the stinger is lodged under your skin, you will experience pain for about an hour.
+		Although you are young, you can stay up late.
+
+	Compound-Complex Sentences
+		Two indpendent clauses and a dependent clause
+		You can combine compound clause with conjunction that combines with dependent clause
+		e.g. We could go to the beach, or we could go up to the mountains since it mightr rain on the coast.
+		In above example, first two clauses are independent and "since it might rain on the coast" is dependent.
+		e.g. Because the stinger is lodged under your skin, you will experience pain for about an hour, yet the 
+		pain will subside gradually.
+		In above example, "because.." is dependent and "you will.." and "yet..." are independent clauses.
+		Pick up the trash, and you can have some ice cream when you come inside.
+
+
+Three parts of paragraph:
+	Topic sentence
+		it tells what paragraph is about
+		e.g. People need supportive relationships to ensure mental and physical health.
+	Supporting Details
+		It convince the reader,e .g.
+		give an example of family relationships, work relationships
+	Concluding Sentence
+		It provides summary, e.g.
+		Mental and physical health go together, so people need to make it a priority to find and maintain
+			supportive relationships.
+
+	
+Five stages of writing
+	Inventing
+		Freewriting, brainstorming, journalistic questions, listing, clustering
+	Organizing
+		Arrange material, e.g.
+		compare/contrast
+		cause/effect
+		division/classification
+		process analysis
+		illustration
+	Drafting
+		You just trying to get information on page without regard to grammer, spelling
+	Revising
+		Two steps - macro revision, micro revision
+		Macro revision looks at organization and contents
+		Micro revision looks at sentences
+		Keep readers in mind
+		You may go back to organization/drafting
+	Editing
+		Do this last
+		spelling/punctuation/grammer
+
+
+Editing
+	Subject-verb agreement
+		Plural subject require plural verb
+	Pronoun-Antecedent agreement
+		Antecedent is a word that pronoun refers, e.g.
+		The student lost their notebook. is incorrect and instead we need to use his/her notebook. "student" is
+		antecdent.
+		Avoid slang
+	Parallel structure
+		same format, e.g. if you are using ing, then use that for all verbs
+		For excercise, Tara liked snowboarding, surfing, and running.
+
+	Punctuation
+		commas
+			commas with introductory elements
+			First of all, I like to go to the movies, the beach, and the mountains, so I need a car.
+			Introductory words should be separated by comma (e.g. subbordinate clause)
+			commas in a series
+			commas in a compound sentence
+			comma splice
+				Two independent clauses join by comma
+			e.g. 
+				On the other hand, you might consider yoga, but meditation is also an option.
+		apostrophes
+			mark possession and contraction
+			We found Hank's hammer. (shows posession apostrophe)
+			I can't make it. (contraction)
+		semicolon
+			Separate two complete sentences/clauses
+		
+	Capitalization
+		always capitalize "I"
+		The first word of a sentene.
+		Capitalize proper nouns.
+
+	Spelling
+		homonyms/commonly confused words (two, too, to)
+		
+
+
+
+shahbhat@gmail.com/Yellow1 https://ilm.azurewebsites.net/	noor academy
+Pediatrics Yass Moinpour, MD	Renton Pediatric Associates Phone: 425.271.5437
+Dentist Stephen Cho, 425-430-4450

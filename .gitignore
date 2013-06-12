@@ -2,3 +2,4 @@
 *.dump
 *.class 
 target
+*.class 

@@ -1,0 +1,143 @@
+Lexical analysis + Parsing + Semantic Analysis + Optimization + Code generation
+
+Cool compiler
+ 1.cl
+	class Main {
+		i : IO <- new IO;
+		main():Int {
+			{
+			i.out_string("Hello World\n");
+			(new IO).out_string("another");
+			1;
+			}
+		};
+	};
+
+ 2.cl
+	class Main inherits IO {
+		i : IO <- new IO;
+		main():Int {
+			{
+			self.out_string("Hello World\n");
+			1;
+			}
+		};
+	};
+
+coolc 1.cl
+spim 1.s
+
+Factorial
+class Main inherits A2I {
+	fact1(i: Int): Int {
+		if (i == 0) then 1 else i * fact(i-1) fi
+	}
+	fact(i: Int): Int {
+		let fact: Int <- 1 in {
+			while (not (i = 0)) loop
+			{
+				fact <- fact * i;
+				i <- i - 1;
+			}	
+			pool;
+			fact;
+		};
+	}
+	main() : Object {
+		str : String <- (new IO).in_string();
+		i : Int <- a2i(str);
+		str = i2a(fact(i))
+		(new IO).out_String(str.concat("\n"));
+	};
+};
+
+
+coolc 3.cl a2i
+
+
+class Main inherits IO {
+	main() : Object {
+		let hello: String <- "Hello",
+			world: String <- "World",
+			newline: String <- "\n"
+		in
+			self.out_string(hello.concat(world).concat(newline))
+	};
+};
+
+////////////////////////////////////////////
+
+
+class List inherits A2I {
+	item: Object
+	next: List;
+	
+	init(i: String, n: List): List {
+		{
+		item <- i;
+		next <- n;
+		self;
+		}
+	};
+	flatten() : String {
+		let string: String < -
+			case item of 
+				i: Int => i2a(i);
+				s: String => s;
+				o: Object => { abort(); "";}
+			esac
+		in
+			if (isvoid next) then item else string.concat(flatten(next)) fi
+	};
+};
+		
+	
+
+class Main inherits IO {
+	main() : Object {
+		let hello: String <- "Hello",
+			world: String <- "World",
+			newline: String <- "\n",
+			nil: List,
+			list: List <- (new List).init(hello, 
+				(new List).init(world,
+					(new List).init(newline, nil)))
+		in
+			self.out_string(list.flatten())
+	};
+};
+
+
+
+
+Lexical analysis
+	token class: identifier, whitespace, keywords (if/else), (, ), numbers, ...
+	communicate tokens to the parser
+	string -> LA -> Token<class, string> -> Parser
+	Some tokens require look ahead
+	
+Regular expressions into NFA
+Single character
+	'c' = {"c"}
+Epsilon
+	E = {""}
+Union
+	A + B = {a|a E A} U {b|b E B}
+Concatenation
+	AB = {ab|a E A ^ b E B}
+Iteration
+	A* = Union of i>=0 of A^i
+	A^0 = Epsilon
+Regular expresss = Epsilon | 
+		'c', where c belongs to Sigma (c E EE)
+		| R + R
+		| RR
+		| R*
+
+Regular languages
+	Sigma = {0, 1} e.g. language of strings of 0, 1
+	|* = U i>= 0 of i^i = 1 repeated i times = "" + 1 + 11 .. = all strings of 1
+	(1 + 0)1 = {ab|a E 1+0 ^ b E 1} = {11, 01}^
+	0* + 1* = {0^i|i>=0} U {1^i|i>=0}
+	(0+1)^* = U i>= 0 of (0+1)^i = "", 0+1, (0+1)(0+1), ... = all strings of alphabet = Sigma*
+
