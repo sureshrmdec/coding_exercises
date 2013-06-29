@@ -60,4 +60,395 @@ List(1, 2, 3, 4) match {
       }
 
 
+Case Classes
+    - adds companion objects, e.g.
+        object Number {
+            def apply(n: Int) = new Number(n)
+        }
+        So you can write Number(2) and it automatically calls apply 
+    -  def eval(e: Expr): Int = e match {
+            case Number(n) => n
+            case Sum(e1, e2) => eval(e1) + eval(e2)
+    }
+    Patterns are constructed from 
+        constructors, variables, wildcard patterns, constants
+
+
+Expression Problem
+create show method
+trait Expr 
+case class Number(n: Int) extends Expr 
+case class Sum(e1: Expr, e2: Expr) extends Expr 
+
+object exprs {
+    def show(e: Expr):String = e match {
+        case Number(x) => x.toString()
+        case Sum(l, r) => show(l) + " + " + show(r)
+    }
+}
+
+Lists - immutable and recursive whereas arrays are flats and mutable
+    List(1, 2, 3)
+    List()
+
+    lists are constructed from nil
+        fruit = "apple" :: ("oranges" :: ("pears" :: Nil))
+
+    three fundamental operatotions 
+        head 
+        tail 
+        isEmpty 
+    List patterns   
+        1 :: 2 :: xs    will match with first two members are 1 and 2
+        x :: Nil        list of length 1
+
+def last[T](xs: List[T]): T = xs match {
+    case List()=> throw new Error("empty list")
+    case List(x) => x
+    case y :: ys => last(ys)
+}
+
+def init[T](xs: List[T]): List[T] = xs match {
+    case List() => new Error("init")
+    case List(x) => List()
+    case y::ys => y::init(ys)
+}
+
+def concat[T](xs: List[T], ys: List[T]): List[T] = xs match {
+    case List() => ys
+    case z::zs => z :: concat(zs, ys)
+}
+    
+def reverse[T](xs: List[T]): List[T] = xs match {
+    case List() => xs 
+    case y :: ys => reverse(ys) :: y // cost O(N*N) because concat
+}
+
+def removeAt[T](n: Int, xs: List[T]): T = (xs take n) ::: (xs drop n+1)
+
+def map[U](f: T => U): List[U] = this match {
+    case Nil => this 
+    case x :: xs => f(x) :: xs.map(f)
+}
+
+def filter(p: T => Boolean): List[T] = this match {
+    case Nil => this 
+    case x :: xs => if (p(x)) x :: xs.filter(p) else xs.filter(p)
+}
+
+
+pack(List("a", "a", "a", "b", "c", "c", "a"))
+
+def pack[T](xs: List[T]): List[List[T[T]] = xs match {
+    case Nil => Nil 
+    case x :: xsl => 
+        val (first, rest) = xs span(y => y == x)
+        first :: pack(rest)
+    }
+}
+
+def encode[T](xs: List[T]): List[(T, Int)] =
+    pack(xs) map(ys => (ys.head, ys.length))
+}
+
+
+Cost of insertion sort - N * N
+
+Other methods
+xs.length 
+xs.last - last element exception if xs is empty 
+xs.init - list conisting of all elements of xs except last one 
+xs take n - list of first n elements of xs 
+xs drop n - rest of collection after taking n elements 
+xs(n) - element at index n
+xs ++ ys - concatenation
+xs.reverse
+xs.updated(n, x) - list containing same element as xs except at index n where it contains x 
+xs indexOf x
+xs contains x
+
+
+def msort(xs: List[Int]): List[Int] = {
+    val n = xs.length / 2
+    if (n == 0) xs 
+    else  {
+        def merge(xs: List[Int], ys: List[Int]) =  {
+            xs match {
+                case Nil =>
+                    ys 
+                case xs :: xs1 => 
+                    ys match {
+                        case Nil => xs 
+                        case y :: ys1 =>
+                            if (x < y) x :: merge(xs1, ys)
+                            else y :: merge(xs, ys1)
+                    }
+            }
+        }
+        val (fst, snd) = xs splitAt n
+        merge(msort(fst), msort(snd))
+    }
+}
+
+
+Tuple class 
+    all table classes are modled after 
+    case class Tuple2[T1, T2](_1: +T1, _2: +T2) {
+        override def toString = "(" + _1 + ","  _2 + ")"
+    }
+
+object mergesort {
+    def msort[T](xs: List[T])(lt: (T,T) => Boolean): List[T] = {
+        val n = xs.length / 2
+        if (n == 0) xs 
+        else {
+            def merge(xs: List[Int], ys: List[Int]):List[Int] = (xs, ys) match {
+                case (Nil, ys) => ys 
+                case (xs, Nil) => xs 
+                case (x :: xs1, y :: ys1) =>
+                    if (lt(x, y)) x::merge(xs1, ys)
+                    else y :: merge(xs, ys1)
+                }
+        val (fst, snd) = xs splitAt n
+        merge(msort(fst)(lt), msort(snd)(lt))
+    }
+}
+
+// msort(nums)((x: Int, y: Int) => x < y)
+
+
+
+object mergesort {
+    def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] {
+        val n = xs.length / 2
+        if (n == 0) xs 
+        else {
+            def merge(xs: List[Int], ys: List[Int]):List[Int] = (xs, ys) match {
+                case (Nil, ys) => ys 
+                case (xs, Nil) => xs 
+                case (x :: xs1, y :: ys1) =>
+                    if (ord.lt(x, y)) x::merge(xs1, ys)
+                    else y :: merge(xs, ys1)
+                }
+        val (fst, snd) = xs splitAt n
+        merge(msort(fst), msort(snd)) // compiler will find implicit type
+    }
+}
+
+// msort(nums)(Ordering.Int)
+// msort(nums) // implicit will find correct Ordering
+
+
+
+Reduce
+def sum(xs: List[Int]) = (0 :: xs) reduceLeft (_ + _)
+def product(xs: List[Int]) = (1 :: xs) reduceLeft (_ * _)
+
+Fold
+def sum(xs: List[Int]) = (xs foldLeft 0) (_ + _)
+def product(xs: List[Int]) = (xs foldLeft 1) reduceLeft (_ * _)
+
+abstract class List[T] {
+    def reduceLeft(op: (T,T) => T): T = this match {
+        case Nil => throw new Error("empty")
+        case x :: xs => (xs foldLeft x)(op)
+    }
+    def foldLeft[U](z: U)(op: (U,T) => U): U = this match {
+        case Nil => z
+        case x :: xs => (xs foldLeft op(z, x))(op)
+    }
+    def reduceRight(op: (T,T) => T): T = this match {
+        case Nil => throw new Error("empty")
+        case x :: Nil => x
+        case x :: xs => op(x, xs.reduceRight(op))
+    }
+    def foldRight[U](z: U)(op: (U,T) => U): U = this match {
+        case Nil => z
+        case x :: xs => op(x, (xs foldRight z)(op))
+    }
+
+reduceRight -- right tree
+foldRight -- right tree 
+
+
+Structural induction on listFiles 
+natural induction - to show property P(n) for all integers n >= b
+    show that we have P(b)
+    for all integers n >= b show the induction step
+            if one has P(n) then one also has P(n+1)
+
+Referential transparency
+    
+Vectors
+    up-to-32 elements is just an array 
+    for bigger size, you have 32 slot pointers that are pointed to 32 arrays    for eent larger size, you can have pointers to points to array   
+    32 
+    2^10 
+    2^15 
+    2^20 
+    2^25 
+    2^30 
+   depth of vecotr log32(N)
+
+Ranges
+ val r : Range  = 1 until 5 // 1, 2, 3, 4
+ val r : Range  = 1 to 5 // 1, 2, 3, 4, 5
+ 1 to 10 by 3 // 1, 4, 7, 10 
+ 6 to 1 by -2 // 6, 4, 2
+
+Sequence operations
+  xs exists p 
+  xs forall p 
+  xs zip ys 
+  xs.unzip 
+  xs.flatMap f
+  xs.sum 
+  xs.product 
+  xs.max 
+  xs.min
+
+
+def scalerProduct(xs: Vector[Double], ys: Vector[Double]): Double =
+    (xs zip ys).map(xy => xy._1 * xy._2).sum 
+
+def scalerProduct(xs: Vector[Double], ys: Vector[Double]): Double =
+    (xs zip ys).map{case (x,y) => x * y}.sum
+
+def isPrime(n: Int): Boolean = (2 until n) forall (d => n % d != 0)
+
+Gien a positive integer n, find all pairs of positive integers i and j 
+where 1 <= j < n such that i + j is prime , e.g.
+i   2   3   4   4   5   6   6
+j   1   2   1   3   2   1   5
+i+j 3   5   5   7   7   7   11
+
+val n = 7
+(1 until n) map (i => 
+    (1 until i) map (j => (i, j))).flatten
+
+(xss foldLeft Seq[Int]())(_ ++ _)
+xss.flatten
+
+(1 until n) flatMap (i => 
+    (1 until i) map (j => (i, j))) filter(pair => 
+        isPrime(pair._1 + pair._2))
+
+
+For-exprs 
+case class Person(name: String, age: Int)
+ 
+
+for (p <- person if p.page > 20) yield p.name 
+    is same as 
+persons filter (p => p.age > 20) map(p => p.name)
+
+A for expr is of form 
+    for (s) yield e
+        where s is sequence of generators and filters and e is expr 
+    A generator is of form p <- e where p is pattern and e is expr 
+    A filter is of the form "if f" 
+
+def scalerProduct(xs: List[Double], ys: List[Double]): Double =
+    (for ((x,y) <- xs zip ys) yield x * y).sum
+
+
+val fruit = Set("apple, "banana", "pear")
+val s = (1 to 6).toSet
+
+s map (_ + 2)
+fruit filter (_.startsWith == "app")
+s.nonEmpty
+
+
+N-Queens
+ 8 queen: two queens can't be in same row column , diagonal 
+ e.g.
+ def queens(n: Int): Set[List[Int]] = 
+    def isSafe(col: Int, queens: List[Int]): Boolean = {
+        val row = queens.length 
+        val queensWithRow = (row - 1 to 0 by -1) zip queens 
+        queensForRow forall {
+            case (r, c) => col != c && math.abs(col - c) != row - r
+        }
+    }
+    def showQueens(queens: List[Int]) = {
+        val lines = for (col <- queens.reverse) 
+            yield Vector.fill(queens.length)("* ").updated(col, "X ").mkString
+            "\n" + (lines mkString "\n")
+    }
+
+    // retrun set of solutions
+    def placeQueens(k: Int): Set[List[Int]] =
+        if (k == 0) Set(List())
+        else {
+            for {
+                queens <- placeQueens(k - 1)
+                col <- 0 until n
+                if (isSafe(col, queens)
+            } yield col :: queens 
+        }
+    placeQueens(n)
+}
+
+
+for is similar to SQL
+for (b <- books; a<- b.authors if a startsWith "Bird",")
+    yield b.title
+for (b <- books if b.title indexOf "Program" >= 0) 
+    yield b.title 
+
+    // find authors who published two books
+{ for {
+    b1 <- books 
+    b2 <- books 
+    if b1.title < b2.title
+    a1 <- b1.authors 
+    a2 <- b2.authors 
+    if a1 == a2 
+} yield a1 }.distinct // replace List with Set 
+
+
+For-expr as replacement of map/filterNot 
+
+def mapFun[T, U](xs: List[T], f: T=>U): List[U] = 
+    for (x <- xs yield f(x)
+
+def flatMap[T, U](xs: List[T], f: T=>Iterable[U]): List[U] =
+    for (x <- xs; y <- f(x)) yield y
+
+def filter[T](xs: List[T], p: T => Boolean): List[T] =
+    for (x <- xs if p(x)) yield x
+
+1.
+A simple for-expr 
+    for (x <- e1) yield e2 
+is translated to e1.map(x => e2)
+
+2.
+for (x <- e1 if f; s) yield e2 
+    where f is filter and s is sequence of generators: is translated to 
+for (x <- e1.withFilter(x => f); s) yield e2 
+
+// above filter is lazy filter 
+3. for (x <- e1; y<-e2; s) yield e3
+is translated toString 
+    e1.flatMap(x => for (y <- e2; s) yield e3)
+
+
+for {
+    i <- 1 until n
+    j <- 1 until i
+    if isPrime(i+j)
+} yield (i, j)
+would beyond 
+(1 until n).flatMap(i => 
+    (1 until i).withFilter(j=> isPrime(i+j))
+        .map(j => (i, j)))
+
+e.g. for (b <- books; a <- b.authors if a startsWith "Bird")
+        yield b.title 
+will be 
+books flatMap (b => 
+    for (a <- b.authors if a startsWith "Bird") yield b.title 
+    for (a <- b.authors withFilter(a=>a.startsWith "Bird")) yield b.title 
 

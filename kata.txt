@@ -1,0 +1,345 @@
+ Every week the number of unique visitors grow with 7% compared to the previous week.
+
+Giving an integer number N representing the number of unique visitors at the end of this week and an integer number W
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the number of unique visitors we are going to have after W weeks
+    please round the final result downwards to the nearest integer (e.g both 7.1 and 7.9 are rounded to 7)
+
+Note that your function will receive the following arguments:
+
+    n
+        which is an integer representing the number N described above
+    w
+        which is an integer representing the number W described above
+
+Data constraints
+
+    the value for N will not exceed 10000
+    the value for W will not exceed 50
+
+
+class MyClass {
+    public static void compute_prediction(Integer n, Integer w) {
+        double sum = n;
+        for (int i=0; i<w; i++) {
+            sum = sum * 1.07;
+        }
+        
+        int result = (int) Math.floor(sum);
+        System.out.println(result);
+        
+    }
+}
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the number of unique possible configurations (as, bs, cs) which can be used to serve exactly N visitors
+    as represents the number of users from location a we choose to serve
+    bs represents the number of users from location b we choose to serve
+    cs represents the number of users from location c we choose to serve
+
+Note that your function will receive the following arguments:
+
+    a
+        which is an integer representing the number of users from location a
+    b
+        which is an integer representing the number of users from location b
+    c
+        which is an integer representing the number of users from location c
+    n
+        which is an integer representing the number of users our servers can serve
+
+Data constraints
+
+    the values for a, b, c will be in the [0 .. 100] range
+    n will always be smaller than the sum of a, b, and c
+
+
+class MyClass {
+    public static void count_configurations(Integer a, Integer b, Integer c, Integer n) {
+        int matched = 0;
+        for (int i=0; i<=a; i++) {
+            for (int j=0; j<=b; j++) {
+                for (int k=0; k<=c; k++) {
+
+                    if (i+j+k == n) {
+                        matched++;
+                    }
+                }
+            }
+        }      
+        System.out.println(matched);
+    }
+}
+
+
+
+ Given an array with all final grades for a course
+
+Your task is to
+
+    write a function that finds the highest grade and prints this grade to standard output (stdout)
+
+Note that your function will receive the following arguments:
+
+    grades
+        which is the list of grades, represented as integer numbers
+
+Data constraints
+
+    the length of the array given as input will not exceed 1000 elements
+
+
+
+import java.util.*;
+class MyClass {
+    public static void max_grade(Integer[] grades) {
+        Arrays.sort(grades);
+        System.out.println(grades[grades.length-1]);
+        
+    }
+}
+
+
+ Given an array with all final grades for a course and the minimum grade that a student needs to have in order to pass the course
+
+Your task is to
+
+    write a function that counts the number of students that passed and prints this number to standard output (stdout)
+
+Note that your function will receive the following arguments:
+
+    grades
+        which is the list of grades, represented as integer numbers
+    min_grade
+        which is the minimum grade that a student can get, so that he passes the course
+
+Data constraints
+
+    the length of the array given as input will not exceed 1000 elements
+
+Example
+Input   Output
+
+grades: 1, 2, 8, 4, 5, 8, 3
+min_grade: 5
+    
+3
+
+class MyClass {
+    public static void count_successful_students(Integer[] grades, Integer min_grade) {
+        int matched = 0;
+        for (Integer grade : grades) {
+            if (grade >= min_grade) {
+                matched++;
+            }
+        }
+        System.out.println(matched);
+    }
+}
+
+
+ An easy way to understand how well the students performed at this years course is to compute the average of their final grades. If it is higher that the average for last year, that means the course was easier than last year.
+
+Given an array with all final grades for a course
+
+Your task is to
+
+    write a function that computes the average of all the grades in the array and prints this number to standard output (stdout)
+    the result must be rounded downwards to the nearest integer (e.g. both 7.1 and 7.9 are rounded to 7)
+
+Note that your function will receive the following arguments:
+
+    grades
+        which is the list of grades, represented as integer numbers
+
+Data constraints
+
+    the length of the array given as input will not exceed 1000 elements
+
+
+class MyClass {
+    public static void compute_average_grade(Integer[] grades) {
+        int sum = 0;
+        for (Integer grade : grades) {
+            sum += grade;
+        }
+        System.out.println(sum/grades.length);
+    }
+}
+
+
+
+ Students are graded for their activity in each lab session.
+
+It is expected that a students performance improves in time, which means that he should always receive a grade equal to or higher than the grade he received in the previous lab.
+
+Given an array with the lab grades of a student
+
+Your task is to
+
+    write a function that checks whether the grades received by each student are in ascending order
+    your function must print to standard output (stdout):
+        1 if the grades are in ascending order (e.g. 1, 3, 3, 7)
+        0 if the grades are not in ascending order (e.g. 1, 3, 7, 3)
+
+Note that your function will receive the following arguments:
+
+    grades
+        which is an array containing the grades of the student
+
+Data constraints
+
+    the length of the array given as input will not exceed 1000 elements
+
+
+class MyClass {
+    public static void is_sorted(Integer[] grades) {
+        for (int i=1; i<grades.length; i++) {
+            if (grades[i-1] > grades[i]) {
+                System.out.println(0);
+                return;
+            }
+        }        
+        System.out.println(1);
+    }
+}
+
+
+ A student's performance in lab activities should always improve, but that is not always the case.
+
+Since progress is one of the most important metrics for a student, lets write a program that computes the longest period of increasing performance for any given student.
+
+For example, if his grades for all lab activities in a course are: 9, 7, 8, 2, 5, 6, 8, 7 then the longest period would be 4 consecutive labs (2, 5, 6, 8).
+
+Given an array with the lab grades of a student
+
+Your task is to
+
+    write a function that computes and prints to standard output (stdout) the longest period of increasing performance for the student that has these grades
+
+Note that your function will receive the following arguments:
+
+    grades
+        which is an array containing the grades of the student
+
+Data constraints
+
+    the length of the array given as input will not exceed 1000 elements
+
+
+class MyClass {
+    public static void longest_improvement(Integer[] grades) {
+        int matched = 1;
+        int max = -1;
+        for (int i=1; i<grades.length; i++) {
+            if (grades[i-1] <= grades[i]) {
+                matched++;
+                max = Math.max(matched, max);
+            } else {
+                matched = 1;
+            }
+        }
+        System.out.println(max);
+    }
+}
+
+
+ After an exam all the students are graded and sorted by their grades.
+
+In some cases, students talk to the professor and conclude that one of the tougher problem statements in the exam was unclear and the teacher decides to remove its contribution towards the final grade.
+
+Since its just one of many challenges, the sorted list of students wont change much - only a few students might change their order.
+
+How do we implement an efficient algorithm that sorts a list of numbers that are almost sorted? Bubble sort is the perfect one for this specific case:
+
+    bubblesort(A):
+    repeat
+        changed = false
+        for i = 1 to length(A) - 1
+            if A[i - 1] > A[i]
+                swap A[i - 1], A[i]
+                changed = true
+    until not changed
+  
+
+Given an array of integer numbers
+
+Your task is to
+
+    implement the bubblesort algorithm to sort the array in ascending order and print the sorted elements to standard output (stdout), one per line
+
+Note that your function will receive the following arguments:
+
+    numbers
+        which is the array of integer numbers that needs to be sorted
+
+Data constraints
+
+    the length of the array given as input will not exceed 1000 elements
+
+
+import java.util.*;
+class MyClass {
+    public static void sort_students(Integer[] numbers) {
+        Arrays.sort(numbers);
+        for (Integer n : numbers) {
+            System.out.println(n);
+        }
+        
+    }
+}
+
+
+
+ A teacher wants to compare the performance of two students. To understand them better, hes looking at all the other courses they took, but its hard to spot the common courses just from a glance.
+
+Given two arrays that contain the course IDs of two different students
+
+Your task is to
+
+    write a function that prints to standard output (stdout) all the course IDs that are contained in both arrays, sorted in ascending order, one per line
+
+Note that your function will receive the following arguments:
+
+    courses1
+        which is the list of course IDs for the first student
+    courses2
+        which is the list of course ids for the second student
+
+Data constraints
+
+    the length of the array given as input will not exceed 1000 elements
+
+
+
+import java.util.*;
+class MyClass {
+    private static boolean exists(Integer[] arr, int n) {
+        for (Integer i : arr) {
+            if (i.equals(n)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static void get_common_courses(Integer[] courses1, Integer[] courses2) {
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i=0; i<courses1.length; i++) {
+            if (exists(courses2, courses1[i])) {
+                list.add(courses1[i]);
+            }
+        }
+        
+        Collections.sort(list);
+        for (Integer n : list) {
+            System.out.println(n);
+        }
+    }
+}
+
+
+
+

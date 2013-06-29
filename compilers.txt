@@ -141,3 +141,47 @@ Regular languages
 	0* + 1* = {0^i|i>=0} U {1^i|i>=0}
 	(0+1)^* = U i>= 0 of (0+1)^i = "", 0+1, (0+1)(0+1), ... = all strings of alphabet = Sigma*
 
+
+Max-munch -- if multiple tokens match regex then we take longest token 
+
+Determistic Finite Automata (DFA)
+  one transition per input per state 
+  no epsilon move (transitioning without moving input pointer) 
+  can only take one path through the state graph
+
+Nondeterministic Finite Automata (NFA)
+ - can have multiple transitions for one input in a given state 
+ - can have epsilon moves 
+ - accept if some choices lead to an accepting state 
+ - NFA are, in general, smaller (exponentially smaller)
+ - NFA may be in many states at any times
+
+Epsilon closure
+  all states that you can reach via epsilon move 
+  E-closure(B) = {B, C, D) if you can reach B, C, D from B via Epsilon move 
+    - moves can be recursive
+
+How many states NFA can have 
+  Let N states 
+  |S| <= N 
+  Number of subsets = 2^N - 1 ------ finite set of possible configurations 
+
+We can covert NFA to DFA:
+    Let NFA has S states 
+    start state: s 
+    final: F <= S 
+    transition function a(X) = {y| x subset Xn  x---a--->y}
+    E-clsoure 
+
+    State of DFA will be subset of S (2^N-1) 
+    start state: epsilon-closure of s (which is start state fo NFA)
+    final state = {X|XnF != empty}
+    transition function: X--a-->Y if E-closure(a(X))
+
+Implementing Finite Automata 
+i=0;
+state = 0;
+while (input[i]) {
+    state = A[state, input[i++]];
+}
+
