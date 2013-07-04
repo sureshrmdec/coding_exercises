@@ -185,3 +185,13 @@ while (input[i]) {
     state = A[state, input[i++]];
 }
 
+Have a single array for state and entry would be transitions for other states 
+2^n - 1 states for DFA for an NFA with N states 
+
+    0   1   E
+A           {H}
+B           {B,H}
+C       {E}
+D   {F}
+
+

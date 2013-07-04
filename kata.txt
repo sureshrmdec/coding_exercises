@@ -340,6 +340,848 @@ class MyClass {
     }
 }
 
+ common operation with text editors is selecting a block of text for further manipulation. Lets see how an editor extracts the characters between two given positions in a string.
+
+Given a string S and two integer numbers p1, p2
+
+Your task is to
+
+    write a function that extracts all the characters between positions p1 and p2 in the given string and prints these characters to standard output (stdout)
+
+Note that your function will receive the following arguments:
+
+    s
+        which is the string from which you must extract the specified characters
+    p1
+        which is the position of the left-most character that you must extract
+    p2
+        which is the position of the right-most character that you must extract
+
+Data constraints
+
+    the string will contain at most 1000 characters
+
+class MyClass {
+    public static void select_substring(String s, Integer p1, Integer p2) {
+        StringBuilder sb = new StringBuilder();
+        for (int i=p1-1; i<p2 && i<s.length(); i++) {
+            sb.append(s.charAt(i));
+        }
+        System.out.println(sb);
+    }
+}
+
+
+
+ Another common operation is deleting characters starting from the position of our cursor in the editor.
+
+Given a string S, a position in this string P and a number N
+
+Your task is to
+
+    write a function that deletes N characters from the string S, starting from position P
+    your function must print the newly formed string to standard output (stdout)
+
+Note that your function will receive the following arguments:
+
+    s
+        which is the string from which we must delete the specified characters
+    p
+        which is the position in the string from which we must start deleting characters
+    n
+        which is the number of characters that must be deleted
+
+Data constraints
+
+    the string will contain at most 1000 characters
+
+class MyClass {
+    public static void remove_substring(String s, Integer p, Integer n) {
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<s.length() && i< p-1; i++) {
+            sb.append(s.charAt(i));
+        }
+        for (int i=p+n-1; i<s.length(); i++) {
+            sb.append(s.charAt(i));
+        }
+        System.out.println(sb);        
+    }
+}
+
+
+
+
+ When writing text we frequently use the copy and paste commands. Lets see how an editor implements the paste command.
+
+Given two strings S1 and S2 and an integer number P
+
+Your task is to
+
+    write a function that inserts S2 into S1 starting with the position P in S1 and then prints the newly formed string S1 to standard output (stdout)
+
+Note that your function will receive the following arguments:
+
+    s1
+        which is the string in which we must make the insertion
+    s2
+        which is the string that needs to be inserted
+    p
+        which is the position in s1 where s2 must be inserted
+
+Data constraints
+
+    the strings will contain at most 1000 characters
+
+
+
+class MyClass {
+    public static void copy_string(String s1, String s2, Integer p) {
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<s1.length() && i< p; i++) {
+            sb.append(s1.charAt(i));
+        }
+        sb.append(s2);
+        for (int i=p; i<s1.length(); i++) {
+            sb.append(s1.charAt(i));
+        }
+        System.out.println(sb);        
+    }
+}
+
+ When writing an essay it is useful to know the total number of words that we have typed.
+
+Let's define a word as any number of characters separated by spaces and commas. For example the string " one, ,two three,4," contains 4 words.
+
+Given a string S
+
+Your task is to
+
+    write a function that counts the number of words in the given string and prints this number to standard output (stdout)
+
+Note that your function will receive the following arguments:
+
+    s
+        which is the string for which you must count the number of words
+
+Data constraints
+
+    the string will contain at most 1000 characters
+
+
+
+import java.util.*;
+class MyClass {
+    public static void count_words(String s) {
+        StringTokenizer st = new StringTokenizer(s, " ,");
+        int count = 0;
+        while (st.hasMoreTokens()) {
+            String next = st.nextToken();
+            if (next.trim().length() > 0) {
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+}
+
+
+
+ Some advanced code editors allow programmers to sort the words from a selected block of text. This is useful when we are polishing our code to make sure everything is readable and consistent.
+
+Lets define a word as any number of characters separated by spaces and commas. For example the string " one, ,two three,4," contains 4 words.
+
+Given a string S
+
+Your task is to
+
+    write a function that sorts all the words in the string alphabetically and prints them to standard output (stdout) in sorted order, one on each line
+
+Note that your function will receive the following arguments:
+
+    s
+        which is the string from which you must extract and sort the words
+
+Data constraints
+
+    the string will contain at most 1000 characters
+
+Example
+
+
+import java.util.*;
+class MyClass {
+    public static void sort_words(String s) {
+        StringTokenizer st = new StringTokenizer(s, " ,");
+        List<String> words = new ArrayList<String>();
+        while (st.hasMoreTokens()) {
+            String next = st.nextToken().trim();
+            if (next.length() > 0) {
+                words.add(next);
+            }
+        }
+        Collections.sort(words);
+        for (String word : words) {
+            System.out.println(word);
+        }
+    }
+}
+
+
+
+Given an integer number N
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the numbers from 1 to N (one per line) with the following restrictions
+        for multiples of three print Fizz instead of the number
+        for the multiples of five print Buzz instead of the number
+        for numbers which are multiples of both three and five print FizzBuzz
+
+Note that your function will receive the following arguments:
+
+    n
+        which is the integer number described above
+
+Data constraints
+
+    the maximum value of N will not exceed 1000
+
+Efficiency constraints
+
+    your function is expected to print the result in less than 2 seconds
+
+
+
+class MyClass {
+    public static void fizzbuzz(Integer n) {
+        for (int i=1; i<=n; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
+                System.out.println("FizzBuzz");
+            } else if (i % 3 == 0) {
+                System.out.println("Fizz");
+            } else if (i % 5 == 0) {
+                System.out.println("Buzz");
+            } else {
+                System.out.println(i);
+            }
+        }
+        
+    }
+}
+
+
+
+As soon as a user inputs a query, the search engine must tokenize it - that means break it down into understandable tokens. A token is defined as a sequence of characters separated by white spaces and/or punctuation.
+
+Given a string representing a user query and a set of punctuation characters
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) all the tokens in the user query (one per line)
+
+Note that your function will receive the following arguments:
+
+    query
+        which is a string giving the user query
+    punctuation
+        which is a string giving the punctuation characters that separate tokens
+
+Data constraints
+
+    the size of the query string will not exceed 1000 characters
+    the size of the punctuation string will not exceed 10 characters
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+
+
+
+import java.util.*;
+class MyClass {
+    public static void tokenize_query(String query, String punctuation) {
+        StringTokenizer st = new StringTokenizer(query, punctuation + " ");
+        List<String> words = new ArrayList<String>();
+        while (st.hasMoreTokens()) {
+            String next = st.nextToken().trim();
+            if (next.length() > 0) {
+                words.add(next);
+            }
+        }
+        for (String word : words) {
+            System.out.println(word);
+        }        
+    }
+}
+
+
+
+Stop words are tokens which are filtered out from queries because they add little value in finding relevant web pages.
+
+Given a list of tokens that were obtained after the search engine tokenized the user query using your code from the previous task and a list of stopwords
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) all the tokens in the user query that are not stop words (one per line)
+
+Note that your function will receive the following arguments:
+
+    query
+        which is an array of strings giving the tokens in the user query
+    stopwords
+        which is an array of strings giving the stop words
+
+Data constraints
+
+    the length of the query array will not exceed 1000
+    the length of the stopwords array will not exceed 1000
+    all string comparisons are case-sensitive (i.e: Cool != cool)
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+
+
+import java.util.*;
+class MyClass {
+    public static void remove_stopwords(String[] query, String[] stopwords) {
+        List<String> result = new ArrayList<String>();    
+        for (int i=0; i<query.length; i++) {
+            boolean matched = false;
+            for (int j=0; j<stopwords.length; j++) {
+                if (query[i].equals(stopwords[j])) {
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                result.add(query[i]);
+            }
+        }
+        for (String word : result) {
+            System.out.println(word);
+        }
+    }
+}
+
+
+Stemming removes word suffixes to reduce inflected (or sometimes derived) words to their base or root form.
+
+E.g. friendly is an inflection of friend. By stemming (in this case stemming means removing the suffix ly), friendly is reduced to friend.
+
+Given a list of tokens and a list of suffixes
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) all the tokens having their suffix removed if found in the list of suffixes (please print one token per line)
+    for each token if there is more than one suffix that can be removed please choose the one that is the longest
+
+Note that your function will receive the following arguments:
+
+    tokens
+        which is an array of strings giving the tokens described above
+    suffixes
+        which is an array of strings giving the suffixes described above
+
+Data constraints
+
+    the length of the tokens array will not exceed 1000
+    the length of the suffixes array will not exceed 100
+    all string comparisons are case-sensitive (i.e: Cool != cool)
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+
+
+
+import java.util.*;
+class MyClass {
+    private static final Comparator<String> CMP = new Comparator<String>(){
+        @Override
+        public int compare(String o1, String o2) {  
+            if (o1.length() > o2.length()) {
+                return 1;
+            } else if (o1.length() < o2.length()) {
+                return -1;
+            }
+            return o1.compareTo(o2);
+        }
+    };
+    public static void token_stemming(String[] tokens, String[] suffixes) {
+        List<String> result = new ArrayList<String>();
+        Arrays.sort(suffixes, CMP);
+        for (int i=0; i<tokens.length; i++) {
+            String word = tokens[i];
+            for (int j=suffixes.length-1; j>=0; j--) {
+                if (tokens[i].endsWith(suffixes[j])) {
+                    word = word.substring(0, word.length()-suffixes[j].length());
+                    break;
+                }
+            }
+            result.add(word);
+        }
+        for (String word : result) {
+            System.out.println(word);
+        }        
+    }
+}
+
+
+
+It's time to retrieve the web pages that match a user query.
+
+Given a query as a list of tokens and a list of strings representing the content of each web page
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the number of web pages that contain all the given tokens in the same order.
+
+Note that your function will receive the following arguments:
+
+    query
+        which is an array of strings giving the tokens in the user query
+    pages
+        which is an array of strings giving the content of each web page
+
+Data constraints
+
+    the length of the query array will not exceed 10
+    the length of the pages array will not exceed 1000
+    the length of any web page content will not exceed 1000
+    all string comparisons are case-sensitive (i.e: Cool != cool)
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+
+
+class MyClass {
+    public static void search_query(String[] query, String[] pages) {
+        int count = 0;
+        for (int i=0; i<pages.length; i++) {
+            int matched = 0;
+            int index = 0;
+            for (int j=0; j<query.length; j++) {
+                int mndx = pages[i].indexOf(query[j], index);
+                if (mndx != -1) {
+                    index = mndx + query[j].length();
+                    matched++;
+                }
+            }
+            if (matched == query.length) {
+                count++;
+            }
+        }
+        System.out.println(count);
+        
+    }
+}
+
+
+
+Challenge: Context extraction
+
+Considering the name of a book and the tweet mentioning it we define the context of the book as a sequence of tokens immediately preceding and immediately following the book name in the tweet.
+
+    A token is defined as a sequence of characters that occur between white spaces.
+    The size of the context is W tokens on each side (preceding and following the book name)
+
+For example, having the book title "Beautiful Code", W=2 and the following tweet
+
+"I read Beautiful Code and it was simply amazing"
+
+the context is "I read -TITLE- and it"
+
+Given a list of book titles, a list of tweets and W
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) for each book all the contexts that can be extracted from the list of tweets (one per line in the same order with the tweets that generated those contexts)
+    each context must be printed as a string formed by concatenating the tokens preceding the book title, the keyword "-TITLE-" (one white space on both sides) and the tokens following the book title
+    please take into consideration the following constraints:
+        A book title matches a tweet if all its tokens match a sequence of consecutive tokens in the tweet (e.g. "Beautiful Code" does not match "Beautiful A Code")
+        If the number of available tokens preceding or following a book title is lower than W extract only those available.
+        If a context is empty on both the left and the right side it must be ignored, otherwise it is considered valid
+
+Note that your function will receive the following arguments:
+
+    books
+        which is an array of strings representing the book titles
+    tweets
+        which is an array of strings representing the tweets
+    w
+        which is an integer number as described above
+
+Data constraints
+
+    the length of the books array will not exceed 50
+    the length of the tweets array will not exceed 10000
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+
+
+class MyClass {
+    public static void extract_contexts(String[] books, String[] tweets, Integer w) {
+        for (int j=0; j<books.length; j++) {
+            for (int i=0; i<tweets.length; i++) {
+                int ndx = 0;
+                StringBuilder sb = new StringBuilder();
+
+                while ((ndx=tweets[i].indexOf(books[j], ndx)) != -1) {
+                    String[] prefix = tweets[i].substring(0, ndx).split(" ");
+                    for (int k=prefix.length-1, l=0; k >= 0 && l<w; k--, l++) {
+                        String word = prefix[k].trim();
+                        if (word.length() == 0) {
+                            l--;
+                            continue;
+                        }
+                        if (sb.length() > 0) {
+                            sb.insert(0, " ");
+                        }
+                        
+                        sb.insert(0, word);
+                    }
+                    sb.append(" -TITLE- ");
+                    ndx += books[j].length();
+                    String[] suffix = tweets[i].substring(ndx).split(" ");
+
+                    for (int k=0, l=0; k < suffix.length && l<w; k++, l++) {
+                        String word = suffix[k].trim();
+                        if (word.length() == 0) {
+                            l--;
+                            continue;
+                        }
+                        sb.append(word);
+                        if (k<suffix.length-1 && l<w-1) {
+                            sb.append(" ");
+                        }
+                    }
+                }
+                final String result = sb.toString().trim();
+                if (result.length() > 0) {
+                    System.out.println(result);
+                }
+            }
+        }
+        
+    }
+}
+
+
+Challenge: Trigger words
+
+Lets consider a context that was extracted during the previous challenge:
+
+Did you read -TITLE- on Kindle yesterday?
+
+In this example, "read" and "Kindle" are trigger words. These types of words signal that theres a high likelihood of finding a book title in their vicinity.
+
+A trigger word is a token that has two properties:
+
+    it is frequent in the list of extracted contexts
+    it is specific to the field of books
+
+In order to identify trigger words we are going to assign a weight to each token. Lets call this weight: IDF ("inverse document frequency").
+
+IDF(token) = log(N / num_contexts(token))
+
+    N represents the total number of contexts we are working with
+    num_contexts(token) represents the number of contexts that contain the given token
+    log() represents the natural logarithm (base E) of a number.
+
+Given a list of contexts and an integer number M
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the first M tokens having the highest IDF value (one per line)
+    if there are more tokens having the same IDF value they must be sorted in lexicographical order
+
+Note that your function will receive the following arguments:
+
+    contexts
+        which is an array of strings giving a list of contexts
+        each context is a string of tokens containing the keyword "-TITLE-" (separated by spaces) which delimits the left side of the context and the right side of it
+    m
+        which is an integer number giving the number mentioned above
+
+Data constraints
+
+    the length of the contexts array will not exceed 1000
+    the length of a context string will not exceed 1000 characters
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+Input   Output
+
+contexts: "to read -TITLE- while in", "to buy -TITLE- while in school", "buy -TITLE-"
+
+m: 2
+    
+
+read
+school
+
+Explanation
+
+    In this example we are working with 3 contexts, so N = 3
+    IDF("read") = log(3/1) = 1.09
+    IDF("buy") = log(3/2) = 0.40
+
+
+
+import java.util.*;
+class MyClass {
+    static int N;
+    static class Info implements Comparable<Info> {        
+        String token;
+        int num_context;
+        public Info(String token) {
+            this.token = token;
+            num_context = 1;
+        }
+        double idf() {
+            return Math.log(N / num_context);            
+        }
+        @Override
+        public int compareTo(Info other) {
+            if (other.idf() < idf()) {
+                return -1;
+            } else if (other.idf() > idf()) {
+                return +1;
+            } else {
+                return token.compareTo(other.token);
+            }
+        }
+        @Override public String toString() {
+            return token + ", N " + N + ", num " + num_context + ", idf " + idf() + "\n";
+        }
+    }
+    public static void extract_trigger_words(String[] contexts, Integer m) {
+        N = contexts.length;
+        Map<String, Info> idfMap = new TreeMap<String, Info>();
+        for (String c : contexts) {
+            String[] arr = c.split(" ");
+            Arrays.sort(arr);
+            for (int i=0; i<arr.length; i++) {
+                if (!arr[i].equals("-TITLE-")) {
+                    Info info = idfMap.get(arr[i]);
+                    if (info == null) {
+                        idfMap.put(arr[i], new Info(arr[i]));
+                    } else {
+                        if (i > 1 && arr[i-1].equals(arr[i])) {
+                            //skip
+                        } else {
+                            info.num_context++;
+                        }
+                    }
+                }
+            }
+        }
+        List<Info> idfList = new ArrayList<Info>(idfMap.values());
+        Collections.sort(idfList);
+        for (int i=0; i<m && i<idfList.size(); i++) {
+            System.out.println(idfList.get(i).token);
+        }
+    }
+}
+
+Context pruning
+
+Youve obtained the set of trigger words, congrats!
+
+Its time to remove the tokens that are not useful in predicting a book title in their vicinity from each context. This operation is called pruning.
+
+Pruning each context is done in the following fashion:
+
+    select the token which is a trigger word and has the highest IDF (inverse document frequency)
+    if none of the tokens is a trigger word then ignore the context
+    if the token is on the left side of the context
+        we keep the token and all tokens on its right
+        for the right side of the context we keep only the first token (if exists)
+    if the token is on the right side of the context
+        we keep the token and all tokens on its left
+        for the left side of the context we keep only the last token (if exists)
+
+Considering the list of trigger words [Kindle, read] sorted in ascending order by their IDF, pruning the context: Did you read -TITLE- on Kindle yesterday? will produce the following result:
+
+    read -TITLE- on
+
+Given a list of contexts and a list of trigger words sorted in ascending order by IDF
+
+Your task is to
+
+    write a function that prunes the contexts and prints the results to the standard output (stdout)
+
+Note that your function will receive the following arguments:
+
+    contexts
+        which is an array of strings giving a list of contexts
+        each context is a string of tokens containing the keyword "-TITLE-" (separated by spaces) which delimits the left side of the context and the right side of it
+    triggers
+        which is an array of strings representing trigger words sorted in ascending order by IDF
+
+Data constraints
+
+    the length of the contexts array will not exceed 1000
+    the length of a context string will not exceed 1000 characters
+    the length of the triggers array will not exceed 1000
+    the length of a trigger word will not exceed 100 characters
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+Input   Output
+
+contexts: "to read -TITLE- while in", "to buy -TITLE- while in school", "buy -TITLE-"
+
+triggers: "read", "school"
+    
+
+read -TITLE- while
+buy -TITLE- while in school
+
+
+
+
+import java.util.*;
+class MyClass {
+    
+    private static void append(List<String> contextTokens, String matchingTrigger, String leftOfTitle,String rightOfTitle, StringBuilder sb) {
+        boolean printedTitle = false;
+        for (int i=0; i<contextTokens.size(); i++) {
+            if (contextTokens.get(i).equals(matchingTrigger)) {
+                continue;
+            }
+            if (sb.length() > 0) {
+                sb.append(" ");
+            }
+            if (!printedTitle && rightOfTitle != null && contextTokens.get(i).equals(rightOfTitle)) {
+                sb.append("-TITLE- ");
+                printedTitle = true;
+            }
+            sb.append(contextTokens.get(i));
+            if (!printedTitle && leftOfTitle != null && contextTokens.get(i).equals(leftOfTitle)) {
+                sb.append(" -TITLE-");
+                printedTitle = true;
+            }
+        }
+        if (!printedTitle) {
+            sb.append(" -TITLE-");
+        }
+    }
+    private static boolean idfHigher(String matchingTrigger, String token, String[] triggers) {
+        int matchingIdfIndex = -1;
+        int tokenIdfIndex = -1;
+        for (int i=0; i<triggers.length; i++) {
+            if (triggers[i].equals(matchingTrigger)) {
+                matchingIdfIndex = i;
+            }
+            if (triggers[i].equals(token)) {
+                tokenIdfIndex = i;
+            }
+        }
+        if (matchingIdfIndex == -1 || tokenIdfIndex == -1) {
+            return false;
+        }
+        return matchingIdfIndex < tokenIdfIndex; // triggers are in asc IDF
+    }
+    public static void context_pruning(String[] contexts, String[] triggers) {
+        int count = 0;
+        for (String context : contexts) {
+            if (++count > 10) {
+                break;
+            }
+            String matchingTrigger = null;
+            boolean matchedTokenOnLeftSide = true;
+            String leftOfTitle = null;
+            String rightOfTitle = null;
+            List<String> contextTokens = new ArrayList<String>();
+            List<String> tokensSinceMatchingToken = new ArrayList<String>();
+            boolean foundTitle = false;
+            for (String token : context.split(" ")) {
+                if (token.equals("-TITLE-")) {
+                    foundTitle = true;
+                    if (matchingTrigger == null) {
+                        contextTokens.clear();
+                    }
+                    continue;
+                }
+                //
+                if (!foundTitle) {
+                    leftOfTitle = token;
+                } else if (rightOfTitle == null) {
+                    rightOfTitle = token;
+                }
+                //
+                for (String trigger : triggers) {
+                    if (token.equals(trigger) && (matchingTrigger == null || idfHigher(matchingTrigger, token, triggers))) {
+                        matchingTrigger = token;
+                        if (foundTitle) {
+                            matchedTokenOnLeftSide = false;
+                        } else {
+                            contextTokens.clear();
+                            matchedTokenOnLeftSide = true;
+                        }
+                        for (String t : tokensSinceMatchingToken) {
+                            if (contextTokens.indexOf(t) == -1) {
+                                contextTokens.add(t);
+                            }
+                        }
+                        tokensSinceMatchingToken.clear();
+                    } else if ((matchingTrigger == null || !foundTitle) && !token.equals(matchingTrigger)) {
+                        if (contextTokens.indexOf(token) == -1) {
+                            contextTokens.add(token);
+                        }
+                    } else if (matchingTrigger != null && !token.equals(matchingTrigger) && tokensSinceMatchingToken.indexOf(token) == -1) {
+                        tokensSinceMatchingToken.add(token);
+                    }
+                }
+            }
+            if (matchingTrigger == null) {
+                // ignore 
+                continue;
+            }
+            StringBuilder sb = new StringBuilder();
+            if (matchedTokenOnLeftSide) {
+                sb.append(matchingTrigger);
+                append(contextTokens, matchingTrigger, leftOfTitle, rightOfTitle, sb);
+
+                if (rightOfTitle != null) {
+                    sb.append(" " + rightOfTitle);
+                }
+            } else {
+                if (leftOfTitle != null) {
+                    sb.append(leftOfTitle);
+                }
+                append(contextTokens, matchingTrigger, leftOfTitle, rightOfTitle, sb);
+
+                sb.append(" " + matchingTrigger);
+
+
+            }
+            //System.out.println("matchingTrigger " + matchingTrigger + ", left " + matchedTokenOnLeftSide + ", Context '" + context + "': '" + sb + "', contextTokens " + contextTokens);
+            System.out.println(sb);
+        }
+        
+    }
+}
 
 
 
