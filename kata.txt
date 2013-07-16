@@ -1103,11 +1103,7 @@ class MyClass {
         return matchingIdfIndex < tokenIdfIndex; // triggers are in asc IDF
     }
     public static void context_pruning(String[] contexts, String[] triggers) {
-        int count = 0;
         for (String context : contexts) {
-            if (++count > 10) {
-                break;
-            }
             String matchingTrigger = null;
             boolean matchedTokenOnLeftSide = true;
             String leftOfTitle = null;
@@ -1163,11 +1159,11 @@ class MyClass {
                 sb.append(matchingTrigger);
                 append(contextTokens, matchingTrigger, leftOfTitle, rightOfTitle, sb);
 
-                if (rightOfTitle != null) {
+                if (rightOfTitle != null && contextTokens.indexOf(rightOfTitle) == -1) {
                     sb.append(" " + rightOfTitle);
                 }
             } else {
-                if (leftOfTitle != null) {
+                if (leftOfTitle != null && contextTokens.indexOf(leftOfTitle) == -1) {
                     sb.append(leftOfTitle);
                 }
                 append(contextTokens, matchingTrigger, leftOfTitle, rightOfTitle, sb);
@@ -1185,3 +1181,203 @@ class MyClass {
 
 
 
+
+
+def context_pruning(contexts, triggers):
+    """
+    Prunes contexts based on trigger words and prints the 
+    results.
+    """
+    def pruned(context,trigger):
+        try:
+            words = context.split()
+            i = words.index('-TITLE-')
+            j = words.index(trigger)
+            if i > j: # token on the left
+                print ' '.join(words[j:i+2])
+            else:     # token on the right
+                print ' '.join(words[i-1 if i > 0 else 0:j+1])
+            return True
+        except:
+            return False
+        
+    for context in contexts:
+        for trigger in reversed(triggers):
+            if pruned(context,trigger):
+                break
+
+
+class MyClass {
+    public static void context_pruning(String[] contexts, String[] triggers) {
+        
+        // O(context.length * triggers.length)
+        
+        for (String s : contexts)
+        {
+            String[] toks = s.split(" +");
+            
+            // for each trigger
+            boolean doneContext = false;
+            for (int trig = triggers.length - 1; trig >= 0 && !doneContext; trig--)
+            {
+                boolean foundTrigger = false;
+                boolean foundTitle = false;
+                int titleIndex = 0;
+                int trigIndex = 0;
+                    
+                // for each bit of the context
+                for (int i = 0; i < toks.length && (!foundTrigger || !foundTitle); i++)
+                {
+                    if (toks[i].equals("-TITLE-")) 
+                    {
+                        titleIndex = i;
+                        foundTitle = true;
+                    }
+                    else if (toks[i].equals(triggers[trig]))
+                    {
+                        trigIndex = i;
+                        foundTrigger = true;
+                    }
+                }
+                if (foundTrigger)
+                {         
+                    doneContext = true;
+                    if (trigIndex < titleIndex)
+                    {
+                        // left side
+                        System.out.println(makeString(toks, trigIndex, Math.min(titleIndex+2, toks.length)));
+                    }
+                    else
+                    {
+                        // right side
+                        System.out.println(makeString(toks, Math.max(titleIndex-1, 0), trigIndex+1));   //need trigIndex + 1 so that trigIndex is inclusive                         
+                    }
+                }
+            }
+        }
+    }
+    
+    public static String makeString(String[] a, int start, int end)
+    {
+        String str = "";
+        for (int i = start; i < end; i++) str += a[i] + " ";
+        return str.trim();
+    }
+    public static String makeString(String[] a)
+    {
+        return makeString(a, 0, a.length);
+    }
+}
+
+
+
+
+
+
+
+
+
+Challenge: Extract book titles
+
+In the previous challenge we have implemented context pruning and obtained high-precision contexts. These contexts have a high probability of identifying book titles.
+
+Having a high-precision context
+
+read -TITLE- on
+
+and a tweet
+
+“I’ve just read Design Patterns: Elements of Reusable Object-Oriented Software on my new Kindle!”
+
+we can induce that Design Patterns: Elements of Reusable Object-Oriented Software is the name of a book because it is surrounded by the left side and the right side of a high-precision context.
+
+Given a list of contexts sorted in decreasing order by their precision and a list of tweets
+
+Your task is to
+
+    * write a function that prints to the standard output (stdout) all book titles extracted from the tweets using the given contexts
+    * please print one unique book title per line sorted in lexicographical order (alphabet order)
+    * if a tweet matches multiple contexts please use only the one with the highest precision to extract the book title
+    * If the same context matches a tweet multiple times, please pick the first match from left to right
+
+Note that your function will receive the following arguments:
+
+    * contexts
+          o which is an array of strings giving a list of contexts
+          o each context is a string of tokens containing the keyword "-TITLE-" (separated by spaces) which delimits the left side of the context and the right side of it
+    * tweets
+          o which is an array of strings representing tweets
+
+Data constraints
+
+    * the length of the contexts array will not exceed 1000
+    * the length of a context string will not exceed 1000 characters
+    * the length of the tweets array will not exceed 1000
+    * the length of a tweet string will not exceed 140 characters
+    * all string comparisons are case-sensitive
+
+Efficiency constraints
+
+    * your function is expected to print the requested result and return in less than 2 seconds
+
+  
+
+
+
+contexts: "read -TITLE- on Kindle", "read -TITLE- ", "-TITLE- is a good reading"
+
+tweets: 
+"I've just read Beautiful Code", 
+"Yay! I've read The Old Man and the Sea on Kindle", 
+"Thinking, Fast and Slow is a good reading"
+ 
+
+import java.util.*;
+import java.util.regex.*;
+
+class MyClass {
+   public static void extract_books(String[] contexts, String[] tweets) {
+      String title = "-TITLE-";
+      String[][] contextParts = new String[contexts.length][];
+      for (int i=0; i<contexts.length; i++) {
+         contexts[i] = contexts[i].trim();
+         int ndx = contexts[i].indexOf(title);
+         contextParts[i] = new String[] {contexts[i].substring(0, ndx).trim(), contexts[i].substring(ndx+title.length()).trim()};
+      }
+      List<String> result = new ArrayList<String>();
+      for (String tweet : tweets) {
+         for (int i=0; i<contexts.length; i++) {
+            boolean matched = true;
+            String book = new String(tweet);
+            if (contextParts[i][0].length() > 0) {
+               Pattern p = Pattern.compile("\\b" + contextParts[i][0] + "\\b");
+               Matcher m = p.matcher(book);
+               if (m.find()) {
+                  book = book.substring(m.end());
+               } else {                  
+                  matched = false;
+               }
+            }
+            if (contextParts[i][1].length() > 0) {
+               Pattern p = Pattern.compile("\\b" + contextParts[i][1] + "\\b");
+               Matcher m = p.matcher(book);
+               int ndx = book.indexOf(contextParts[i][1]);
+               if (m.find()) {
+                  book = book.substring(0, m.start());
+               } else {                     
+                  matched = false;
+               }
+            }
+            book = book.trim();
+            if (matched && book.length() > 0) {
+               result.add(book);
+               break;
+            }
+         }
+      }
+      Collections.sort(result);
+      for (String book : result) {
+         System.out.println(book);
+      }
+   }
+}
