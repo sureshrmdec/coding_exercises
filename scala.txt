@@ -452,3 +452,312 @@ books flatMap (b =>
     for (a <- b.authors if a startsWith "Bird") yield b.title 
     for (a <- b.authors withFilter(a=>a.startsWith "Bird")) yield b.title 
 
+
+
+Map
+val m = Map("I" -> 1, "V" -> 5)
+m('X')  // would throw NoSuchElementException
+m get "X") // would rturn null
+
+
+Option Type
+    trait Option[+A]
+    case class Some[+A](value: A) extends Option[A]
+    object None extends Option[Nothing]
+
+    None 
+    Some(x)
+
+val capitals = Map("US" -> "Washington DC", ...
+def showCapitals(country: String) = capitals.get(country) match {
+    case Some(capital) => capital 
+    case None => "Missing"
+}
+
+
+Sorting
+val fruit = List("apple", "Pea", ...
+fruit sortedWith (_.length < _.length)
+fruit.sorted 
+
+
+fruit.groupBy(_.head)
+
+Polynomials 
+    X^3 - 2x + 5 can be stored as 
+    Map(0 -> 5, 1 -> -2, 3 -> 1)
+
+class Poly(val terms: Map[Int, Double]) {
+    override def toString =
+        (for ((exp, coeff) <- terms.toList.sorted.reverse) yield coeff + "x^" + exp) mkString " + "
+    def + (other: Poly) = new Poly(terms ++ (other.terms map adjust)) 
+    def adjust(term: (Int, Double)): (Int, Double) = {
+        val (exp, coeff) = term
+        terms get exp match {
+            case Some(coeff1) => exp -> (coeff + coeff1) 
+            case None => exp -> coeff 
+        }
+    }
+}
+
+Map is partial function - you can pass withDefaultValue 
+
+class Poly(val terms0: Map[Int, Double]) { 
+    def this(bindings: (Int, Double)*) = this(bindings.toMap)
+    val terms = terms0 withDefaultValue 0.0 
+    override def toString =
+        (for ((exp, coeff) <- terms.toList.sorted.reverse) yield coeff + "x^" + exp) mkString " + "
+    def + (other: Poly) = new Poly(terms ++ (other.terms map adjust)) 
+    def adjust(term: (Int, Double)): (Int, Double) = {
+        val (exp, coeff) = term 
+        exp -> (coeff + terms(exp)) 
+    }
+}
+
+Fold Left
+
+class Poly(val terms0: Map[Int, Double]) { 
+    def this(bindings: (Int, Double)*) = this(bindings.toMap)
+    val terms = terms0 withDefaultValue 0.0 
+    override def toString =
+        (for ((exp, coeff) <- terms.toList.sorted.reverse) yield coeff + "x^" + exp) mkString " + "
+    def + (other: Poly) = new Poly(other.terms foldLeft terms)(addTerms))
+    def addTerm(terms: Map[Int, Double], term(Int, Double)): Map[Int, Double] = {
+        val (exp, coeff) = term 
+        terms + (exp -> (coeff + terms(exp)))
+    }
+}
+
+
+Lutz Prechelt 
+
+object x {
+    val in = Source.fromURL("http://lamp.epfl.ch/files/contents/sites/lamp/files/teaching/progfun/linuxwords")
+    val words = in.getLines.tList filter (word => word forall (chr => chr.isLetter)) 
+
+    val mnem = Map(
+        '2' -> "ABC", '3' -> "DEF", '4' -> "GHI", '5' -> "JKL",
+        '6' -> "MNO", '7' -> "PQRS", '8' -> "TUV", '9' -> "WXYZ")
+
+    val charCode: Map[Char, Char] = 
+        for ((digit, str) <- mnem; ltr <- str) yield ltr -> digit 
+
+    def wordCode(word: String): String =
+        word.toUpperCase map charCode 
+
+    def wordsForNum: Map[String, Seq[String]] = 
+        words groupBy wordCode withDefaultValue Seq()
+    def encode(number: String): Set[List[String]] =
+        if (number.isEmpty) Set(List())
+        else {
+            for  {
+                split <- 1 to number.length 
+                word <- wordsForNum(number take split) 
+                rest <- enode(number drop split)
+            } yield word :: rest
+        }.toSet
+    }
+
+    def translate(number: String): Set[String] = 
+        encode(number) map (_ mkString " ")
+}
+
+
+
+Streams
+ ((100 to 1000) filter isPrime)(1) 
+ // above is shorter but evaluation is expensive -- construct all prime
+
+Recursive
+  def secondPrime(from: Int, to: Int) = nthPrime(from, to, 2)
+  def nthPrime(from: Int, to: Int, n: Int): Int =
+    if (from >= to) throw new Error("no prime")
+    else if (isPrime(from))
+        if (n == 1) from else nthPrime(from+1, to, n-1)
+    else nthPrime(from+1, to, n)
+
+via Streams 
+    val xs = Stream.cons(1, Stream.cons(, Stream.empty))
+    Stream(1, 2, 3)
+    (1 to 1000).toStream
+    
+    def streamRange(lo: Int, hi: Int): Stream[Int] =
+        if (lo >= hi) Stream.empty 
+        else Stream.cons(lo, streamRange(lo+1, hi)) 
+
+    def listRange(lo: Int, hi: Int): List[Int] =
+        if (lo >= hi) Nil 
+        else lo :: listRange(lo+1, hi)
+
+trait Stream[+A] extends Seq[A] { // covariant parameter A
+    def isEmpty: Boolean 
+    def head: A 
+    def tail: Stream[A] 
+
+object Stream { 
+            // tl is call by name parameter
+    def cons[T](hd: T, tl: => Stream[T]) = new Stream[T] {
+        def isEmpty = false
+        def head = hd 
+        def tail = tl 
+    }
+    val empty = new Stream[Nothing] {
+        def isEmpty = true 
+        def head = throw new NoSuchElementException("empty")
+        def tail = throw new NoSuchElementException("empty") 
+    }
+}
+
+Lazy evaluation (as opposed to call by-name evluation where everything is recomputed) and strict evaluation for normal parameters and val definitions 
+
+Scala uses strict evaluation by default but you can add lazy 
+
+lazy val x = expr  
+
+def expr = {
+    val x = {print("x"); 1}
+    lazy val y = {print("y"); 2}
+    def z = {print("z");3}
+    z + y + x + z + y + x
+    // will print xzyz
+
+
+Lazy Streams 
+def cons[T](hd: T, tl: => Stream[T]) = new Stream[T] {
+    def head = hd 
+    lazy val tail = tl 
+    ...
+}
+
+
+((100 to 1000) filter isPrime)(1) 
+
+
+Infinite streams
+ def from(n: Int): Stream[Int] = n #:: from(n+1)
+
+Primes
+object primes {
+ def from(n: Int): Stream[Int] = n #:: from(n+1)
+ val nats = from(0)
+ val m4s = nats map(_ * 4)
+
+ def sieve(s: Stream[Int]): Stream[Int] = 
+    s.head #:: sieve(s.tail filter (_ % s.head != 0)) 
+
+  def primes = sieve(from(2))
+
+  primes.take(100).toList
+}
+
+
+Sqrt
+
+def sqrtStream(x: Double): Stream[Double] = {
+    def improve(guess: Double) = (guess + x / guess) / 2
+    lazy val guesses: Stream[Double] = 1 #:: (guesses map improve)
+    guesses
+}
+
+def isGoodEnough(guess: Double, x: Double) = 
+    math.abs((guess * guess - x) / x) < 0.001
+     
+sqrtStream(4) filter (isGoodEnough(_, 4))
+
+
+Water Pouring Problem 
+ Given a faucet, a sink and number of glasses - produce given quantity 
+ but there are no marking 
+
+
+Let each number of classes is int and vector class holds ml filled for that 
+glass.
+
+
+
+Empty(glass)
+Fill(glass)
+Pour(from, to)
+
+e.g. two glasses have size 4 and 9 
+from state 0 
+ you can fill first glass or second glass and then move from there 
+
+Generate all possible moves from first state and for each other move, generate all possible moves until you reach a solution or there is no solution (like onion).
+
+
+class Pouring(capacity: Vector[Int]) {
+    // state 
+    type State = Vector[Int]
+    val initialState = capacity map (x => 0) 
+
+    // moves 
+    trait Move  {
+        def change(state: State): State
+    }
+    case class Empty(glass: Int) extends Move  {
+        def change(state: State): State = state updated(glass, 0)
+    }
+    case class Fill(glass: Int) extends Move {
+        def change(state: State): State = state updated(glass, capacity(glass))
+    }
+    case class Pour(from: Int, to: Int) extends Move  {
+        def change(state: State): State = {
+            val amount = state(from) min (capacity(to) - state(to))
+            state updated(from, state(from) - amount) updated(to, state(to) + amount)
+        }
+    }
+
+    val glasses = 0 until capacity.length  
+
+    val moves = 
+      (for (g <- glasses) yield Empty(g)) ++
+      (for (g <- glasses) yield Fill(g)) ++ 
+      (for (from <- glasses; to <- glasses if from != to) yield Pour(from, to)) 
+
+    // paths
+    class Path(history: List[Move], val endState: State) { 
+        ////def endState: State = trackState(history)
+        //def endState: State = (history foldRight initialState) (_ change _)
+
+        //private trackState(x: List[Move]): State = xs match {
+        //        case Nil => initialState 
+        //        case move :: xs1 => move change trackState(xs1)
+        //} 
+
+        def extend(move: Move) = new Path(move :: history, move change endState) 
+
+        override def toString = (history.reverse mkString " ") + "--> " + endState 
+    }
+
+    val initialPath = new Path(Nil, initialState) 
+
+    def from(paths: Set[Path], explored: Set[State]): Stream[Set[Path]] =
+        if (paths.isEmpty) Stream.empty 
+        else { 
+            val more = for { 
+                path <- paths 
+                next <- moves map path.extend  
+                if !(expored contains next.endState)
+            } yield next 
+            paths #:: from(more, explored ++ (more map (_.endState)))
+        } 
+
+    val pathSets = from(Set(initialPath), Set(initialState)) 
+
+    val solutions(target: Int): Stream[Path] =
+        for { 
+            pathSet < pathSets 
+            path <- pathSet 
+            if path.endState contains target 
+        } yield path
+}
+
+object test { 
+        val problem = new Pouring(Vector(4, 7))
+        problem.moves 
+
+        problem.pathSets.take(3).toList 
+
+        problem.solutions(6)
+}
