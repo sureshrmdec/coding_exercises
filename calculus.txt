@@ -32,4 +32,7 @@ lim x->inf (2x - x) = x(2-1) = x = infinity
 
 slope = height/width
 
+Derivative 
+    derivative of f at this point x:
+        lim h->0    (f(x+h) - f(x)) / h 
 
