@@ -1,0 +1,11 @@
+zookeeper service discover
+mesos resource sharing
+redshift warehousing
+chef/puppet/ansibleworks deployment
+weka data mining
+key/value: openstack swift, redis, ceph, 
+testing - sauce labs 
+cloude - apache cloudstack, hpcc, scalr, libvrirt 
+tracing - http://google.github.io/tracing-framework/
+js - timeline.js, 
+mobile - http://blogs.shephertz.com/2013/07/19/configure-send-push-notification-on-android-devices/
