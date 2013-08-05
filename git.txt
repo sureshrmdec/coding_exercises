@@ -1,0 +1,36 @@
+BASIC
+git init jax
+vi readme.txt
+    edit
+git add readme.txt 
+git commit -m "initial commit" -a
+ls -l .git 
+    look for master under head
+
+git status
+git log
+
+ADVANCED
+mkdir jax 
+cd jax
+mkdir .git 
+# you need objects and refs in .git 
+mkdir .git/objects
+mkdir .git/refs
+mkdir .git/refs/heads 
+echo "hello there" |git hash-object --stdin -w
+# check objects directory under .git 
+# objects are key/value store 
+git cat-file -p 5d555
+git cat-file -t b0c9
+git cat-file -s b0c9
+# stage it permission 644
+git update-index --add --cacheinfo 100644 b0c9 readme.txt
+#
+git write-tree 
+# 5555 is under objects, e.g. 5d and 555 under 5d directory
+git commit-tree 5d555 -m "initial commit'  
+
+git status 
+cat .git/HEAD 
+# detached head state -- read-only way

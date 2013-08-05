@@ -1,0 +1,38 @@
+right/left-hand-limit
+    lim x->3+ f(x) = 2
+    lim x->3- f(x) 3
+
+If both limits are different then lim x->3 doesn't exist.
+
+
+Continuous function 
+    sqrt(2) =~ sqrt(1.99) =~ sqrt(2.01) 
+    nearby input give newarby output
+    f(x) = sqrt(x) is continuous at 2
+    lim x-> f(x) = f(a), then f(x) is continuous at a 
+
+Open interval (a, b)    between a, b
+Closed interval [a, b]  -- inclusive
+    lim x->a+ f(x) = f(a) 
+    and
+    lim x->b- f(x) = f(b)
+
+Intermediate value theorem
+
+Limit law of quotient (you can't use infinity)
+    you calculate limit of numerator and denominator separately and then 
+    divide those limits , e.g.
+    lim x->infinity 2x/x+1 = 2x/x+1 . (1/x)/(1/x) = lim x->infinity 2 / (1 + 1/x)
+    = 2 / 1 = 2
+
+as infinity is not a number, you cannot use [0, infinity], you should use [0, infinity). You cannot use infinity - infinity, use limit 
+
+potential and actual infinity 
+lim x->inf (2x - x) = x(2-1) = x = infinity 
+
+slope = height/width
+
+Derivative 
+    derivative of f at this point x:
+        lim h->0    (f(x+h) - f(x)) / h 
+

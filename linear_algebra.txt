@@ -1,0 +1,51 @@
+Coding the Matrix 
+
+Python
+Set comprehension  
+S = {-4, 4, -3, 3, -2, 2}
+{x for x in S if x >= 0 }
+
+A X B - Cartesian product
+Cardinality of Cartesian product = length of A X length of B 
+
+{(x, y) : y = x^2}
+
+Function - assigns a single output 
+Domain  set of all input
+Subdomain  set of all output
+Image of q under function f(q) = r  where input actually maps to output
+Image of cos(x) is {-1 <= x <= 1}
+Range - some people use range for image and other as co-domain 
+
+Identity function for any domain D 
+    id : D -> D
+Let
+    f : A -> B and g : B -> C
+    (g o f)  : A -> C
+    g compose of f = g(f(x))
+
+Associativity of function 
+    h o (g o f) = (h o f) o f
+
+Function inverse
+  Function f and g are functional inverse and f o g and g o f are identity functions. A function that has an inverse is invertible.
+
+  Invertible functions are one to one 
+
+  Probability distribution function - sum to 1
+    uniform distribution - (same probability to all outcomes)
+
+Complex numbers 
+    real + imaginary numbers 
+
+Python  (uses j instad of i)
+    3j
+    x = 1 + 3j 
+    (x-1) ** 2
+    x.real x.imag 
+    type(1+2j) 
+
+addition is commutative: a + b = b + a 
+multiplication distributes over addition: a * (b + c) = a * b + a * c 
+
+
