@@ -1,5 +1,5 @@
 import java.util.*;
-class SortBySign {
+class RelativeSort {
   public static void relative_sort(Integer[] v) {
     int lastPositiveNdx = -1;
     for (int i=0; i<v.length; i++) {
