@@ -1979,4 +1979,150 @@ class TupleSum {
 
 
 
+Type ahead
 
+
+The Typeahead feature allows you to quickly search people while writing a tweet on Twitter.
+
+How would you implement the Typeahead feature for the scenario described below?
+
+Given a big list of user names and a list of strings representing queries
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) for each query the user name that matches the query
+    if there are multiple user names matching the query please select the one that is the smallest lexicographically
+    all string matches must be case insensitive
+    if no match is found for a given query please print "-1"
+
+Note that your function will receive the following arguments:
+
+    usernames
+        which is an array of strings representing the user names
+    queries
+        which is an array of strings representing the queries described above
+
+Data constraints
+
+    the length of the array above will not exceed 100,000 entries
+    each name or query string will not exceed 30 characters
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+Input   Output
+
+names: ["james", "jBlank"]
+
+queries: ["j", "jm", "jbl", "JB"]
+  
+
+james
+-1
+jBlank
+jBlank
+
+import java.util.*;
+import java.io.*;
+
+class TypeAhead {
+  public static void typeahead(String[] usernames, String[] queries) {
+    Map<String, String[]> lookup = new HashMap<String, String[]>();
+    for (String u : usernames) {
+      String lu = u.toLowerCase();
+      for (int i=0; i<u.length(); i++) {
+        String prefix = lu.substring(0, i+1);
+        String[] val = lookup.get(prefix);
+        if (val == null) {
+          val = new String[] {u, lu};
+          lookup.put(prefix, val);
+        } else {
+          if (val[1].compareTo(lu) > 0) {
+            val[0] = u;
+            val[1] = lu;
+          }
+        }
+      }
+    }
+    for (String q : queries) {
+      String[] matched = lookup.get(q.toLowerCase());
+      if (matched == null) {
+        System.out.println("-1");
+      } else {
+        System.out.println(matched[0]);
+      }
+    }
+  }
+  public static void main(String[] args) throws Exception {
+      /*
+      typeahead(new String[] {"james", "jBlank"}, new String[] {"j", "jm", "jbl", "JB"});
+      */
+      BufferedReader in = new BufferedReader(new FileReader("type.dat")); 
+      String[] usernames = in.readLine().replaceAll("\"", "").split(",");
+      String[] queries = in.readLine().replaceAll("\"", "").split(",");
+      typeahead(usernames, queries);
+  }
+}
+other solutions 
+import java.util.Arrays;
+import java.util.LinkedList;
+class MyClass {
+    public static void typeahead(String[] usernames, String[] queries) {
+        int[] sizes = new int[26]; // 
+        String[][] buckets = buckets(usernames, sizes);
+        /*
+        for(int i = 4; i < 5 && i < buckets.length; i++){
+            printBucket(buckets[i]);
+        } // */
+        for(int i = 0; i < queries.length; i++){
+            String query = queries[i].toUpperCase();
+            int q = query.charAt(0) - 'A';
+            print(buckets[q], query);
+        }
+    }
+      private static String[][] buckets(String[] usernames, int[] sizes){
+        LinkedList<String>[] buckets = new LinkedList[26];
+        for(int i = 0; i < buckets.length; i++){
+            buckets[i] = new LinkedList<String>();
+            sizes[i] = 0;
+        }
+        for(int i = 0; i < usernames.length; i++){
+            String word = usernames[i].toUpperCase() + "-" + usernames[i];
+            int bucket = word.charAt(0) - 'A';
+            buckets[bucket].add(word);
+            sizes[bucket]++;
+        }
+        String[][] array = new String[26][];
+        for(int i = 0; i < 26; i++){
+            array[i] = new String[sizes[i]];
+            buckets[i].toArray(array[i]);
+            Arrays.sort(array[i]);
+        }
+        return array;
+    }
+    //private static void print(LinkedList<String> list, String query){
+    private static void print(String[] list, String query){
+        boolean printed = false;
+        for( String w : list){
+            if(w.startsWith(query)){
+                System.out.println(w.split("-")[1]);
+                printed = true;
+                break;
+            }
+        }
+        if(!printed){
+            System.out.println("-1");
+        }
+    }
+    /*private static void printBucket(String[] bucket){
+        for(String w : bucket){
+                System.out.print(w);
+                System.out.print("\t");
+        }
+        if(bucket.length > 0){
+            System.out.println("");
+        }
+    }*/
+}
