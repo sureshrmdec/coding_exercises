@@ -1,5 +1,7 @@
+
+
 import java.io.*;
-class MyClass {
+class HashString {
    public static void hash_string(String s, String t) {
       int[] schars = toInt(s);
       int slen = schars.length;

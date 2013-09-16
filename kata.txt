@@ -1,107 +1,3 @@
- Every week the number of unique visitors grow with 7% compared to the previous week.
-
-Giving an integer number N representing the number of unique visitors at the end of this week and an integer number W
-
-Your task is to
-
-    write a function that prints to the standard output (stdout) the number of unique visitors we are going to have after W weeks
-    please round the final result downwards to the nearest integer (e.g both 7.1 and 7.9 are rounded to 7)
-
-Note that your function will receive the following arguments:
-
-    n
-        which is an integer representing the number N described above
-    w
-        which is an integer representing the number W described above
-
-Data constraints
-
-    the value for N will not exceed 10000
-    the value for W will not exceed 50
-
-
-class MyClass {
-    public static void compute_prediction(Integer n, Integer w) {
-        double sum = n;
-        for (int i=0; i<w; i++) {
-            sum = sum * 1.07;
-        }
-        
-        int result = (int) Math.floor(sum);
-        System.out.println(result);
-        
-    }
-}
-
-Your task is to
-
-    write a function that prints to the standard output (stdout) the number of unique possible configurations (as, bs, cs) which can be used to serve exactly N visitors
-    as represents the number of users from location a we choose to serve
-    bs represents the number of users from location b we choose to serve
-    cs represents the number of users from location c we choose to serve
-
-Note that your function will receive the following arguments:
-
-    a
-        which is an integer representing the number of users from location a
-    b
-        which is an integer representing the number of users from location b
-    c
-        which is an integer representing the number of users from location c
-    n
-        which is an integer representing the number of users our servers can serve
-
-Data constraints
-
-    the values for a, b, c will be in the [0 .. 100] range
-    n will always be smaller than the sum of a, b, and c
-
-
-class MyClass {
-    public static void count_configurations(Integer a, Integer b, Integer c, Integer n) {
-        int matched = 0;
-        for (int i=0; i<=a; i++) {
-            for (int j=0; j<=b; j++) {
-                for (int k=0; k<=c; k++) {
-
-                    if (i+j+k == n) {
-                        matched++;
-                    }
-                }
-            }
-        }      
-        System.out.println(matched);
-    }
-}
-
-
-
- Given an array with all final grades for a course
-
-Your task is to
-
-    write a function that finds the highest grade and prints this grade to standard output (stdout)
-
-Note that your function will receive the following arguments:
-
-    grades
-        which is the list of grades, represented as integer numbers
-
-Data constraints
-
-    the length of the array given as input will not exceed 1000 elements
-
-
-
-import java.util.*;
-class MyClass {
-    public static void max_grade(Integer[] grades) {
-        Arrays.sort(grades);
-        System.out.println(grades[grades.length-1]);
-        
-    }
-}
-
 
  Given an array with all final grades for a course and the minimum grade that a student needs to have in order to pass the course
 
@@ -2125,4 +2021,142 @@ class MyClass {
             System.out.println("");
         }
     }*/
+}
+
+Tweets per second
+
+Japan Castle in the Sky airing broke a Twitter record on August 3, 2013. At one point during the classic anime movie showing, people submitted 143,199 tweets per second.
+
+This particular spike was about 25 times greater than Twitter’s steady state.
+
+Given an array of integers representing the number of tweets recorded every second and an integer value K
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the highest number of tweets recorded between each second in the array and the past K seconds before it
+
+Note that your function will receive the following arguments:
+
+    tps
+        which is an array of integers representing the number of tweets recorded every second
+    k
+        which is the integer number mentioned above
+
+Data constraints
+
+    the length of the array above will not exceed 500,000 numbers
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+Input   Output
+
+tps: 6, 9, 4, 7, 4, 1
+
+k: 3
+  
+
+6
+9
+9
+9
+7
+7
+Also found in:
+
+
+
+
+/*
+Tweets per second
+
+Japan Castle in the Sky airing broke a Twitter record on August 3, 2013. At one point during the classic anime movie showing, people submitted 143,199 tweets per second.
+
+This particular spike was about 25 times greater than Twitter’s steady state.
+
+Given an array of integers representing the number of tweets recorded every second and an integer value K
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the highest number of tweets recorded between each second in the array and the past K seconds before it
+
+Note that your function will receive the following arguments:
+
+    tps
+        which is an array of integers representing the number of tweets recorded every second
+    k
+        which is the integer number mentioned above
+
+Data constraints
+
+    the length of the array above will not exceed 500,000 numbers
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+Input   Output
+
+tps: 6, 9, 4, 7, 4, 1
+
+k: 3
+  
+
+6
+9
+9
+9
+7
+7
+*/
+
+
+
+import java.math.*;
+
+class Tweets {
+  public static void tweets_per_second(Integer[] tps, Integer k) {
+    for (int i=0; i<tps.length; i++) {
+      int max = tps[i];
+      for (int j=Math.max(i-k+1, 0); j<i; j++) {
+        max = Math.max(max, tps[j]);
+      }
+      System.out.println(max);
+    }
+  }
+  public static void main(String[] args) throws Exception {
+      tweets_per_second(new Integer[] {6, 9, 4, 7, 4, 1}, 3);
+      /*
+      BufferedReader in = new BufferedReader(new FileReader("type.dat")); 
+      String[] usernames = in.readLine().replaceAll("\"", "").split(",");
+      String[] queries = in.readLine().replaceAll("\"", "").split(",");
+      typeahead(usernames, queries);
+      */
+  }
+}
+
+
+other solutions 
+
+import java.util.*;
+class MyClass {
+    public static void tweets_per_second(Integer[] tps, Integer k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(k, new Comparator<Integer>() {
+            @Override public int compare(Integer i1, Integer i2) {
+                 return i2 - i1;   
+            }
+        });
+        for (int i=0; i < k; ++i) {
+            pq.add(tps[i]);
+            System.out.println(pq.peek());
+        }
+        for (int i=k; i < tps.length; ++i) {
+            pq.add(tps[i]);
+            pq.remove(tps[i-k]);
+            System.out.println(pq.peek());
+        }
+    }
 }
