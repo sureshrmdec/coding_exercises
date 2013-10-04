@@ -45,119 +45,93 @@ The car positioned at intersection 1 is the closest to the customer. It's ID is 
 import java.util.*;
 import java.io.*;
 
-class Vertex {
-  final String id;
-  Vertex(String id) {
+class Vertex implements Comparable<Vertex> {
+  public final int id;
+  public Vertex previous;
+  public Set<Edge> adjacencies = new HashSet<Edge>();
+  public double minDistance = Double.POSITIVE_INFINITY;
+  Vertex(int id) {
     this.id = id;
   }
   public int hashCode() {
-      return id.hashCode();
+      return id;
   }
   public boolean equals(Object o) {
       Vertex other = (Vertex) o;
-      return id.equals(other.id);
+      return id == other.id;
+  }
+
+  public String toString() { 
+    return "" + id;
+  }
+  public int compareTo(Vertex other) {
+    return Double.compare(minDistance, other.minDistance);
   }
 }
+
+
 class Edge {
   final Vertex from;
   final Vertex to;
-  final int length;
-  Edge(Vertex from, Vertex to, int length) {
+  final double length;
+  Edge(Vertex from, Vertex to, double length) {
     this.from = from;
     this.to = to;
+    this.from.adjacencies.add(this);
+    this.to.adjacencies.add(this);
     this.length = length;
+  }
+  public Vertex other(Vertex v) {
+    return v.equals(from) ? to : from;
   }
 }
 
 class Graph {
-  final List<Vertex> vertexes = new ArrayList<Vertex>();
-  final List<Edge> edges = new ArrayList<Edge>();
-  final Set<Vertex> settled = new HashSet<Vertex>();
-  final Set<Vertex> unSettled = new HashSet<Vertex>();
-  final Map<Vertex, Vertex> predecessors = new HashMap<Vertex, Vertex>();
-  final Map<Vertex, Integer> distance = new HashMap<Vertex, Integer>();
+  private List<Vertex> vertexes;
+  private List<Edge> edges;
 
-  public void execute(Vertex source) {
-    distance.put(source, 0);
-    unSettled.add(source);
-    while (unSettled.size() > 0) {
-      Vertex node = getMinimum(unSettled);
-      settled.add(node);
-      unSettled.remove(node);
-      findMinimalDistances(node);
-    }
+  public Graph(List<Vertex> vertexes, List<Edge> edges) {
+    this.vertexes = vertexes;
+    this.edges = edges;
   }
 
-  private void findMinimalDistances(Vertex node) {
-    List<Vertex> adjacentNodes = getNeighbors(node);
-    for (Vertex target : adjacentNodes) {
-      if (getShortestDistance(target) > getShortestDistance(node)
-          + getDistance(node, target)) {
-        distance.put(target, getShortestDistance(node)
-            + getDistance(node, target));
-        predecessors.put(target, node);
-        unSettled.add(target);
-      }
-    }
-  }
-
-  private int getDistance(Vertex node, Vertex target) {
-    for (Edge edge : edges) {
-      if (edge.from.equals(node)
-          && edge.to.equals(target)) {
-        return edge.getWeight();
-      }
-    }
-    throw new RuntimeException("Should not happen");
-  }
-
-  private List<Vertex> getNeighbors(Vertex node) {
-    List<Vertex> neighbors = new ArrayList<Vertex>();
-    for (Edge edge : edges) {
-      if (edge.getSource().equals(node)
-          && !isSettled(edge.getDestination())) {
-        neighbors.add(edge.getDestination());
-      }
-    }
-    return neighbors;
-  }
-
-  private Vertex getMinimum(Set<Vertex> vertexes) {
-    Vertex minimum = null;
-    for (Vertex vertex : vertexes) {
-      if (minimum == null) {
-        minimum = vertex;
-      } else {
-        if (getShortestDistance(vertex) < getShortestDistance(minimum)) {
-          minimum = vertex;
+  public Vertex computePaths(Vertex customer, Map<Integer, Vertex> cars) {
+    customer.minDistance = 0;
+    PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
+    vertexQueue.add(customer);
+    double carDist = Double.POSITIVE_INFINITY;
+    Vertex carV = null;
+    while (!vertexQueue.isEmpty()) {
+      Vertex u = vertexQueue.poll();
+      // Visit each edge exiting u
+      for (Edge e : u.adjacencies) {
+        Vertex v = e.other(u);
+        double distanceThroughU = u.minDistance + e.length;
+        System.out.println(u + " to " + v + " is " + distanceThroughU + ", mind " + v.minDistance);
+        if (distanceThroughU < v.minDistance) {
+          vertexQueue.remove(v);
+          v.minDistance = distanceThroughU;
+          v.previous = u;
+          vertexQueue.add(v);
+        }
+        if (u == customer && cars.get(v.id) != null) {
+          if (distanceThroughU < carDist || carV == null) {
+            carDist = distanceThroughU;
+            carV = v;
+          } else if (distanceThroughU == carDist && carV.id > v.id) {
+            carV = v;
+          }
         }
       }
     }
-    return minimum;
+    return carV;
   }
 
-  private int getShortestDistance(Vertex destination) {
-    Integer d = distance.get(destination);
-    if (d == null) {
-      return Integer.MAX_VALUE;
-    } else {
-      return d;
+  public List<Vertex> getShortestPathTo(Vertex target) {
+    List<Vertex> path = new ArrayList<Vertex>();
+    for (Vertex vertex = target; vertex != null; vertex = vertex.previous) {
+      path.add(vertex);
     }
-  }
-
-  public LinkedList<Vertex> getPath(Vertex target) {
-    LinkedList<Vertex> path = new LinkedList<Vertex>();
-    Vertex step = target;
-    // Check if a path exists
-    if (predecessors.get(step) == null) {
-      return null;
-    }
-    path.add(step);
-    while (predecessors.get(step) != null) {
-      step = predecessors.get(step);
-      path.add(step);
-    }
-    // Put it into the correct order
     Collections.reverse(path);
     return path;
   }
@@ -166,13 +140,49 @@ class Graph {
 
 public class Dispatcher {
   public static void find_closest_car(String[] city_map, Integer[] cars, Integer customer) {
+    Map<Integer, Vertex> vertexLookup = new HashMap<Integer, Vertex>();
+    final List<Vertex> vertexes = new ArrayList<Vertex>();
+    final List<Edge> edges = new ArrayList<Edge>();
+    for (String road : city_map) {
+        String[] toks = road.split(",");
+        int fromId = Integer.parseInt(toks[0]);
+        int toId = Integer.parseInt(toks[1]);
+        Vertex from = vertexLookup.get(fromId);
+        Vertex to = vertexLookup.get(toId);
+        if (from == null) {
+            from = new Vertex(fromId);
+            vertexLookup.put(fromId, from);
+        }
+        if (to == null) {
+            to = new Vertex(toId);
+            vertexLookup.put(toId, to);
+        }
+
+        int len = Integer.parseInt(toks[2]);
+        if (!vertexes.contains(from)) {
+            vertexes.add(from);
+        }
+        if (!vertexes.contains(to)) {
+            vertexes.add(to);
+        }
+        edges.add(new Edge(from, to, len));
+    }
+    Graph graph = new Graph(vertexes, edges);
+    Map<Integer, Vertex> carsMap = new HashMap<Integer, Vertex>();
+    for (int car : cars) {
+        carsMap.put(car, vertexLookup.get(car));
+    }
+    Vertex customerV = vertexLookup.get(customer);
+    Vertex match = graph.computePaths(customerV, carsMap);
+    for (int i=0; i<cars.length; i++) {
+        if (match.id == cars[i]) {
+            System.out.println(i+1);
+            break;
+        }
+    }
   }
   public static void main(String[] args) throws Exception {
-      /*
-      typeahead(new String[] {"james", "jBlank"}, new String[] {"j", "jm", "jbl", "JB"});
-      */
-      BufferedReader in = new BufferedReader(new FileReader("type.dat")); 
-      String[] usernames = in.readLine().replaceAll("\"", "").split(",");
-      String[] queries = in.readLine().replaceAll("\"", "").split(",");
+    //find_closest_car(new String[]{"1,2,1", "2,3,2", "1,3,1", "3,4,1"}, new Integer[] {2, 1}, 4);
+    find_closest_car(new String[]{"1,2,2", "6,2,2", "6,4,1", "5,4,1", "2,5,1", "2,5,1", "5,3,1", "2,3,2"}, new Integer[] {1,6}, 3);
   }
 }
