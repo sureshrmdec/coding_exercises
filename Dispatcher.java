@@ -62,7 +62,7 @@ class Vertex implements Comparable<Vertex> {
   }
 
   public String toString() { 
-    return "" + id;
+    return "Vertex(" + id + "," + minDistance + ")";
   }
   public int compareTo(Vertex other) {
     return Double.compare(minDistance, other.minDistance);
@@ -95,36 +95,24 @@ class Graph {
     this.edges = edges;
   }
 
-  public Vertex computePaths(Vertex customer, Map<Integer, Vertex> cars) {
+  public void computePaths(Vertex customer) {
     customer.minDistance = 0;
     PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
     vertexQueue.add(customer);
-    double carDist = Double.POSITIVE_INFINITY;
-    Vertex carV = null;
     while (!vertexQueue.isEmpty()) {
       Vertex u = vertexQueue.poll();
       // Visit each edge exiting u
       for (Edge e : u.adjacencies) {
         Vertex v = e.other(u);
         double distanceThroughU = u.minDistance + e.length;
-        System.out.println(u + " to " + v + " is " + distanceThroughU + ", mind " + v.minDistance);
         if (distanceThroughU < v.minDistance) {
           vertexQueue.remove(v);
           v.minDistance = distanceThroughU;
           v.previous = u;
           vertexQueue.add(v);
         }
-        if (u == customer && cars.get(v.id) != null) {
-          if (distanceThroughU < carDist || carV == null) {
-            carDist = distanceThroughU;
-            carV = v;
-          } else if (distanceThroughU == carDist && carV.id > v.id) {
-            carV = v;
-          }
-        }
       }
     }
-    return carV;
   }
 
   public List<Vertex> getShortestPathTo(Vertex target) {
@@ -168,14 +156,19 @@ public class Dispatcher {
         edges.add(new Edge(from, to, len));
     }
     Graph graph = new Graph(vertexes, edges);
-    Map<Integer, Vertex> carsMap = new HashMap<Integer, Vertex>();
-    for (int car : cars) {
-        carsMap.put(car, vertexLookup.get(car));
-    }
     Vertex customerV = vertexLookup.get(customer);
-    Vertex match = graph.computePaths(customerV, carsMap);
+    graph.computePaths(customerV);
+    double carDist = Double.POSITIVE_INFINITY;
+    Vertex carV = null;
+    for (int car : cars) {
+      Vertex v = vertexLookup.get(car);
+      if (carV == null || carDist > v.minDistance) {
+        carDist = v.minDistance;
+        carV = v;
+      }
+    }
     for (int i=0; i<cars.length; i++) {
-        if (match.id == cars[i]) {
+        if (carV.id == cars[i]) {
             System.out.println(i+1);
             break;
         }
