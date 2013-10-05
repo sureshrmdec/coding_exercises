@@ -68,9 +68,9 @@ public class Pricing {
       // when A^2 + 12B != 0
       //    x = 1/12 * (2A - sqrt(A^2 + 12B))
       //
-    double x = 1.0F / 12.0F * (2.0F * a - (double) Math.sqrt(a*a + 12.0F * b));
-    System.out.println(String.format("%.3f", x));
-        
+    double x = 1.0 / 12.0 * (2.0F * a - Math.sqrt(a*a + 12.0 * b));
+    String val = String.format("%.3f", x);
+    System.out.println(val.substring(0, val.length()-1));
   }
   public static void main(String[] args) throws Exception {
       uber_price(250, 400);

@@ -1992,3 +1992,147 @@ class MyClass {
         }
     }
 }
+
+
+
+
+
+
+/*
+ *
+Price experiment
+
+Uber is a company based in San Francisco, California that makes a mobile application that connects passengers with drivers of luxury vehicles for hire.
+
+Uber is doing experiments to better understand the relationship between price and demand for rides. One hypothesis is that lower prices will show an increase in demand for cars.
+
+Their goal is to find the cost/demand point that is best for everyone.
+
+Experimental data will show that the relation between the price discount and the uber revenue can be approximated by a mathematical function. Lets consider the following function:
+
+y = 1/2 ((-3x^2 + Ax + B) - x - 1)
+
+where
+
+    x represents the discount,
+    y represents the uber revenue and
+    A, B are two constant positive integers
+
+The relation described above has a shape similar to the one shown below:
+
+Given the two positive integer numbers A and B
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the discount value x that maximizes uber revenue y
+    please print the found value x truncated to two decimal places without rounding.
+
+Note that your function will receive the following arguments:
+
+    a
+        the positive integer number A
+    b
+        the positive integer number B
+
+Data constraints
+
+    the values of a, b constants will not exceed 2000
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+Input   Output
+
+a: 250
+
+b: 400
+    
+
+20.04
+*/
+
+import java.util.*;
+import java.io.*;
+
+
+public class Pricing {
+  public static void uber_price(Integer a, Integer b) {
+      // derivative = 
+      // L = A - 6x 
+      // M = 2 * Sqrt(x(A-3x)+B)
+      // (1/2) * (L / M - 1)
+      // root 
+      // when A^2 + 12B != 0
+      //    x = 1/12 * (2A - sqrt(A^2 + 12B))
+      //
+    double x = 1.0 / 12.0 * (2.0F * a - Math.sqrt(a*a + 12.0 * b));
+    String val = String.format("%.3f", x);
+    System.out.println(val.substring(0, val.length()-1));
+  }
+  public static void main(String[] args) throws Exception {
+      uber_price(250, 400);
+  }
+}
+
+
+Other solutions 
+
+
+class MyClass {
+    public static void uber_price(Integer a, Integer b) {
+        double d = ((2 * a) - Math.sqrt(a * a + (12 * b))) / 12.0;
+        int i = (int)(d * 100.0);
+        System.out.println(String.format("%.2f", i / 100.0f));
+    }
+}
+
+
+
+
+
+
+Neighbourhood
+
+Uber needs to connect a rider with a car as fast as possible. To achieve that, the system needs to accurately predict demand to make sure you get a car when you want one. Predicting demands requires knowledge about the locations from which most orders are likely to occur.
+
+Given a neighbourhood represented as the coordinates of a convex polygon and a list of trip destinations
+
+Your task is to
+
+    write a function that prints to the standard output (stdout) the number of trips that ended in the given neighbourhood
+
+Note that your function will receive the following arguments:
+
+    neighbourhood
+        which is an array of strings representing the coordinates of the polygon
+        the convex polygon coordinates are presented in clockwise order
+        each string contains the x,y coordinates of one vertex, separated by comma
+    trips
+        which is an array of strings representing the coordinates of the trips destinations
+        each string contains the x,y coordinates of one destination, separated by comma
+
+Data constraints
+
+    the length of the arrays above will not exceed 100,000 entries
+    all the coordinates values, for both the polygon and trip destinations, will be integer numbers in the [0, 10000] range
+
+Efficiency constraints
+
+    your function is expected to print the requested result and return in less than 2 seconds
+
+Example
+Input   Output
+neighbourhood: ["1,3","4,5","3,1"]
+trips: ["1,1","2,3","3,3","4,2"]  2
+
+Explanation:
+
+The only trips that ended in the neighbourhood are (2,3) and (3,3).
+
+
+
+
+
+
