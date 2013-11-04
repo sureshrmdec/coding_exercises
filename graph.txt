@@ -1,0 +1,9 @@
+min # of edges for n vertices : n-1
+max # of edges for n vertices : n(n-1)/2
+or m = omega(n) and o(n^2)
+
+matrix repr requires O(N^2)
+adjacency list requiers O(m+n)
+
+
+
