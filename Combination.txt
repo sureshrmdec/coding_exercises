@@ -1,0 +1,13 @@
+1.￼Choosing k among n items without considering the order in which they are chosen is called a combination. The binomial coefficient notation:
+n!/k!.(n-k)! = 5400/(210*6)
+35
+
+2. Order requires k!, e.g 3! = 6, selecting 3 numbers can be rearranged in 6 ways
+
+3. Permutation : Combining 1 and 2 requires multiplying above two.
+nPk
+nPn = The number of ways n objects can be chosen among n possible objects = n!
+
+
+
+an m×n matrix times an n×p matrix yields an m×p matrix.

@@ -1,4 +1,27 @@
 
+Finding median via two heaps
+  - maintain min and max heaps 
+  - when a new element arrives, check if it's smaller than smallest of max then it goes to min heap 
+  - rebalance both heaps 
+
+
+Dijkstra alg - naive impl - O(N*M) but with heap (M Log N)
+
+Greedy algorithm 
+  Dijkstra shortest path 
+  iteratively makes myopic decision, hope everything works out at the end 
+  divide and conquer problem -- solve sub problem (e.g. merge sort)
+
+
+Scheduling problem 
+  weight - priority of job
+  length - how long job will take to run 
+  completion time of job = wall time (includes waiting time before job is actually run)
+  objective func - minimize sum of completion time x weight = minimze weighted average completion time 
+
+
+
+
  Given an array with all final grades for a course and the minimum grade that a student needs to have in order to pass the course
 
 Your task is to
@@ -2130,8 +2153,6 @@ trips: ["1,1","2,3","3,3","4,2"]  2
 Explanation:
 
 The only trips that ended in the neighbourhood are (2,3) and (3,3).
-
-
 
 
 
