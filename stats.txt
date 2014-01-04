@@ -1,0 +1,362 @@
+P(A | B) = P(A ∩ B) / P(B)
+
+P(A | B) = P(A) × P(B | A) / P(A) × P(B | A) + P(AI) × P(B | AI)
+
+
+P(B) = P(B ∩ A) + P(B ∩ AI) = P(A) P(B | A) + P(AI) P(B | AI)
+The Law of Total Probability is the denominator of Bayes’ Theorem.
+
+
+The expectation of a function of X is given by 
+E(f(X)) = ￼ f(x)P(X=x)
+
+The variance of a probability distribution is given by Var(X) = E(X - μ)2
+
+E(X) = ￼ xP(X = x)
+E(X - μ)2 = ￼ ￼ (x - μ)2P(X = x)
+￼
+E(aX + b) = a E(X) + b 
+
+Var(aX + b) = a2 Var(X)
+
+
+Each game is called an event.  The outcome of each game is called an observation
+
+Independent Observations Use the following formula to calculate the variance
+E(X1 + X2 + ... + Xn) = nE(X) Var(X1 + X2 + ... + Xn) = nVar(X)
+
+
+If X and Y are independent random variables, then:
+E(X + Y) = E(X) + E(Y)
+E(X - Y) = E(X) - E(Y)
+Var(X + Y) = Var(X) + Var(Y) Var(X - Y) = Var(X) + Var(Y)
+￼
+
+E(aX + bY) = aE(X) + bE(Y)
+Var(aX + bY) = a2Var(X) + b2Var(Y)
+
+E(aX - bY) = aE(X) - bE(Y)
+Var(aX - bY) = a2Var(X) + b2Var(Y)
+
+
+
+E(aX + b) = aE(X) + b
+Var(aX + b) = a2Var(X)
+E(X) = xP(X = x)
+￼
+Var(aX - bY) = a2Var(X) + b2Var(Y)
+Var(X) = E(X - μ)2 = E(X2) - μ2
+E(aX - bY) = aE(X) - bE(Y)
+E(X1 + X2 + X3) = 3E(X)
+Var(X1 + X2 + X3) = 3Var(X)
+E(X2) = x2P(X = x)
+Var(aX - b) = a2Var(X)
+
+
+when calculating arrangements that include duplicate objects, divide the total number of arrangements (n!) by the number of arrangements of each set of alike objects (j!, k!, and so on).
+n! / j!k!
+
+
+Permutations (order matters) = nPr = n! /  (n - r)!   where n is the total number of objects and r is the number of positions we want to fill
+Combinations (order doesn't matter = nCr = n!  / r! (n - r)!
+
+
+
+The coach classes 3 of the players as expert shooters. What’s the probability that all 3 of these players will be on the court at the same time, if they’re chosen at random?
+Let’s start by finding the number of ways in which the three shooters can be on the court at the same time.
+If the three expert shooters are on the court at the same time, this means that there are 2 more places left for the other players. 
+= 12! / 5!(12-5)! = 792
+= 9! / 2!(9-2)! = 36
+This means that the probability of all 3 shooters being on the court at the same time is 36/792 = 1/22.
+
+A poker hand consists of 5 cards and there are 52 cards in a pack. How many different arrangements are there?
+= 52! / 47!5! = 2,598,960
+Probability of flush (10, Jack, Queen, King and Ace) = 4 / 2,598,960
+
+
+P (4 of kind) = 13x48 (13 denomination, 48 cards left) = 624
+P(Four of a Kind) = 624 / 2,598,960
+
+P (flush - all 5 cards same suit, 13 cards in each suit) = 4 x 13! / 8!5! = 5148
+P(Flush) = 5148 / 2,598,960
+
+
+Geometric distribution =  P(X = r) = q^(r - 1) . p   where r is nth trial, p is the probability of success, and q = 1 – p, the probability of failure.
+P(X > r) = q^r and P(X ≤ r) = 1 - q^r     --- (P(X ￼ r) + P(X > r) = 1)
+
+If X ~ Geo(p) then E(X) = 1 / p
+Var(X) = E(X2) – E2(X) or Var(X) = q / p^2
+
+
+The probability that you will be successful on your second attempt, while failing on your first.
+P(X = 2) = p x q = 0.4 x 0.6 = 0.24
+2. The probability that you will be successful in 4 attempts or fewer.
+P(X ≤ 4) = 1 - q^4 = 1 - 0.64 = 1 - 0.1296 = 0.8704
+3. The probability that you will need more than 4 attempts to be successful.
+P(X > 4) = q^4 = 0.64 = 0.1296
+4. The number of attempts you expect you’ll need to make before being successful.
+E(X) = 1/p = 1/0.4 = 2.5
+4. The variance of the number of attempts.
+Var(X) = q/p2 = 0.6/0.42 = 0.6/0.16 = 3.75
+
+P(X = r) = 3Cr × 0.25^r × 0.75^3 - r, where .25 is probability of correct answer and .75 probability of incorrect
+= 3!/(3-1)! × 0.25 × 0.5625 = 0.422
+Binomial distribution  P(X = r) = nCr × p^r × q^n-r  whre nCr = n! / r!(n-r)!  ---- X ~ B(n,p)
+
+
+E(X) = 0q + 1p =p
+Var(X) = E(X2) - E(X)2 = (0q + 1p) - p2 = p - p2 = p(1 - p) = pq
+E(X) = np 
+Var(X) = npq
+
+
+In the latest round of Who Wants To Win A Swivel Chair, there are 5 questions. The probability of getting a successful outcome in a single trial is 0.25
+What’s the probability of getting exactly two questions right?
+If X represents the number of questions answered correctly, then X ~ B(n, p) P(X = 2) = 5C2 x 0.252 x 0.753 = 5!/3!2! x 0.0625 x 0.421875 = 10 x 0.0264 = 0.264
+
+What’s the probability of getting no questions right?  P(X = 0) = 0.755 = 0.237
+
+What are the expectation and variance?
+E(X) = np = 5 x 0.25 = 1.25
+Var(X) = npq = 5 x 0.25 x 0.75 = 0.9375
+
+What’s the difference between geometric distribution and the binomial distribution 
+
+Both of them deal with independent trials, and each trial can result in success or failure.  If you have a fixed number of trials and you want to know the probability of 
+getting a certain number of successes, you need to use the binomial distribution. You can also use this to find out how many successes you can expect to have in your n trials.
+If you’re interested in how many trials you’ll need before you have your first success, then you need to use the geometric distribution instead.
+
+
+Poisson distribution - events occur at random and independently in a given interval (time/space). The mean number of occurrences is normally represented by the Greek letter λ (lambda).
+
+
+Let X - the number of occurrences in the given interval, X follows a Poisson distribution with a mean of λ occurrences per interval or rate, we write this as:
+  X ~ Po(λ)
+find the probability that there are r occurrences in a specific interval, use the formula:
+  P(X = r) = e^-λ λ^r / r!
+For example, X ~ Po(2)
+P(X = 3) = e^-2 × 2^3 / 3!  = e^-2 × 8 / 6 = e^-2 × 1.333 = 0.180
+If X ~ Po(λ) 
+  E(X) = λ 
+  Var(X) = λ 
+If λ is an integer, then there are two modes, λ and λ - 1. If λ is not an integer, then the mode is λ.
+
+job is to play like you’re the popcorn machine and say what the probability is of you malfunctioning a particular number of times next week.
+Let’s use X to represent the number of times the popcorn machine malfunctions in a week. We have X ~ Po(3.4)
+
+1. What’s the probability of the machine not malfunctioning next week?
+If there are no malfunctions, then X must be 0. 
+  P(X = 0) = e^-λ λ^r / r!  = e^-3.4 x 3.4^0 / 0! = e^-3.4 x 1 / 1 = 0.033
+
+2. What’s the probability of the machine malfunctioning three times next week?
+P(X = 3) = e^-3.4 x 3.4^3 / 3!  = e^-3.4 x 39.304 / 6 = 0.033 x 6.55 = 0.216
+
+3. What’s the expectation and variance of the machine malfunctions?
+E(X) = λ Var(X) = λ = 3.4 = 3.4
+
+
+If X is the number of times the popcorn machine malfunctions and Y is the number of times the drinks machine malfunctions, then X ~ Po(3.4) and Y ~ Po(2.3).
+ What’s the distribution of X + Y?
+ λx + λy = 3.4 + 2.3 = 5.7
+ X + Y ~ Po(5.7)
+
+
+2. Once you’ve found how X + Y is distributed, you can use it to find probabilities. What’s P(X + Y = 0)?
+P(X + Y = 0) = e^-λ λr / r!  = e-5.7 x 5.7^0 / 0!  = e^-5.7 x 1 / 1 = 0.003
+
+
+
+Sometimes it’s simpler to use the Poisson distribution than the binomial, e.g. imagine if you had to calculate a binomial probability where n is 3000. A
+Imagine we have a variable X where X ~ B(n, p). We want to find a set of circumstances where B(n, p) is similar to Po(λ).
+In other words, we want λ to be like np for expectation and λ to be like npq for vairance -- np to be like npq 
+X ~ B(n, p) can be approximated by X ~ Po(np) if n is large (>50) and p is small (<0.1)
+
+A student needs to take an exam, needs to guess the answer to each question, and the probability of getting a question right is 0.05. There are 50 questions on the exam paper. 
+What’s the probability he’ll get 5 questions right? 
+n = 50 and p = 0.05, np = 2.5. This means we can use X ~ Po(2.5) to approximate the probability.
+P(X = 5) = e^-λ λr / r!  = e^-2.5 x 2.5^5 / 5!  = e^-2.5 x 97.65625 / 120 = e-2.5 x 0.8138 = 0.067
+
+
+How do I calculate probabilities, and the expectation and variance?  Use
+  P(X = r) = e^-λ λr / r!       E(X) = λ            Var(X) = λ 
+How do I combine independent random variables?
+￼￼￼￼￼If X ~ Po(λx) and Y ~ Po(λy), then
+What connection does it have to the binomial distribution?
+If X ~ B(n, p), where n is large and p is small, then X can be approximated using
+    X ~ Po(np)
+
+
+
+A man is bowling. The probability of him knocking all the pins over is 0.3. If he has 10 shots, what’s the probability he’ll knock all the pins down less than three times?
+If X is the number of times the man knocks all the pins over, then X ~ B(10, 0.3)
+E(X) = np = 10 x 0.3 = 3
+Var(X) = npq = 10 x 0.3 x 0.7 = 2.1
+nCr = n!  / r! (n - r)!
+
+For a general probability, P(X = r) = nCr x p^r x q^n-r
+P(X = 0) = 10!/(10-0)! x 0.3^0 x 0.7^10 = 1 x 1 x 0.028 = 0.028
+P(X = 1) = 10!/(10-1)! x 0.3^1 x 0.7^9 = 10 x 0.3 x 0.04035 = 0.121
+P(X = 2) = 10!(10-2)! x 0.3^2 x 0.7^8 = 45 x 0.09 x 0.0576 = 0.233
+P(X < 3) = P(X = 0) + P(X = 1) + P(X = 2) = 0.028 + 0.121 + 0.233 = 0.382
+
+
+
+On average, 1 bus stops at a certain point every 15 minutes. What’s the probability that no buses will turn up in a single 15 minute interval?
+If X is the number of buses that stop in a 15 minute interval, then X ~ Po(1) 
+E(X) = λ = 1
+Var(X) = λ = 1
+For a general probability, P(X = r) = e^-λ λ^r / r!
+P(X = 0) = e^-1 x 1^0 / 0!  = e^-1 x 1 / 1 = 0.368
+
+
+20% of cereal packets contain a free toy. What’s the probability you’ll need to open fewer than 4 cereal packets before finding your first toy?
+If X is the number of cereal packets that need to be opened in order to find your first toy, then X ~ Geo(0.2)
+E(X) = 1/p = 1/0.2 = 5
+
+Var(X) = q/p^2 = 0.8/0.2^2 = 0.8/0.04 = 20
+
+For a general probability, P(X ≤ r) = 1 - qr
+P(X ≤ 3) = 1 - q^r = 1 - 0.8^3 = 1 - 0.512 = 0.488
+
+
+
+
+
+The geometric distribution X ~ Geo(p)
+P(X = r) = pq^(r - 1)
+P(X > r) = q^r
+P(X ≤ r) = 1 - q^r
+E(X) = 1/p 
+Var(X) = q/p2
+
+
+The binomial distribution
+X ~ B(n, p)
+P(X = r) = nCr × p^r × q^n-r  whre nCr = n! / r!(n-r)! 
+E(X) = np 
+Var(X) = npq
+
+
+The Poisson distribution
+X ~ Po(λ)
+P(X = r) = e^-λ λr / r!
+E(X) = λ 
+Var(X) = λ
+
+If X ~ Po(λx), Y ~ Po(λy) and X and Y are independent,
+X + Y ~ Po(λx + λy)
+If X ~ B(n, p) where n is large and p is small, you can approximate it with X ~ Po(np
+
+
+Probability density tells you how high probabilities are across ranges, and it’s described by the probability density function. 
+For continuous data, you need to find probability by calculating area.
+The total area under the probability density function must equal 1.
+A bunch of probability density functions have lost track of their probabilities. Your job is to play like you’re the
+probability density function and work out the probability between the specified ranges.
+
+f(x)=0.05 where 0<x<20 Find P(X < 5)
+(X < 5) = 5 x 0.05 = 0.25
+
+f(x)=1 where 0<x<1 Find P(X < 0.5)
+P(X < 0.5) = 1 x 0.5 = 0.5
+
+f(x)=1 where 0<x<1 Find P(X > 2)
+P(X > 2) = 0
+
+f(x)=0.1–0.005x where 0<x<20
+Find P(X > 5)
+When x = 5, f(x) = 0.075. This means we have to find the area of a right-angled triangle with height 0.075 and width 15.
+P(X > 5) = (0.075 x 15)/2 = 1.125/2 = 0.5625   -- area of triangle is half of area of rectangle
+
+
+The normal distribution is called normal because it’s seen as an ideal.  The normal distribution is in the shape of a bell curve. 
+The probability density decreases the further away you get from the mean. The normal distribution is defined by two parameters, μ and σ2. 
+μ tells you where the center of the curve is, and σ gives you the spread. X ~ N(μ, σ2)
+No matter how far you go out on the graph, the probability density never equals 0.  The probability density gets closer and closer to 0
+
+Three steps to calculating normal probabilities
+  Grab your distribution and range
+    mean is 71 inches, and the variance is 20.25 inches.
+    X ~ N(71, 20.25)    μ = 71        σ2 = 20.25
+    The probability of Julie’s date being over 64 inches tall is given by this area here: P(X > 64).
+  Standardize it
+    standardize our variable X so that the mean becomes 0 and the standard deviation 1  -- Z ~ N(0, 1)
+    X - 71 ~ N(0, 20.25)
+    We also need to adjust the variance. To do this, we “squash” our distribution by dividing by the standard deviation.
+    X - 71 / 4.5 ~ N(0, 1) 
+    Z ~ N(0, 1) where Z = X - 71 / 4.5
+    This is the standard score Z = X - μ / σ
+  Look up the probabilities
+    probability distribution can be standardized to get from X ~ N(μ, σ2) to Z ~ N(0, 1)
+    Let’s find the standard score of 64
+      z = x -μ / σ = 64 - 71 / 4.5 = -1.56 (to 2 decimal places)
+   
+N(10, 4), value 6
+z = x -μ / σ = 6 - 10 / 2 = -2 
+
+N(6.3, 9), value 0.3
+z =x - μ / σ = 0.3 - 6.3 / 3 = -2
+
+N(2, 4). If the standard score is 0.5, what’s the value?
+z = x -μ / σ 
+0.5 = x - 2 / 2
+x = 3
+
+The standard score of value 20 is 2. If the variance is 16, what’s the mean?
+z = x -μ / σ 
+2 = 20 - μ / 4
+2 x 4 = 20 - μ
+μ = 20 - 8 = 12
+
+Standard normal probability tables allow you to look up any value z, and then read off the corresponding probability P(Z < z).
+So, looking up the value of –1.56 in the probability table gives us a probability of 0.0594. In other words, P(Z < –1.56) = 0.0594. This means that
+P(Z > –1.56) = 1 - P(Z < –1.56) = 1 – 0.0594
+= 0.9406 = 94%
+
+
+P(Z > z) = 1 - P(Z < z)
+P(a < Z < b) = P(Z < b) - P(Z < a)
+
+Another name for the normal distribution is the Gaussian distribution.
+Do continuous distributions have a mode? Can you find the mode of the normal distribution?
+The mode of a continuous probability distribution is the value, which is middle -- mean μ.
+
+The median of a continuous probability distribution is the value a where P(X < a) = 0.5. 
+For the normal distribution, the median is also μ. 
+
+P(-0.15 < Z < 0.5)
+look up P(Z < 0.5), and subtract P(Z < -0.15) 
+P(-0.15 < Z < 0.5 = P(Z < 0.5) - P(Z < -0.15) = 0.6915 - 0.4404 = 0.2511
+
+
+When Julie is wearing 5 inch high heels, her height is 69 inches. We need to find P(X > 69).
+We need to start by finding the standard score of 178 so that we can use probability tables to look up the probabilities.
+Z = X -μ / σ = 69 - 71 / 4.5 = -2 / 4.5 = -0.44 (to 2 decimal places)
+Now we’ve found z, we need to find P(Z > z) i.e. P(Z > -0.44)
+P(Z > -0.44) = 1 - P(Z < -0.44) = 1 - 0.3300 ￼￼￼￼￼￼￼￼-0.44
+So, I can wear my highest heels, and there’s still a 67% chance ￼￼= 0.67
+
+
+
+Will knows that the number of minutes people spend playing level one follows a normal distribution.
+Secondly, he knows that the probability of a player playing for less than 5 minutes is 0.0045.
+Finally, the probability of someone taking less than 15 minutes to complete level one is 0.9641.
+How can Will find the mean and standard deviation?
+
+First of all, we know that P(X < 5) = 0.0045. From probability tables, P(X < z1) where z1 = -2.61, which means that the standard score of 5 is -2.61. 
+-2.61 = 5 - μ / σ
+Similarly, P(X < 15) = 0.9641, which means that the standard score of 15 is 1.8. This gives us
+1.8 = 15 - μ / σ
+
+2.61σ = 5 - μ 
+1.8σ = 15 - μ
+
+If we subtract the first equation from the second, we get
+σ = 2.27
+
+then substituting it in first equation
+1.8 × 2.27 = 15 - μ
+μ = 15 - 4.086 = 10.914
+
+
+
