@@ -1,3 +1,6 @@
+P(A ∪ B) = P(A) + P(B) - P(A ∩ B)
+
+
 P(A | B) = P(A ∩ B) / P(B)
 
 P(A | B) = P(A) × P(B | A) / P(A) × P(B | A) + P(AI) × P(B | AI)
@@ -5,6 +8,26 @@ P(A | B) = P(A) × P(B | A) / P(A) × P(B | A) + P(AI) × P(B | AI)
 
 P(B) = P(B ∩ A) + P(B ∩ AI) = P(A) P(B | A) + P(AI) P(B | AI)
 The Law of Total Probability is the denominator of Bayes’ Theorem.
+
+Bayes’ Theorem
+P(A | B) = P(A) × P(B | A)    /       P(A) × P(B | A) + P(AI) × P(B | AI)
+
+
+Manic Mango selects one of the volunteers at random to ask if she enjoyed playing the game, and she says she did. Given that the volunteer enjoyed playing the game, 
+what’s the probability that she played game 2? Use Bayes’ Theorem.
+We need to use Bayes’ Theorem to find P(Game 2 | Satisfied). This means we need to use
+
+P(Game 2 | Satisfied) = P(Game 2) P(Satisfied | Game 2)       /       P(Game 2) P(Satisfied | Game 2) + P(Game 1) P(Satisfied | Game 1)
+We’ve been told that P(Game 2) = 0.2 and P(Satisfied | Game 2) = 0.7. This means that 
+P(Game 2) P(Satisfied | Game 2) = 0.2 x 0.7 = 0.14
+
+The next thing we need to find is P(Game 1) P(Satisfied | Game 1). We’ve been told that P(Satisfied | Game 1) = 0.6, and also that P(Game 1) = 0.8. This means that
+P(Game 1) P(Satisfied | Game 1) = 0.8 x 0.6 = 0.48
+
+Substituting this into the formula for Bayes’ Theorem gives us
+P(Game 2 | Satisfied) = P(Game 2) P(Satisfied | Game 2)       /       P(Game 2) P(Satisfied | Game 2) + P(Game 1) P(Satisfied | Game 1) = 0.14
+0.14 / 0.14 + 0.48 = 0.14 / 0.62 = 0.226
+
 
 
 The expectation of a function of X is given by 
@@ -357,6 +380,265 @@ If we subtract the first equation from the second, we get
 then substituting it in first equation
 1.8 × 2.27 = 15 - μ
 μ = 15 - 4.086 = 10.914
+
+
+E(X+Y)
+E(X + Y) = E(X) + E(Y)
+
+E(X-Y)
+E(X - Y) = E(X) - E(Y)
+
+Var(X+Y)
+Var(X + Y) = Var(X) + Var(Y)
+
+Var(X-Y)
+Var(X + Y) = Var(X) + Var(Y)      -- note we add variance even though it's subtraction
+
+
+X + Y ~ N(μ, σ2)
+To find the mean and variance of X + Y, you can use the same formulae that we used for discrete probability distributions. In other words, if
+X ~ N(μx, σx2) and Y ~ N(μy, σy2) then
+X + Y ~ N(μ, σ2)
+where μ = μ + μ           and           σ2 = σ 2 + σ 2
+In other words, the mean of X + Y is equal to the mean of X plus the mean of Y, and the variance of X + Y is equal to the variance of X plus the variance of Y.
+
+X ~ N(μx, σx2) and Y ~ N(μy, σy2) then
+X - Y ~ N(μ, σ2) where μ = μ - μ      σ2 = σx2 + σy2 
+In other words, the mean of X – Y is equal to the mean of Y subtracted from the mean of X, and you find the variance of X – Y by adding the X and Y variances together.
+
+X is the weight of the bride and Y is the weight of the groom, where X ~ N(150, 400) and Y ~ N(190, 500). With this information, find the probability distribution for the combined weight of the bride and groom.
+We need to find the probability distribution of X + Y. To find the mean and variance of X + Y, we add the means and variances of the X and Y distributions together. This gives us
+X + Y ~ N(340, 900)
+
+
+Then, using this distribution, find the standard score of 380 pounds.
+z = (x + y) - μ / σ = 380 - 340 / 30 = 40 / 30 = 1.33 (to 2 decimal places)
+
+Finally, use the standard score to find P(X + Y < 380)
+If we look 1.33 up in standard normal probability tables, we get a probability of 0.9082. 
+This means that P(X + Y < 380) = 0.9082
+
+
+In Statsville, the height of men in inches is distributed as N(71, 20.25), and the height of women in inches is distributed as N(64, 16).
+Let’s use X to represent the height of the men and Y to represent the height of the women. This means that X ~ N(71, 20.25) and Y ~ N(64, 16).
+We need to find the probability that a man is at least 5 inshes taller than a woman. This means we need to find P(X > Y + 5) or P(X - Y > 5)
+To find the mean and variance of X - Y, we take the mean of Y from the mean of X, and add the variances together. This gives us
+X - Y ~ N(7, 36.25)
+We need to find the standard score of 5 inches z = (x - y) - μ / σ = 5- 7 / 6.02 = -0.33 (to 2 decimal places)
+We can use this to find P(X - Y > 5).
+P(X - Y > 5) = 1 - P(X - Y < 5) = 1 - 0.3707 = 0.6293
+
+Linear transformations
+When we looked at discrete probability distributions, we found that E(aX + b) = aE(X) + b. Now, X follows a normal distribution where E(X) = μ, so this gives us E(aX + b) = aμ + b.
+We can take a similar approach with the variance. When we looked at discrete probability distributions, we found that Var(aX + b) = a2 Var(X). We know that
+Var(X) in this case is given by Var(X) = σ2, so this means that Var(aX + b) = a2σ2. Putting both of these together gives us
+aX + b ~ N(aμ + b, a2σ2)
+the new mean becomes aμ + b, and the new variance becomes a2σ2
+
+When we looked at the expectation and variance of independent observations of discrete random variables, we found that
+E(X1 + X2 + ... Xn) = nE(X) and Var(X1 + X2 + ... + Xn) = nVar(X)
+As you’d expect, these same calculations work for continuous random variables too.  This means that if X ~ N(μ, σ2), then
+X + X + ... + X ~ N(nμ, nσ2)
+
+You calculate the expectation for linear transforms and independent observations in the same way, but there’s a big difference in the way the variance is calculated. 
+If you have n independent observations then the variance is n times the original. If you transform your probability distribution as aX + b, then your variance becomes a2 times the original.
+
+Let’s solve Dexter’s Love Train dilemma. What’s the probability that the combined weight of 4 adults will be less than 800 pounds? Assume the weight of an sdult is distributed as N(180, 625).
+If we represent the weight of an adult as X, then X ~ N(180, 625). We need to start by finding how the weight of 4 adults is distributed. To find the mean and variance of this new distribution, 
+we multiply the mean and variance of X by 4. This gives us
+X1 + X2 + X3 + X4 ~ N(720, 2500)
+To find P(X1 + X2 + X3 + X4< 800), we start by finding the standard score. z = x- μ / σ
+= 800 - 720 / 50 = 80 / 50 = 1.6
+Looking this value up in standard normal probability tables gives us a value of 0.9452. This means that
+P(X1 + X2 + X3 + X4< 800) = 0.9452
+
+
+How would you find the probability of getting at least 30 out of 40 questions correct? What steps would you need to go through to get the right answer? How would you find the mean and variance?
+We’re not asking you to find the probability—just say how you’d go about finding it.
+
+There are 40 questions, which means there are 40 trials. The outcome of each trial can be a success or failure, and we want to find the probability of getting a certain number of successes. In order to do this, we need to use the binomial distribution. We use n = 40, and as each question has four possible answers, p is 1/4 or 0.25.
+If X is the number of questions we get right, then we want to find P(X > 30). This means we have to calculate and add together the probabilities for P(X = 30) up to P(X = 40).
+We can find the mean and variance using n, p and q, where q = 1 - p. The mean is equal to np, and the variance is equal to npq. This gives us a mean of 40 x 0.25 = 10, and a variance of 40 x 0.25 x 0.75 = 7.5.
+
+The Poisson distribution can approximate the binomial in some situations, but the normal can in others.
+We can use normal distribution to approximate binomial probability when np and nq are > 5. μ = np and σ2 = npq 
+If X ~ B(n, p) and np > 5 and nq > 5, you can use X ~ N (np, npq) to approximate it.
+
+Let’s try finding the probability that we get 5 or fewer questions correct out of 12, where there are only two possible choices for each question.
+Let’s start off by working this out using the binomial distribution. Use the binomial distribution to find P(X < 6) where X ~ B(12, 0.5).
+P(X = r) = nCrp^rq^n-r  where nCr = n! / r!(n - r)!
+We need to find P(X < 6) where X ~ B(12, 0.5). To do this, we need to find P(X = 0) through P(X = 5), and then add all the probabilities together.
+The individual probabilities are
+P(X = 0) = 12C0 x 0.5^12 = 0.5^12
+P(X = 1) = 12C1 x 0.5 x 0.5^11 = 12 x 0.5^12 
+P(X = 2) = 12C2 x 0.5^2 x 0.5^10 = 66 x 0.5^12 
+P(X = 3) = 12C3 x 0.5^3 x 0.5^9 = 220 x 0.5^12 
+P(X = 4) = 12C4 x 0.5^4 x 0.5^8 = 495 x 0.5^12 
+P(X = 5) = 12C5 x 0.5^5 x 0.5^7 = 792 x 0.5^12
+Adding these together gives us an overall probability of
+P(X < 6) = (1 + 12 + 66 + 220 + 495 + 792) x 0.5^12 = 1586 x 0.5^12 = 0.387 (to 3 decimal places)
+
+Now let’s try using the normal approximation to the binomial and check we get the same result. First of all, if X ~ B(12, 0.5), 
+what normal distribution can we use to approximate this? Once you’ve found that, what’s P(X < 6)?
+X ~ B(12, 0.5), which means that n = 12, p = 0.5 and q = 0.5. A good approximation to this is X ~ N(np, npq), or X ~ N(6, 3).
+We want to find P(X < 6), so we start by calculating the standard score. z = x -μ /σ = 6 -6 / sqrt(3) =0
+Looking this up in probability tables gives us P(X < 6) = 0.5
+The binomial is discrete, but the normal is continuous 
+The discrete value 6 actually covers a range from 5.5 to 6.5, so instead of using the normal distribution to find P(X < 6), we should have tried calculating
+P(X < 5.5) insteadThe binomial is discrete, but the normal is continuous 
+The discrete value 6 actually covers a range from 5.5 to 6.5, so instead of using the normal distribution to find P(X < 6), we should have tried calculating
+P(X < 5.5) instead. This adjustment is called a continuity correction.
+
+We want to find P(X < 5.5) where X ~ (6, 3), so let’s start by calculating the standard score. z = x -μ / σ
+= 5.5 - 6 / sqrt(3) = -0.29 (to 2 decimal places)
+We want to find the probability given by the area Z < -0.29, and looking this up in standard normal probability tables gives us a probability of 0.3859. In other words,
+P(X < 5.5) = 0.3859
+
+use the normal distribution to approximate the binomial. If X ~ B(n, p) and np > 5 and nq > 5 then you can approximate X using X ~ N(np, npq)
+If you’re approximating the binomial distribution with the normal distribution, then you need to apply a continuity correction to make sure your results are accurate.
+
+
+
+Finding ≤ probabilities
+When you work with probabilities of the form P(X ≤ a), the key thing you need to make sure of is that you choose your range so that it includes the discrete value a. On a continuous scale, the discrete value a goes up to (a + 0.5). 
+This means that if you’re using the normal distribution to find P(X ≤ a), you actually need to calculate P(X < a + 0.5) to come up with a good approximation. In other words, you add an extra 0.5.
+
+Finding ≥ probabilities
+If you need to find probabilities of the form P(X ≥ b), you need to make absolutely sure that your range includes the discrete value b. The value b extends down to (b - 0.5) on a continuous scale so you need to use a range of P(X > b - 0.5) to make sure that you include it. In other words, you need to subtract an extra 0.5.
+
+Finding “between” probabilities
+Probabilities of the form P(a ≤ X ≤ b) need continuity corrections to make sure that both a and b are included. To do this, we need to extend the range out by 0.5 either side. 
+To approximate this probability using the normal distribution, we need to find P(a - 0.5 < X < b + 0.5). This is really just a combination of the two types above.
+
+You can approximate the binomial distribution with both the normal and Poisson distributions. Which should I use?
+You can use the Poisson distribution to approximate the binomial distribution if n > 50 and p < 0.1
+
+Your job is to take snippets from the pool and place them into the blank lines so that you get the right continuity correction for each
+dscrete probability range. You may use the same snippet more than once, and you won’t need to use all the snippets.
+
+X < 3     ==> X < 2.5
+X > 3     ==> X > 3.5
+X <= 3    ==> X < 3.5
+X >= 3    ==> X > 2.5
+3 <= X < 10 ==> 2.5 < X < 9.5
+X = 0     ==> -0.5 < X < 0.5
+3 <= X <= 10 ==> 2.5 < X < 10.5
+3 < X <= 10 ==> 3.5 < X < 10.5
+X > 0     ==> X > 0.5
+3 < X < 10 ==> 3.5 < X < 9.5
+
+
+What’s the probability of you winning the jackpot on today’s edition of Who Wants to Win a Swivel Chair? See if you can find the probability of getting at least 30 questions correct out of 40, 
+where each question has a choice of 4 possible answers.
+If X is the number of questions we get right, then we want to find P(X > =30) where X ~ B(40, 0.25).
+As np and nq are both greater than 5, it’s appropriate for us to use the normal distribution to approximate this probability. np = 10 and npq = 30, which means we need to find P(X > 29.5) 
+where X ~ N(10, 7.5).
+Let’s start by finding the standard score. z = x -μ / σ
+= 29.5 - 10 / sqrt(7.5) = 19.5 / 2.74 = 7.1
+Looking up7.116 in probability tables gives us a probability that is very close to 1. This means that
+P(X > 29.5) = 1 - 1 = 0
+
+
+What sort of probability distribution does this follow? How would you work out the probability of the ride breaking down less than 52 times in a year?
+Situations where you’re dealing with things breaking down at a mean rate follow a Poisson distribution, taking a parameter of the mean. If X represents the number of breakdowns in a year, 
+then X ~ Po(40).
+We need to find P(X < 52). To find this, we’d need to find each individual probability for all values of X up to 52 .
+
+As λ gets larger, the shape of the Poisson distribution looks increasingly like that of the normal distribution. The main part of the shape is reasonably symmetrical, and it forms 
+a smooth curve that’s just like the one for the normal.
+This means that as λ gets larger, the normal distribution can be used to give a better and better approximation of it.
+
+If X ~ Po(λ) and λ > 15, you can use X ~ N (λ, λ) to approximate it.
+
+The number of breakdowns on Dexter’s Love Train follows a Poisson distribution where σ = 40. What’s the probability that there will be fewer than 52 breakdowns in the first year?
+If we use X to represent the number of breakdowns in a year, then X ~ Po(40)
+As λ is large, we can use the normal distribution to approximate this. In other words, we use X ~ N(40, 40)
+We need to find the probability that there are fewer than 52 breakdowns. As we’re approximating a discrete probability distribution with a continuous one, we have to apply a continuity correction. 
+We don’t want to include 52, so we need to find P(X ≤ 51.5).
+Before we can find the probability using standard normal tables, we need to calculate the standard score. z = x- μ / σ
+= 51.5 - 40 / 6.32 = 1.82 (to 2 decimal places)
+Looking this up in probability tables gives us 0.9656. This means that the probability of there being fewer than 52 breakdowns in a year is 0.9656.
+
+Situation                                       Solution                        Condition
+X + Y                                         X+Y~N(μx +μy,σ2x +σ2y )           X, Y are independent
+X ~ N(μx , σ2x ), Y ~ (μy , σ2y ) 
+
+X - Y                                         X-Y~N(μx - μy,σ2x +σ2y )          X, Y are independent
+X ~ N(μx , σ2x ), Y ~ (μy , σ2y ) 
+
+aX + b                                        aX + b ~ N(aμ + b, a2σ2)          a, b are constant values
+X ~ N(μ, σ2)
+
+
+X1 + X2 + ... + Xn                            X1 + X2 + ... + Xn ~ N(nμ, nσ2)   X1, X2, ..., Xn are independent observations of X
+X ~ N(μ, σ2)
+
+Normal approximation of X                     X ~ N(np, npq)                    np > 5, nq > 5 Continuity correction required
+X ~ B(n, p)
+
+Normal approximation of X                     X ~ N(λ, λ)                       λ > 15 Continuity correction required
+X ~ Po(λ)
+
+
+
+1. Choc-O-Holic Inc. manufactures chocolates, and they have just finished a limited- edition run of chocolates for the holiday season. They want to check the quality of those chocolates.
+The target population is all the chocolates in the limited edition run.
+The sampling unit is one chocolate.
+The sampling frame needs to cover all of the chocolates; as it’s a limited-edition run, it’s possible that Choc-O-Holic has records of how many chocolates are in the run, including numbers of 
+each type of chocolate.
+When forming the sample, you need to make sure that it is representative of the target population and unbiased. If there are different types of chocolate in the run, you’d need to make sure 
+that you included each sort of chocolate.
+
+
+2. The Statsville Health Club wants to conduct a survey to see what their customers think of their facilities.
+The target population is all the customers of the Statsville Health Club.
+The sampling unit is one customer.
+The sampling frame needs to cover all of the customers. It’s likely that the health club has a list of registered customers, so you could use this as the sampling frame.
+As before, you need to make sure that your sample is representative of the population and unbiased. You’d need to make sure that each of the classes is fairly represented by customer 
+gender, customer age group, and so on.
+
+An alternative to simple random sampling is stratified sampling. With this type of sampling, the population is split into similar groups that share similar characteristics. These charateristics or groups are called strata, and each individual group is called a stratum. As an example, we could split up the gumballs into the different colors, yellow, green, red, and pink, so that each color forms a different stratum.
+
+Cluster sampling is useful if the population has a number of similar groups or clusters. As an example, gumballs might be sold in packets, with each packet containing a similar number of gumballs with similar colors. Each packet would form a cluster.
+
+With systematic sampling, you list the population in some sort of order, and then survey every kth item, where k is some number. As an example, you could choose to sample every 10th gumball.
+
+With stratified sampling, you divide the population into different groups or strata, where all the units within a stratum are as similar to each other as possible. In other words, you take some characteristic or property such as gender, and use this as the basis for the strata. Once you’ve split the population into strata, you perform simple random sampling on each stratum.
+With clustered sampling, your aim is to divide the population into clusters, trying to make the clusters as alike as possible. You then use simple random sampling to choose clusters, and then sample everything in those clusters.
+
+How could you apply stratified sampling?
+For stratified smpling, you divide the chocolates into strata and apply simple random sampling to each one. Each strata comprises of a group of chocolates with similar characteristics, so you could use the different types of chocolate. One stratum could be white chocolates, another one could be milk chocolates, and the final one could be dark chocolates.
+
+What about cluster sampling?
+For cluster sampling, you divide the chocolates into groups, but this time each group needs to be similar. Assuming each box of chocolates is similar, you could take one of the boxes, and sample all of the chocolates in it.
+
+
+
+
+The mean of the sample is called a point estimator for the population mean. In other words, it’s a calculation based on the sample data that provides a good estimate for the mean of the population.
+We differentiate between an actual population parameter and its point estimator using the ^ symbol. As an example, we use the symbol μ to represent the population mean, and μ^  to represent its estimator.
+To represent the sample mean, we use the symbol x- (pronounced “x bar”)
+
+se the sample data to estimate the value of the population mean. Here’s a reminder of the data: 61.9 62.6 63.3 64.8 65.1 66.4 67.1 67.2 68.7 69.9
+We can estimate the population mean by calculating the mean of the sample.
+^μ = x- = 61.9 + 62.6 + 63.3 + 64.8 + 65.1 + 66.4 + 67.1 + 67.2 + 68.7 + 69.9 ￼￼= 657/10 = 65.7
+
+If the size of the sample is n, we can estimate the population variance using
+sample-var = Sum of (x - xbar)^2 / (n -1)
+
+population mean = σ2 = Σ(x - μ)2 / n
+
+The formula for the population variance point estimator is usually written s2, so σ2 = s2 where
+s2 = Σ(x - xbar)2 / n -1
+
+Mighty Gumball takes another sample of their super-long-lasting gumballs, and finds that in the sample, 10 out of 40 people prefer the pink gumballs to all other colors. What proportion of people prefer pink gumballs in the population? What’s the probability of choosing someone from the population who doesn’t prefer pink gumballs?
+We can estimate the population proportion with the sample proportion. This gives use 
+p = probability = proportion 
+ps = number of successes / number in sample
+^p = ps = 10/40 = 0.25
+The probability of choosing someone from the population who doesn’t prefer pink gumballs is
+^ P(Preference not Pink) = 1 - p = 1 - 0.25 = 0.75
+
 
 
 
