@@ -1,0 +1,4 @@
+I = Prt
+simple B = P(1 + rt)
+compound B = P(1 + r)^t
+
