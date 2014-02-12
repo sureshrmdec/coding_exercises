@@ -1,0 +1,11 @@
+SELECT * FROM TableA A LEFT JOIN TableB B ON A.key = B.key     -- all data from TableA and common data from TableB
+SELECT * FROM TableA A INNER JOIN TableB B ON A.key = B.key     -- common data from TableA and TableB
+SELECT * FROM TableA A LEFT JOIN TableB B ON A.key = B.key WHERE B.key is Null     -- all data from TableA except common data from both tables and nothing from TableB
+SELECT * FROM TableA A FULL OUTER JOIN TableB B ON A.key = B.key     -- all data from TableA and TableB
+SELECT * FROM TableA A FULL OUTER JOIN TableB B ON A.key = B.key WHERE A.key is NULL And B.key is NULL     -- all data from TableA and TableB except common data
+SELECT * FROM TableA A RIGHT JOIN TableB B ON A.key = B.key -- All data from TableB and common data from TableA  
+SELECT * FROM TableA A RIGHT JOIN TableB B ON A.key = B.key WHERE A.key is NULL     -- All data from TableB except common data and nothing from TableA 
+
+
+
+
