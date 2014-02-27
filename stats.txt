@@ -640,5 +640,232 @@ The probability of choosing someone from the population who doesn’t prefer pin
 ^ P(Preference not Pink) = 1 - p = 1 - 0.25 = 0.75
 
 
+we want to find the expected value of the sample proportion, where the sample proportion is equal to the number of red gumballs divided by the total number of gumballs in the sample. This gives us
+E(Ps ) = E((X) / n) = E(X) / n
+Now X is the number of red gumballs in the sample. If we count the number of red gumballs as the number of successes, then X ~ B(n, p).
+You’ve already seen that for a binomial distribution, E(X) = np. This means that
+E(Ps) = E(X) / n = np / n =p
+
+Var(Ps) = Var((X) / n) = Var(X) / n^2
+If we count the number of red gumballs as the number of successes, then X ~ B(n, p). This means that Var(X) = npq, as this is the variance for the binomial distribution. This gives us
+Var(Ps) = Var(X) / n2 = npq / n2 = pq / n
+
+Taking the square root of the variance gives us the standard deviation of Ps, and this tells us how far away from p the sample proportion is likely to be. It’s sometimes called the standard error of proportion, as it tells you what the error for the proportion is likely to be in the sample.
+Standard error of proportion = √pq
+
+E(Ps) = p 
+Var(Ps) = pq / n
+
+
+If we substitute this in place of X in the formula Ps = X/n, this means that the continuity correction for Ps is given by
+Continuity correction = ±(1/2) / n = ±1 / 2n
+In other words, if you use the normal distribution to approximate probabilities for Ps, make sure you apply a continuity correction of ±1/2n. 
+The exact continuity correction depends on the value of n.
+
+The sampling distribution of proportions is what you get if you consider all possible samples of size n taken from the same population and form a distribution out of their proportions. We use Ps 
+to represent the sample proportion random variable.  The expectation and variance of Ps are defined as 
+E(Ps) = p
+Var(Ps) = pq/n
+where p is the population proportion.  The standard error of proportion is the standard deviation of this distribution. It’s given by
+√Var(Ps)
+If n > 30, then Ps follows a normal distribution, so Ps ~ N(p, pq/n)
+for large n. When working with this, you need to apply a continuity correction of 
+±1 / 2n
+
+
+25% of the gumball population are red. What’s the probability that in a box of 100 gumballs, at least 40% will be red? We’ll guide you through the steps.
+
+1. If Ps is the proportion of red gumballs in the box, how is Ps distributed?
+Let’s use p to represent the probability that a gumball is red. In other words, p = 0.25. Let’s use Ps to represent the proportion of gumballs in the box that are red.
+Ps ~ N(p, pq/n), where p = 0.25, q = 0.75, and n = 100. As pq/n is equal to 0.25 x 0.75 / 100 = 0.001875, this gives us
+Ps ~ N(0.25, 0.001875)
+
+2. What’s the value of P(Ps ≥ 0.4)? Hint: Remember that you need to apply a continuity correction.
+P(Ps ≥ 0.4) = P(Ps > 0.4 - 1/(2 x 100)) = P(Ps > 0.395)
+As Ps ~ N(0.25, 0.001875), we need to find the standard score of 0.395 so that we can look up the result in probability tables. This gives us
+z = 0.395 - 0.25 / √0.001875 = 3.35
+P(Z > z) = 1 - P(Z < 3.35) = 1 - 0.9996 = 0.0004
+In other words, the probability that in a box of 100 gumballs, at least 40% will be red, is 0.0004.
+
+
+
+Your task is to put the magnets back in the right positions and derive the variance of the sample mean.
+￼Var(X) = Var(X1 + X2 + ... + Xn) / n = Var(1/n*x1 + 1/n*x2 ...) = Var(1/n*x1) + Var(1/n*x2) ...
+= (1/n)^2 . Var(x1) + Var(x2) ... + Var(xn) = n * 1 / n^2 * var^2
+= var^2 / n^2
+E(X) = μ 
+Var(X) = σ2 / n￼
+Standard error of the mean = σ / √n￼
+￼
+
+Central limit theorem
+The central limit theorem says that if you take a sample from a non-normal population X, and if the size of the sample is large, then the distribution of X is approximately normal.
+X ~ N(μ, σ2/n)
+By the central limit theorem, if your sample of X is large, then X’s distribution is approximately normal.
+
+
+The binomial distribution
+Imagine you have a population represented by X ~ B(n, p) where n is greater than 30. As we’ve seen before, μ = np, and σ2 = npq.
+The central limit theorem tells us that in this situation, X ~ N(μ, σ2/n). To find the distribution of X, we substitute in the values for the population. This means
+that if we substitute in values for μ = np and σ2 = npq, we get X ~ N(np, pq)
+
+
+The Poisson distribution
+Now suppose you have a population that follows a Poisson distribution of X ~ Po(λ), again where n is greater than 30. For the Poisson distribution,
+μ = σ2 = λ.
+As before, we can use the normal distribution to help us find probabilities for X.  If we substitute population parameters into X ~ N(μ, σ2/n), we get: 
+X ~ N(λ, λ/n)
+In general, you take the distribution X ~ N(μ, σ2/n) and substitute in values for μ and σ2.
+
+
+The mean number of gumballs per packet is 10, and the variance is 1. If you take a sample of 30 packets, what’s the probability that the sample mean is 8.5 gumballs per packet or fewer? 
+1. What’s the distribution of X?
+We know that X ~ N(μ, σ2/n), μ = 10, σ2 = 1, and n = 30, and 1/30 = 0.0333. So this gives us 
+X ~ N(10, 0.0333)
+
+2. What’s the value of P(X < 8.5)?
+As X ~ N(10, 0.0333), we need to find the standard score of 8.5 so that we can look up the result in probability tables. This gives us
+z = (8.5 - 10) / 0.0333 = -8.22 (to 2 decimal places) 
+P(Z < z) = P(Z < -8.22)
+This probability is so small that it doesn’t appear on the probability tables. We can assume that an event with a probability this small will hardly ever happen.
+
+The sampling distribution of means is what ¢ you get if you consider all possible samples of size n taken from the same population and form
+a distribution out of their means. We use X to represent the sample mean random variable.  
+The expectation and variance of X are defined as 
+E(X) = μ
+Var(X) = σ2/n
+
+The standard error of the mean is the standard deviation of this distribution. It’s given by
+sqrt(Var(X))
+
+If X ~ N(μ, σ2), then X ~ N(μ, σ2/n).
+
+The central limit theorem says that if n is large and X doesn’t follow a normal distribution, then
+X ~ N(μ, σ2/n)
+
+
+Even though we don’t know what the true value is for the population variance, σ2, we can estimate its value using its point estimator. Rather than use σ2, we can use s2.
+This means that the expectation and variance for the sampling distribution of means is
+E(X) = μ 
+Var(X) = s2 / n
+Mighty Gumball used a sample of 100 gumballs to come up with their estimates, and they have calculated that s2 = 25. This means that
+Var(X) = s2 / n = 25 / 100 = 0.25
+
+Assume that X ~ N(μ, σ2) and that the number in the sample is large. What distribution does X follow? Use E(X) and Var(X) above to help you.
+If X follows a normal distribution, then X does too. Substituting in the point estimator for σ2, we get: X ~ N(μ, s2/n)
+or:
+X ~ N(μ, 0.25)
+
+we need to find the 95% confidence level for the mean duration of gumball flavor. Meaning, there must be a .95 probability that μ lies between the a and b that we find. We also know that X follows a normal distribution, where X ~ N(μ, 0.25).
+We can find the values of a and b using the distribution of X. In other words, we can use the distribution of X ~ N(μ, 0.25) to find a and b, such that P(X < a) = 0.025 and P(X > b) = 0.025.
+
+We know that X ~ N(μ, 0.25), so this means that if we standardize, we get
+Z = Xbar - μ / √0.25 where Z ~ N(0, 1) 
+
+1. Use probability tables to find the value of za where P(Z < za) = 0.025.
+  If we look up the probability 0.025 in standard normal probability tables, this gives us za = -1.96
+2. Use probability tables to find the value of zb where P(Z > zb) = 0.025.
+To find zb, we need to look up a value of 0.975. This gives us zb = 1.96.
+
+We’ve found that P(-1.96 < Z < 1.96) = 0.95. In other words,
+P(-1.96 < (X - μ) / 0.5 < 1.96)= 0.95 
+
+-1.96< X-μ 0.5
+-1.96× 0.5 <X-μ -0.98 +μ<X
+μ< X+0.98
+
+
+X-μ <1.96 0.5
+X-μ< 1.96 ×0.5 X< 0.98 +μ
+X-0.98 <μ
+
+X - 0.98 < μ < X + 0.98
+
+X is the distribution of sample means, so we can use the value of x from the Mighty Gumball sample
+
+he confidence limits are given by X - 0.98 and X + 0.98. For the Mighty Gumball sample, x is given by 62.7. Use this to come up with values for the confidence limits.
+The confidence limits are given by X - 0.98 and X + 0.98. If we substitute in the mean of the sample, we get confidence limits of 62.7 - 0.98 and 62.7 + 0.98. 
+In other words, our confidence interval is (61.72, 63.68).
+
+
+
+Population statistic   Population distribution           Conditions                                      Confidence interval
+μ                      Normal                          You know what σ2 is n is large or small ￼         (x-c σ/sqrt(n),x+c σ/sqrt(n)) 
+￼￼￼￼￼￼
+μ                      Non-normal     You know what σ2 is n is large (at least 30) x is the sample mean ￼ (x-c σ/sqrt(n),x+c σ/sqrt(n)) 
+￼￼￼￼￼￼
+μ             Normal or non-normal    You don’t know what σ2 is n is large (at least 30) ￼                (x-c s/sqrt(n),x+c s/sqrt(n) 
+                                      x is the sample mean s2 is the sample variance
+￼￼￼￼￼￼
+p                 Binomial          n is large ps is the sample proportion qs is1-ps                      (p -c sqrt(pq/n),p +c sqrt(pq)/n) 
+
+margin of error = c × (standard deviation of statistic)
+
+Mighty Gumball took a sample of 50 gumballs and found that in the sample, the proportion of red gumballs is 0.25. Construct a 99% confidence interval for the proportion of red gumballs in the population.
+The confidence interval for the population proportion is given by
+(p - c sqrt(pq/n), p + c sqrt(pq/n) ) 
+We need to find the 99% confidence interval so c = 2.58. The proportion of red gumballs is 0.25, so ps = 0.25 and qs = 0.75. n = 50. This gives us
+( 0.25 - 2.58 sqrt(0.25 x 0.75/50) , 0.25 + 2.58 sqrt(0.25 x 0.75 / 50)) = (0.092, 0.408)
+
+
+standard score for the t-distribution : As with the the normal distribution, we standardize by subtracting the expectation of the sampling distribution and then dividing by its standard deviation. The only difference is that we represent the result with T instead of Z, as we’re going to use it with the t-distribution.
+
+T = (X -μ) / s/√n
+
+Let’s see if you can apply this to the Mighty Gumball sample. There are 10 gumballs in the sample, where x = 0.5oz and s2 = 0.09. What’s the value of ν, and what’s T?
+There are 10 gumballs in the sample, and ν = n - 1. This means that the value of ν is 9. T is given by
+T = (X -μ) / s/√n
+= X -μ / √0.09/10 = X -μ / 0.0949
+
+
+You find confidence limits with the t-distribution in a similar way to how you find them with the normal distribution. Your confidence interval is given by
+(x - t s / √n, x + t / s√n) where
+
+P(-t ≤ T ≤ t) = 0.95
+ 
+t-distribution probability tables give you the value of t where P(T > t) = p. In our case, p = 0.025.
+To find t, use the first column to look up ν, and the top row to look up p. The place where they intersect gives the value of t. As an example, if we look up ν = 7 and p = 0.05, we get t = 1.895.
+
+The t-distribution is more accurate when we have to estimate the population variance for small samples.
+You don’t know what σ2 is n is small (less than 30) x is the sample mean s2 is the sample variance
+
+
+See if you can find the 95% confidence interval for the average weight of gumballs. There are 10 gumballs in the sample where x = 0.5oz and s2 = 0.09.
+1. The confidence interval for μ is given by (x - t s/√n, x + t s/√n). Use standard probability tables to find the value of t.
+There are 10 gumballs in the sample, so ν = 9. We want to find the 95% confidence interval, so this means we look up 0.025 in the t-distribution probability table, with 9 degrees of freedom. This gives us t = 2.262.
+2. Use this to find the confidence interval for μ.
+We find the confidence interval by substituting values for x, t, s, and n into (x - t s/√n, x + t s/√n). This gives us
+(x - t s/√n, x + t s/√n) = (0.5 - 2.262 x √(0.09/10), 0.5 + 2.262 x √(0.09/10)) = (0.5 - 2.262 x 0.0949, 0.5 + 2.262 x 0.0949)
+= (0.5 - 0.215, 0.5 + 0.215) = (0.285, 0.715)
+
+
+Mighty Gumball has noticed a problem with their gumball dispensers. They have taken a sample of 30 machines, and found that the mean number of malfunctions is 15. Construct a 99% confidence interval for the number of malfunctions per month.
+The number of breakdowns per month is modelled by a Poisson distribution. As there are 30 machines, we can find the confidence interval using (x - cs/√n, x + cs/√n).
+We need to find the 99% confidence interval, which means that c = 2.58. For the poisson distribution, the expectation and variance are both equal to λ, so x = 15 and s2 = 15.
+The confidence interval is given by
+(x - cs/√n, x + cs/√n) = (15 - 2.58 x √(15/30), 15 + 2.58 x √(15/30))
+= (15 - 2.58 x √(15/30), 15 + 2.58 x √(15/30)) = (15 - 2.58 x 0.707, 15 + 2.58 x 0.707)
+= (15 - 1.824, 15 + 1.824) = (13.176, 16.824)
+
+
+
+
+If the drug cures 90% of people, how many people in the sample of 15 snorers would you expect to have been cured? How does this compare with the doctors results? What sort of distribution do you think this follows?
+90% of 15 is 13.5, so you’d expect 14 people to be cured. Only 11 people in the doctors sample were cured, which is much lower than the result you’d expect
+There are a specific number of trials and the doctor is interested in the number of successes, so the number of successes follows a binomial distribution. If X is the number of successes then X ~ B(15, 0.9).
+
+
+
+The six steps for hypothesis testing
+1 Decide on the hypothesis you’re going to test
+2 Choose your test statistic
+3 Determine the critical region for your decision 
+4 Find the p-value of the test statistic
+5 See whether the sample result is within the critical region
+6 Make your decision
+
+The null hypothesis for SnoreCull is the claim of the drug company: that it cures 90% of patients.
+The counterclaim to the null hypothesis is called the alternate hypothesis. It’s represented by H1, and it’s the claim that we’ll accept if there’s strong enough evidence to reject H0.
+
 
 
