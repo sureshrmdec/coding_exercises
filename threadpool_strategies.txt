@@ -1,0 +1,66 @@
+Eager strategy
+  preallocate
+
+Half-Sync/Half-Async
+http://www.cs.wustl.edu/~schmidt/PDF/PLoP-95.pdf
+
+Leader follower
+http://www.cs.wustl.edu/~schmidt/PDF/OM-01.pdf
+
+On-Demand spawning
+    lazy activation
+http://kircher-schwanninger.de/michael/publications/LazyAcquisition.pdf
+
+Kernel threads
+    LWP
+
+User-level threads
+    Green
+
+Hybrid Threading Model: N by M
+
+
+Task vs Message basd architecture
+Each task has a thread that pulls a message off the queue and then moves message along similar to pipes and filter pattern.
+Pool of threads wait for work to show up and the threads does all work and calls all services. This has low-overhead but requires more upfront work.
+http://www.dre.vanderbilt.edu/~schmidt/PDF/INFOCOM-94.pdf
+
+
+other
+http://www.dre.vanderbilt.edu/~schmidt/PDF/daemon-design-94.pdf 
+http://www.dre.vanderbilt.edu/~schmidt/PDF/Svc-Conf.pdf 
+http://www.dre.vanderbilt.edu/~schmidt/PDF/daemon-design-94.pdf 
+
+
+Networking
+Sockets
+ socket() allocate socket  
+ close()
+ bind() associate socket handler with address
+ listen() - willingness to listen 
+ connect() - establishes a connection 
+ accept() - creates a new communication endpoint to service client request
+ shutdown()
+ send()/recv() - over connection
+ sendto()/recvfrom() - datagram 
+ read()/write()
+ readv()/writev() - scatter-read/gather-write 
+ sendmsg()/recvmsg() - various
+ setsockopt()/getsockopt()
+ domain - internet domain / local/unix domain (same machine)
+ active role - socket() / bind() / connect() / send() / recv() -- client 
+ passive role - socket() / ind() / listen() / accept() -- server
+
+Synchronous event demultiplexing - demultiplexing function to wait 
+    for certain events to occur on a set of sources
+selct(int width, // range of handlers
+    fd_set *read_fds,
+    fd_set *write_fds,
+    fd_set *except_fds,
+    struct timeval *timeout)
+  issues - limitations
+
+
+
+
+
