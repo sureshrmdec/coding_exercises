@@ -2217,4 +2217,37 @@ class MyClass {
 }
 
 
+import java.util.HashMap;
+import java.util.HashSet;
+
+class MyClass {
+
+    public static void get_journey(Integer[] departure_ids, Integer[] destination_ids) {
+
+        HashMap<Integer,Integer> adjacencyMap=new HashMap<Integer, Integer>();
+        HashSet<Integer> destinations=new HashSet<Integer>();
+        
+        //initialize the graph
+        for(int i=0;i<departure_ids.length;i++){
+            adjacencyMap.put(departure_ids[i],destination_ids[i]);
+            destinations.add(destination_ids[i]);
+        }
+        int head=-1;
+        //find the node with no in-degree
+        for(int i=0;i<departure_ids.length;i++){
+            if(!destinations.contains(departure_ids[i])){
+                head=departure_ids[i];
+                break;
+            }
+        }
+        
+        while(adjacencyMap.get(head)!=null){
+         System.out.print(head+" ");
+            head=adjacencyMap.get(head);
+        }
+        System.out.print(head);
+    }
+}
+
+
 
