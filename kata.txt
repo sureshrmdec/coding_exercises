@@ -2156,4 +2156,65 @@ The only trips that ended in the neighbourhood are (2,3) and (3,3).
 
 
 
+import java.util.Arrays;
+import java.util.List;
+
+class MyClass {
+
+    public static void count_requests(Integer[] requests, Integer[] pro_start, Integer[] pro_end) {
+        Arrays.sort(requests);
+        List<Integer> list = Arrays.asList(requests);
+        for (int i = 0; i < pro_start.length; i++) {
+            int startIndex = Arrays.binarySearch(requests, pro_start[i]);
+            int endIndex = Arrays.binarySearch(requests, pro_end[i]);
+            startIndex = (startIndex >= 0) ? list.indexOf(pro_start[i]) - 1 : -startIndex - 2;
+            endIndex = (endIndex >= 0) ? list.lastIndexOf(pro_end[i]) : -endIndex - 2;
+            System.out.println(endIndex - startIndex);
+        }
+    }
+}
+
+
+
+
+import java.util.Arrays;
+class MyClass {
+    public static class Req implements Comparable<Req>{
+        int start;
+        int end;
+        public Req(int start, int end){
+            this.start=start;
+            this.end=end;
+        }
+        @Override
+        public int compareTo(Req other){
+            if(other.end==this.end){
+                return this.start-other.start;
+            }
+            return this.end-other.end;
+        }
+    }
+    public static void schedule_requests(Integer[] req_start, Integer[] req_end) {
+        // Write your code here
+        // To print results to the standard output please use System.out.println
+        // Example: System.out.println("Hello world!");
+        Req[] r = new Req[req_start.length];
+        for(int i=0;i<r.length;i++){
+            r[i]=new Req(req_start[i],req_end[i]);
+        }
+        Arrays.sort(r);
+        int time=0;
+        int completed=0;
+        for(int i=0;i<r.length;i++){
+            if(r[i].start>=time){
+                time=r[i].end;
+                completed++;
+            }
+        }
+        System.out.println(completed);
+        
+    }
+}
+
+
 
