@@ -1,12 +1,12 @@
 public class Permutation { 
-    void permute( String str ){
+    static void permute( String str ){
         int length = str.length();
         boolean[] used = new boolean[ length ];
         StringBuffer out = new StringBuffer();
         char[] in = str.toCharArray();
         doPermute( in, out, used, length, 0 );
     }
-    void doPermute( char[] in, StringBuffer out,
+    static void doPermute( char[] in, StringBuffer out,
         boolean[] used, int length, int level ){
         if( level == length ){
             System.out.println( out.toString() );
@@ -20,5 +20,8 @@ public class Permutation {
             used[i] = false;
             out.setLength( out.length() - 1 );
         }
+    }
+    public static void main(String[] args) {
+      permute(args[0]);
     }
 }
