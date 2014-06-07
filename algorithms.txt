@@ -1,3 +1,14 @@
+AGUAMENTI A jet of water shoots from your wand.
+DENSAUGEO The teeth of your target would begin to grow at a shocking rate.
+RICTUSEMPRA They would be stricken with a feeling of incessant tickling.
+WINGARDIUM LEVIOSA Whatever the spell is directed at begins to levitate.
+SCOURGIFY The spell cleans up its target.
+PETRIFICUS TOTALUS The receiver of the spell will instantly be unable to move.
+GLISSEO The steps of stairways flatten into a smooth surface.
+EXPULSO  Your target explodes. 
+COLLOPORTUS The door at which it is aimed will become sealed.
+FURNUNCULUS Your target will become covered in boils.
+
 
 http://opentsdb.net/
 http://www.guardian.co.uk/uk/2013/may/02/birmingham-murder-racially-motivated-police
