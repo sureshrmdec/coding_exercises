@@ -1,8 +1,21 @@
+AGUAMENTI A jet of water shoots from your wand.
+DENSAUGEO The teeth of your target would begin to grow at a shocking rate.
+RICTUSEMPRA They would be stricken with a feeling of incessant tickling.
+WINGARDIUM LEVIOSA Whatever the spell is directed at begins to levitate.
+SCOURGIFY The spell cleans up its target.
+PETRIFICUS TOTALUS The receiver of the spell will instantly be unable to move.
+GLISSEO The steps of stairways flatten into a smooth surface.
+EXPULSO  Your target explodes. 
+COLLOPORTUS The door at which it is aimed will become sealed.
+FURNUNCULUS Your target will become covered in boils.
+
 
 http://opentsdb.net/
 http://www.guardian.co.uk/uk/2013/may/02/birmingham-murder-racially-motivated-police
 http://www.motherjones.com/politics/2013/05/ak-47-semi-automatic-rifle-building-party
- 
+
+Little's Law: L = lambda . W
+Queue length = arrival rate * response time
 
 Specialised NoSQL database systems are used a lot for time series storage, particularly for tick data:
 
@@ -27,8 +40,64 @@ L P S O CG
 Lexical analysis + Parsing + Semantic analysis + Optimization + Code generation
 
 
+SEQUENCES (ordered and repetition)
+  Take k out of n = N^k
+
+ARRANGEMENT (ordered, non-repeating)
+  N! / (N - K)!
+
+SUBSETS (non-ordered, non-repeating)
+ (n)   N! / K! . (N-K)!
+ (k)
+
+MULTISUBSETS (non-ordered, repeating)
+ (n+k-1) 
+ (k)
+
+DIVISION THEOREM
+ A = D*Q + R where D is divisor, Q is quotient, R is remainder
+
+DIVISIBILITY
+ A = D * Q
+
+GCD
+
+BEZOUT’s IDENTITY
+ Let G is GCD
+ (A, B) = G
+ AX + BY = G
+
+EUCLID’S ALGORITHM
+ FOR A, B and X:
+  GCD(A, B) = GCD(B, A-BX) UNTIL B = 0
+
+MODULAR’s VERSION
+  GCD(A, B) = GCD(B, A MOD B) UNTIL B = 0
 
 
+MODULAR ARITHMETIC
+A is congruent to B (A # B, triple equals)
+A # B MOD M IF M / (A-B) FOR M > 0
+OR
+A # B MOD M IF A % M = B % M
+
+IF A # B and C # D MOD M THEN A+C # B + D (MOD M)
+
+
+MODULAR MULTIPLICATION
+IF A # B and C # D MOD M THEN AC # BD (MOD M)
+
+EXPONENTIATION BY SQUARING
+calcualte 7^103
+
+RSA
+ - Pick two prime numbers P and Q
+ - Let N = PQ
+ - Compute Euler's Totient Phi(N)
+ - Phi(N) = (P-1) (Q-1)
+ - Find D such that (D, Phi(N)) = 1, i.e., D is co-prime of Phi(N)
+ - Using extended Euclid's algorithm Ax + By = 1
+   DE + Phi(N)F = 1, D will be private key and E will be public key
 
 
 https://gist.github.com/anonymous/5133829/raw/9340a6fdc354537b878291f591987e27c1605335/SimCityUI.js
