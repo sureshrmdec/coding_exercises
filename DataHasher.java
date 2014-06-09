@@ -1,3 +1,4 @@
+// Using Linear congruential generator (LCG) http://www.javamex.com/tutorials/collections/strong_hash_code_implementation.shtml
 public class DataHasher {
    private static final long[] byteTable = createLookupTable();
    private static final long HSTART = 0xBB40E64DA205B064L;
