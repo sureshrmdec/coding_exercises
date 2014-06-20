@@ -1,3 +1,4 @@
+// http://www.programcreek.com/
 public class LongestPalindrome {
    // O(N^3)
    public static String naiveLongestPalindrome(String s) {
