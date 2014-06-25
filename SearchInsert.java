@@ -1,0 +1,25 @@
+// Given a sorted array and a target value, return the index if the target is found. 
+// If not, return the index where it would be if it were inserted in order. 
+// You may assume no duplicates in the array.
+public class SearchInsert {
+   public static int searchInsert(int[] A, int target) {
+      if(A==null||A.length==0)
+         return 0;
+
+      return searchInsert(A,target,0,A.length-1);
+   }
+
+   private static int searchInsert(int[] A, int target, int start, int end){
+      int mid=(start+end)/2;
+      if(target==A[mid]) return mid;
+      else if(target<A[mid]) 
+         return start<mid?searchInsert(A,target,start,mid-1):start;
+      else 
+         return end>mid?searchInsert(A,target,mid+1,end):(end+1);
+   }
+   public static void main(String[] args) {
+      System.out.println(searchInsert(new int[] {1, 3, 5, 7, 9, 20}, 11));
+      System.out.println(searchInsert(new int[] {1, 3, 5, 7, 9, 20}, 2));
+      System.out.println(searchInsert(new int[] {1, 3, 5, 7, 9, 20}, 3));
+   }
+}
