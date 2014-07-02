@@ -1,6 +1,6 @@
 trait RNG {
    def nextInt: (Int, RNG)
-   }
+}
 
 
 case class Simple(seed: Long) extends RNG {
