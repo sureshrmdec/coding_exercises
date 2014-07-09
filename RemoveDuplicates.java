@@ -4,6 +4,43 @@ import java.util.*;
 //
 // For example, given input array A = [1,1,2], your function should return length = 2, and A is now [1,2].
 public class RemoveDuplicates {
+   static class Node {
+      int val;
+      Node next;
+      Node(int x) {
+         val = x;
+         next = null;
+      }
+      Node add(int x) {
+         next = new Node(x);
+         return next;
+      }
+      public String toString() {
+         return val + (next == null ? "" : "->" + next.toString());
+      }
+   }
+   public static Node deleteDuplicates(Node head) {
+      if(head == null || head.next == null)
+         return head;
+
+      Node prev = head;    
+      Node p = head.next;
+
+      while(p != null){
+         if(p.val == prev.val){
+            prev.next = p.next;
+            p = p.next;
+            //no change prev
+         }else{
+            prev = p;
+            p = p.next; 
+         }
+      }
+
+      return head;
+   }
+
+
    public static int[] removeDuplicates(int[] A) {
       if (A.length < 2)
          return A;

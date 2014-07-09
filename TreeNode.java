@@ -1,0 +1,152 @@
+import java.util.*;
+
+public class TreeNode {
+   int val;
+   TreeNode left;
+   TreeNode right;
+   TreeNode(int x) { val = x; }
+
+   // parent node is processed before its children
+   public static List<Integer> preorderTraversal(TreeNode root) {
+      List<Integer> returnList = new ArrayList<Integer>();
+      if(root == null) return returnList;
+
+      Stack<TreeNode> stack = new Stack<TreeNode>();
+      stack.push(root);
+
+      while(stack.size() > 0){
+         TreeNode n = stack.pop();
+         returnList.add(n.val);
+
+         if(n.right != null){
+            stack.push(n.right);
+         }
+         if(n.left != null){
+            stack.push(n.left);
+         }
+
+      }
+      return returnList;
+   }
+
+   // The order of "inorder" is: left child -> parent -> right child
+   public List<Integer> inorderTraversal(TreeNode root) {
+      List<Integer> lst = new ArrayList<Integer>();
+
+      if(root == null) return lst; 
+
+      Stack<TreeNode> stack = new Stack<TreeNode>();
+      TreeNode p = root;
+
+      while(stack.size() > 0 || p != null){
+         // if it is not null, push to stack
+         //and go down the tree to left
+         if(p != null){
+            stack.push(p);
+            p = p.left;
+            // if no left child
+            // pop stack, process the node
+            // then let p point to the right
+         } else{
+            TreeNode t = stack.pop();
+            lst.add(t.val);
+            p = t.right;
+         }
+      }
+      return lst;
+   }
+   // The order of "Postorder" is: left child -> right child -> parent node.
+   public List<Integer> postorderTraversal(TreeNode root) {
+      List<Integer> lst = new ArrayList<Integer>();
+      if(root == null) return lst; 
+
+      Stack<TreeNode> stack = new Stack<TreeNode>();
+      stack.push(root);
+
+      TreeNode prev = null;
+      while(stack.size() > 0){
+         TreeNode curr = stack.peek();
+         if(prev == null || prev.left == curr || prev.right == curr){
+            //prev == null is the situation for the root node
+            if(curr.left != null){
+               stack.push(curr.left);
+            }else if(curr.right != null){
+               stack.push(curr.right);
+            }else{
+               stack.pop();
+               lst.add(curr.val);
+            }
+         }else if(curr.left == prev){
+            if(curr.right != null){
+               stack.push(curr.right);
+            }else{
+               stack.pop();
+               lst.add(curr.val);
+            }
+         }else if(curr.right == prev){
+            stack.pop();
+            lst.add(curr.val);
+         }
+
+         prev = curr;
+      }
+
+      return lst;
+   }
+   public static boolean isValidBST(TreeNode root) {
+      return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+   }
+
+   private static boolean isValidBST(TreeNode root, int min, int max) {
+      if (root == null) {
+         return true;
+      }
+
+      // not in range
+      if (root.val <= min || root.val >= max) {
+         return false;
+      }
+
+      // left subtree must be < root.val && right subtree must be > root.val
+      return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
+   }
+
+   // Given a binary tree, flatten it to a linked list in-place. 
+   // Go down through the left, when right is not null, push right to stack. 
+   //      1
+   //     / \
+   //    2   5
+   //   / \   \
+   //  3   4   6
+   // 
+   //   1
+   //    \
+   //     2
+   //      \
+   //       3
+   //        \
+   //         4
+   //          \
+   //           5
+   //            \
+   //             6
+   public static void flatten(TreeNode root) {
+      Stack<TreeNode> stack = new Stack<TreeNode>();
+      TreeNode p = root;
+
+      while(p != null || !stack.empty()){
+         if(p.right != null){
+            stack.push(p.right);
+         }
+         if(p.left != null){
+            p.right = p.left;
+            p.left = null;
+         }else if(!stack.empty()){
+            TreeNode temp = stack.pop();
+            p.right=temp;
+         }
+
+         p = p.right;
+      }
+   }
+}
