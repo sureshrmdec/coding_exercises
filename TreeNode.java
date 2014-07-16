@@ -149,4 +149,131 @@ public class TreeNode {
          p = p.right;
       }
    }
+
+   public boolean hasPathSum(TreeNode root, int sum) {
+      if(root == null) return false;
+
+      LinkedList<TreeNode> nodes = new LinkedList<TreeNode>();
+      LinkedList<Integer> values = new LinkedList<Integer>();
+
+      nodes.add(root);
+      values.add(root.val);
+
+      while(!nodes.isEmpty()){
+         TreeNode curr = nodes.poll();
+         int sumValue = values.poll();
+
+         if(curr.left == null && curr.right == null && sumValue==sum){
+            return true;
+         }
+
+         if(curr.left != null){
+            nodes.add(curr.left);
+            values.add(sumValue+curr.left.val);
+         }
+
+         if(curr.right != null){
+            nodes.add(curr.right);
+            values.add(sumValue+curr.right.val);
+         }
+      }
+
+      return false;
+   }
+   public TreeNode sortedArrayToBST(int[] num) {
+      if (num.length == 0)
+         return null;
+
+      return sortedArrayToBST(num, 0, num.length - 1);
+   }
+
+   public TreeNode sortedArrayToBST(int[] num, int start, int end) {
+      if (start > end)
+         return null;
+
+      int mid = (start + end) / 2;
+      TreeNode root = new TreeNode(num[mid]);
+      root.left = sortedArrayToBST(num, start, mid - 1);
+      root.right = sortedArrayToBST(num, mid + 1, end);
+
+      return root;
+   }
+
+   public int minDepth(TreeNode root) {
+      if(root == null) return 0;
+      LinkedList<TreeNode> nodes = new LinkedList<TreeNode>();
+      LinkedList<Integer> counts = new LinkedList<Integer>();
+
+      nodes.add(root);
+      counts.add(1);
+
+      while(!nodes.isEmpty()){
+         TreeNode curr = nodes.remove();
+         int count = counts.remove();
+
+         if(curr.left != null){
+            nodes.add(curr.left);
+            counts.add(count+1);
+         }
+
+         if(curr.right != null){
+            nodes.add(curr.right);
+            counts.add(count+1);
+         }
+
+         if(curr.left == null && curr.right == null){
+            return count;
+         }
+      }
+
+      return 0;
+   }
+
+   public int maxPathSum(TreeNode root) {
+      int max[] = new int[1]; 
+      max[0] = Integer.MIN_VALUE;
+      calculateSum(root, max);
+      return max[0];
+   }
+
+   public int calculateSum(TreeNode root, int[] max) {
+      if (root == null) return 0;
+
+      int left = calculateSum(root.left, max);
+      int right = calculateSum(root.right, max);
+
+      int current = Math.max(root.val, Math.max(root.val + left, root.val + right));
+
+      max[0] = Math.max(max[0], Math.max(current, left + root.val + right));
+
+      return current;
+   }
+
+   public boolean isBalanced(TreeNode root) {
+      if (root == null)
+         return true;
+
+      if (getHeight(root) == -1)
+         return false;
+
+      return true;
+   }
+
+   public int getHeight(TreeNode root) {
+      if (root == null)
+         return 0;
+
+      int left = getHeight(root.left);
+      int right = getHeight(root.right);
+
+      if (left == -1 || right == -1)
+         return -1;
+
+      if (Math.abs(left - right) > 1) {
+         return -1;
+      }
+
+      return Math.max(left, right) + 1;
+
+   }
 }
