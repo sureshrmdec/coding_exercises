@@ -54,7 +54,7 @@ public class TrinaryTree {
       }
    } 
 
-   private Node root;
+   private Node root; // root of the tree
 
    /**
     * The insert method adds given value such using the constraints set by TrinaryTree 
@@ -99,7 +99,7 @@ public class TrinaryTree {
    }
 
    /**
-    * This is helper methods to create new TrinaryTree and 
+    * This is helper methods to create a new TrinaryTree and 
     * insert array of numbers 
     * @param numbers - array of integers 
     * @return - trinary tree 
@@ -123,7 +123,7 @@ public class TrinaryTree {
       root = delete(root, val);
    }
 
-   // This method implements eager Hibbard deletion
+   // This method implements eager Hibbard deletion algorithm
    private Node delete(Node parent, int val) {
       if (parent == null) {
          return null; // nothing to do as tree is empty
@@ -181,7 +181,7 @@ public class TrinaryTree {
       }
       return numbers;
    }
-   // This method traverse using pre-order, i.e., it visits parent, then children
+   // This method traverses the tree using pre-order, i.e., it visits parent, then children
    private List<Integer> preorderValues() {
       List<Integer> list = new ArrayList<Integer>();
       if(root == null) return list;
