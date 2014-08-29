@@ -19,7 +19,7 @@ import java.util.List;
  * 2 
  */
 public class TrinaryTree {
-   // packaged accessible inner class to represent node 
+   // packaged accessible inner class to represent node and value at the node 
    static class Node {
       final int val; // immutable value
       Node left;     // left.value < current.value 
@@ -69,6 +69,7 @@ public class TrinaryTree {
    public void insert(int val) {
       root = insert(root, val);
    }
+
    // This private method uses variation of binary search to find the matching
    // node, where value is inserted. This method recursively finds the node where 
    // value can be inserted and set parent's pointers to middle, left or child 
@@ -78,13 +79,10 @@ public class TrinaryTree {
    //   1
    //     2
    //       3
-   //         4
-   //           5
-   //             6
-   //               7
-   //                 8
-   //                   9
-   //                     10
+   // or descending order such as
+   //     3
+   //   2
+   // 1
    //
    private Node insert(Node parent, int val) {
       if (parent == null) {
@@ -174,6 +172,7 @@ public class TrinaryTree {
       return parent;
    }
 
+   // These are helper methods for testing and verifying contents of the tree 
    private int[] preorderValuesAsPrimitiveArray() {
       List<Integer> list = preorderValues();
       int[] numbers = new int[list.size()];
@@ -182,6 +181,7 @@ public class TrinaryTree {
       }
       return numbers;
    }
+   // This method traverse using pre-order, i.e., it visits parent, then children
    private List<Integer> preorderValues() {
       List<Integer> list = new ArrayList<Integer>();
       if(root == null) return list;
