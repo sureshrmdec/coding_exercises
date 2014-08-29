@@ -17,7 +17,15 @@ import java.util.List;
  * 2    7 
  * | 
  * 2 
+ * 
+ * Testing instructions:
+ *  javac TrinaryTree.java 
+ *  java -cp . TrinaryTree 
+ *
+ *
+ * @author Shahzad Bhatti
  */
+
 public class TrinaryTree {
    // packaged accessible inner class to represent node and value at the node 
    static class Node {
@@ -57,7 +65,7 @@ public class TrinaryTree {
    private Node root; // root of the tree
 
    /**
-    * The insert method adds given value such using the constraints set by TrinaryTree 
+    * The insert method adds given value such using the constraints set by TrinaryTree.
     * This code is modified version of binary search tree's implementation of insert method 
     * as described in Robert Sedgewick's Algorithm's book (pp399, 4th edition)
     * It delegates the insert method recursively so that parent can be adjusted based on
@@ -89,11 +97,11 @@ public class TrinaryTree {
          return new Node(val);
       }
       if (val == parent.val) {
-         parent.middle = insert(parent.middle, val);
+         parent.middle = insert(parent.middle, val); // duplicate value so just add in the middle
       } else if (val > parent.val) {
-         parent.right = insert(parent.right, val);
+         parent.right = insert(parent.right, val);  // bigger values goes to right side
       } else if (val < parent.val) {
-         parent.left = insert(parent.left, val);
+         parent.left = insert(parent.left, val);    // smaller values goes to left side
       }
       return parent;
    }
@@ -130,7 +138,7 @@ public class TrinaryTree {
       }
       if (val == parent.val) {
          if (parent.middle != null) {
-            parent.middle = delete(parent.middle, val);
+            parent.middle = delete(parent.middle, val); // continue until we find value with no middle
          } else {
             if (parent.right == null) {
                return parent.left;
@@ -212,6 +220,8 @@ public class TrinaryTree {
    }
 
 
+   // Though tests would be defined using unit testing framework but here are
+   // examples of a few tests.
    public static void Test1() { 
       TrinaryTree tree = insert(new int[] {5, 4, 9, 5, 7, 2, 2 });
       assertEquals(new int[] {5, 4, 2, 2, 5, 9, 7}, tree.preorderValuesAsPrimitiveArray());

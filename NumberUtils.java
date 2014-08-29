@@ -2,6 +2,13 @@
  * Given a String, write a routine that converts the string to an long, 
  * without using the built in Java functions that would do this. Describe 
  * what (if any) limitations the code has. 
+ * 
+ * Testing instructions:
+ *  javac NumberUtils.java
+ *  java -cp . NumberUtils
+ *
+ *
+ * @author Shahzad Bhatti
  */
 
 // custom exception for throwing overflow errors as default behavior in java is to ignore overflow 
@@ -17,6 +24,8 @@ class NumberUnderflowException extends NumberFormatException {
       super(m);
    }
 }
+
+
 public class NumberUtils {
    /**
     * This method converts a stringified integer number to long value 
@@ -110,6 +119,8 @@ public class NumberUtils {
    }
 
 
+   // Though tests would be defined using unit testing framework but here are
+   // examples of a few tests.
    public void Test() { 
       // happy path
       assertEquals(123L, StringToLong("0123")); 
