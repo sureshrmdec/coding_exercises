@@ -14,9 +14,7 @@ void reverse(char *string) {
    length = string_length(string);
  
    begin = string;
-   end = string;
- 
-   for ( c = 0 ; c < ( length - 1 ) ; c++ ) end++;
+   end = string + (length-1);
  
    for ( c = 0 ; c < length/2 ; c++ ) {        
       temp = *end;
