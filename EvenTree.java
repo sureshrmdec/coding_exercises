@@ -79,7 +79,7 @@ public class EvenTree {
       public String toString() {
          StringBuilder sb = new StringBuilder();
          toString(sb, 0);
-         return sb.toString();
+         return sb.toString() + "\n";
       }
       public void toString(StringBuilder sb, int indent) {
          for (int i=0; i<indent; i++) {
@@ -111,6 +111,13 @@ public class EvenTree {
       public String toString() {
          return from.val + "->" + to.val;
       }
+      public int hashCode() {
+         return from.val * to.val;
+      }
+      public boolean equals(Object o) {
+         Edge other = (Edge) o;
+         return from.val == other.from.val && to.val == other.to.val;
+      }
    }
    private static Vertex get(Map<Integer, Vertex> cache, int n) {
       Vertex v = cache.get(n);
@@ -120,21 +127,19 @@ public class EvenTree {
       }
       return v;
    }
-   private static Vertex buildTree(List<Edge> edges) {
+   private static List<Vertex> buildTree(Collection<Edge> edges) {
       for (Edge e : edges) {
          e.from.reset();
          e.to.clear();
          e.from.addTempChild(e.to);
       }
-      Vertex head = null;
+      List<Vertex> head = new ArrayList<>();
       for (Edge e : edges) {
          if (e.from._parent == null) {
-            head = e.from;
-            break;
+            head.add(e.from);
          }
          if (e.to._parent == null) {
-            head = e.to;
-            break;
+            head.add(e.to);
          }
       }
       return head;
@@ -156,8 +161,17 @@ public class EvenTree {
          edges.add(new Edge(vfrom, vto));
       }
       System.out.println(edges);
-      Vertex head = buildTree(edges);
+      Vertex head = buildTree(edges).iterator().next();
       System.out.println(head);
+      int max = -1;
+      for (int i=0; i<edges.size(); i++) {
+        Set<Edge> list = new HashSet<>();
+        for (int j=i; j<edges.size(); j++) {
+          list.add(edges.get(j));
+        }
+        Collection<Vertex> heads = buildTree(list);
+        System.out.println("i " + i + ", list " + list.size() + ", count " + heads.size() + ": " + heads);
+      }
    }
 }
 
