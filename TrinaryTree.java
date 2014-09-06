@@ -249,6 +249,13 @@ public class TrinaryTree {
    } 
 
    public static void Test4() { 
+      TrinaryTree tree = insert(new int[] {1, 1, 1, 1, 1});
+      assertEquals(new int[] {1, 1, 1, 1, 1}, tree.preorderValuesAsPrimitiveArray());
+      tree.delete(1);
+      assertEquals(new int[] {1, 1, 1, 1}, tree.preorderValuesAsPrimitiveArray());
+   } 
+
+   public static void Test5() { 
       TrinaryTree tree = insert(new int[] {100, 90, 150, 70, 80, 140, 160, 150, 70});
       assertEquals(new int[] {100, 90, 70, 70, 80, 150, 140, 150, 160}, tree.preorderValuesAsPrimitiveArray());
       tree.delete(150);
@@ -275,5 +282,6 @@ public class TrinaryTree {
       Test2();
       Test3();
       Test4();
+      Test5();
    }
 }
