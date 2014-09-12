@@ -101,7 +101,7 @@ public class BST {
       return height(root);
    }
    private int height(Node p) {
-      if (p == null) return -1;
+      if (p == null) return 0;
       else
          return 1 + Math.max( height(p.left), height(p.right));
    }
