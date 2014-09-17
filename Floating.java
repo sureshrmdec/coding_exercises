@@ -4,6 +4,19 @@ import java.text.DecimalFormat;
 
 
 public class Floating {
+  public static void compareEq() {
+    float f = 0.1f;
+    float sum;
+    sum = 0;
+
+    for (int i = 0; i < 10; ++i)
+      sum += f;
+    float product = f * 10;
+    String str = String.format("sum = %1.15f, mul = %1.15f, mul2 = %1.15f\n",
+        sum, product, f * 10);
+    System.out.println(str);
+  }
+
   public static void verhulst(double R) {
     DecimalFormat f = new DecimalFormat("0.0000000000");
     int N = 100;
@@ -106,6 +119,8 @@ public class Floating {
     //financial();
     //financial();
     //compoundInterest(100000, 5, 365);
-    verhulst(Double.parseDouble(args[0])); 
+    //verhulst(Double.parseDouble(args[0])); 
+    compareEq(); 
   }
 }
+

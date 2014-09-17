@@ -50,17 +50,28 @@ public class SubTree {
     }
     return p1; 
   }
-  public Node addList(Node l1, Node l2, int carry) {
-    if (l1 == null && l2 == null) return null;
-    Node result = new Node(carry);
-    int value = carry;
-    if (l1 != null) value += l1.data;
-    if (l2 != null) value += l2.data;
-    result.data = value % 10;
-    Node more = addList(l1 == null ? null : l1.next, l2 == null ? null : l2.next, value > 10 ? 1 : 1);
-    result.next = more;
-    return result;
-  }
+   public static Node add(Node l1, Node l2) {
+      Node result = new Node(0);
+      Node l3 = result;
+      int carry = 0;
+      while (l1 != null || l2 != null) {
+         if (l1 != null) {
+            carry += l1.val;
+            l1 = l1.next;
+         }
+         if (l2 != null) {
+            carry += l2.val;
+            l2 = l2.next;
+         }
+         l3.next = new Node(carry % 10);
+         l3 = l3.next;
+         carry /= 10;
+      }
+      if (carry != 0) {
+         l3.next = new Node(carry);
+      }
+      return result.next;
+   }
 
   void findSum(Node head, int sum, ArrayList<Integer> buffer,
       int level) {

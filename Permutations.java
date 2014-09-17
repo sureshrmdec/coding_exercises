@@ -11,10 +11,12 @@ public class Permutations {
       return permutations;
     }
     char first = s.charAt(0); // get the first character
-    String remainder = s.substring(1); // remove the first character ArrayList<String> words = getPerms(remainder);
+    String remainder = s.substring(1); // remove the first character 
+    ArrayList<String> words = getPerms(remainder);
     for (String word : words) {
       for (int j = 0; j <= word.length(); j++) {
-        permutations.add(insertCharAt(word, first, j)); }
+        permutations.add(insertCharAt(word, first, j)); 
+      }
     }
     return permutations; 
   }
