@@ -1,0 +1,6 @@
+Semilattice data structures are immune to message lost, reorder and multiple delivery as long as they satisfy
+  associativity, e.g. f(f(a, b), c) == f(a, f(b, c))
+  commutativty, e..g f(a, b) = f(b, a)
+  idempotence, f(f(a)) = f(a)
+
+counters, registers, sets, multi-maps, trees, graphs, vectors

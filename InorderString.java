@@ -40,6 +40,7 @@ public class InorderString {
     System.out.println(isInorder("abc", "123", "ab1c23"));
     System.out.println(isInorder("ab", "bc", "abcb"));
     System.out.println(isInorder("ab", "bc", "acbb"));
+    System.out.println(isInorder("ab1", "bc12", "abcb121"));
   }
 }
 
