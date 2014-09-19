@@ -17,7 +17,7 @@ public class StringUtils {
     }
   }
   public static Option<Character> getNonrepeatingCharacter(String s) {
-    Map<Character, Integer> counts = new TreeMap<>();
+    Map<Character, Integer> counts = new LinkedHashMap<>();
     for (int i=0; i<s.length(); i++) {
       char ch = s.charAt(i);
       Integer count = counts.get(ch);
