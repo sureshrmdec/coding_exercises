@@ -6,7 +6,7 @@ public class RotateBinSearch {
   }
   public static int search(int[] a, int l, int u, int x) {
     while (l <= u) {
-      int m = (l+u) / 2;
+      int m = l + (u-l)/2;
       System.out.println("l " + l + ", m " + m + ", u " + u);
       if (x == a[m]) {
         return m;

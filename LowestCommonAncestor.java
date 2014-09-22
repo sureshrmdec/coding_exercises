@@ -47,7 +47,15 @@ public class LowestCommonAncestor {
 
    public Node lowestCommonAncestor(Node foo, Node bar, Set<Node> visited) {
       if (foo == null || bar == null) {
-         throw new IllegalArgumentException("foo/bar is required");
+         if (foo == null && bar == null) {
+            return null;
+         }
+         if (foo != null) {
+            return foo.parent;
+         }
+         if (bar != null) {
+            return bar.parent;
+         }
       }
       if (foo.parent == bar.parent) {
          return foo.parent;
