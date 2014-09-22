@@ -39,7 +39,7 @@ public class IntervalST<Value>  {
    *************************************************************************/
 
   public boolean contains(Interval1D interval) {
-    return (get(interval) != null);
+    return get(interval) != null;
   }
 
   // return value associated with the given key
@@ -259,6 +259,21 @@ public class IntervalST<Value>  {
    *  test client
    *************************************************************************/
   public static void main(String[] args) {
+    if (args.length == 0) {
+      IntervalST<String> st = new IntervalST<>();
+      st.put(new Interval1D(1, 3), "first");
+      st.put(new Interval1D(2, 6), "second");
+      st.put(new Interval1D(8, 10), "third");
+      st.put(new Interval1D(15, 18), "fourth");
+      System.out.println("height:          " + st.height());
+      System.out.println("size:            " + st.size());
+      System.out.println("integrity check: " + st.check());
+      StdOut.println(st.search(new Interval1D(1, 3)));
+      StdOut.println(st.search(new Interval1D(2, 6)));
+      StdOut.println(st.search(new Interval1D(8, 10)));
+      StdOut.println(st.search(new Interval1D(15, 18)));
+      return;
+    }
     int N = Integer.parseInt(args[0]);
 
     // generate N random intervals and insert into data structure
