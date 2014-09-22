@@ -67,6 +67,7 @@ public class LowestCommonAncestor {
       if (visited.contains(parent)) {
          return false;
       }
+      visited.add(parent);
       if (parent.left == child || parent.right == child) {
          return true;
       }
@@ -80,7 +81,6 @@ public class LowestCommonAncestor {
             return true;
          }
       }
-      visited.add(parent);
       return false;
    }
 
