@@ -182,11 +182,40 @@ public class BST2 {
       return countLeaves(p.left) + countLeaves(p.right);
     }
   }
+  void printPreoderWithEachLevelOnSeparateLine() {
+    if (root == null) return;
+    LinkedList<Node> q = new LinkedList<>();
+    LinkedList<Integer> levelQ = new LinkedList<>();
+    q.push(root);
+    levelQ.push(1);
 
-
-
+    while (!q.isEmpty()) {
+      Node node = q.pop();
+      int level = levelQ.pop();
+      System.out.print(node.val);
+      if (node.left != null) {
+        q.add(node.left);
+        levelQ.add(level+1);
+      }
+      if (node.right != null) {
+        q.add(node.right);
+        levelQ.add(level+1);
+      }
+      if (!levelQ.isEmpty()) {
+        int plevel = levelQ.peek();
+        if (level != plevel) {
+          System.out.println();
+        } else {
+          System.out.print(" ");
+        }
+      } else {
+        System.out.println();
+      } 
+    }
+  }
   public static void main(String[] args) {
-    int[] a = {1,5,2,7,4};
+    //int[] a = {1,5,2,7,4};
+    int[] a = {15,5, 20,3,44};
     BST2 bst = new BST2();
     for(int n : a) bst.insert(n);
 
@@ -195,8 +224,9 @@ public class BST2 {
     //bst.root.left = new Node(5);
     //bst.root.right = new Node(5);
     //System.out.println(bst.validateBST());
-    System.out.println(bst.validateBSTViaBFS());
+    //System.out.println(bst.validateBSTViaBFS());
     System.out.println();
+    bst.printPreoderWithEachLevelOnSeparateLine();
   }
 }
 
