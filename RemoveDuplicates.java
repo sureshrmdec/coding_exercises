@@ -29,12 +29,11 @@ public class RemoveDuplicates {
       while(p != null){
          if(p.val == prev.val){
             prev.next = p.next;
-            p = p.next;
             //no change prev
          }else{
             prev = p;
-            p = p.next; 
          }
+         p = p.next; 
       }
 
       return head;

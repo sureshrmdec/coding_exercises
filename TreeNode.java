@@ -191,7 +191,7 @@ public class TreeNode {
       if (start > end)
          return null;
 
-      int mid = (start + end) / 2;
+      int mid = start + (end - start) / 2;
       TreeNode root = new TreeNode(num[mid]);
       root.left = sortedArrayToBST(num, start, mid - 1);
       root.right = sortedArrayToBST(num, mid + 1, end);
