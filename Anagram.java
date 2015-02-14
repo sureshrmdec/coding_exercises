@@ -1,4 +1,6 @@
 public class Anagram {
+  // check if t is anagram of s
+  //
   public static boolean anagram(String s, String t) { 
     if (s.length() != t.length()) return false; 
     int[] letters = new int[256];
@@ -22,5 +24,8 @@ public class Anagram {
       } 
     }
     return false; 
+  }
+  public static void main(String[] args) {
+    System.out.println(anagram(args[0], args[1]));
   }
 }

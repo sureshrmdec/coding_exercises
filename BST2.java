@@ -1,10 +1,11 @@
+import java.io.*;
 import java.util.*;
 import java.util.Queue;
 
 
 public class BST2 {
   private static class Node implements Comparable<Node> {
-    private int val;
+    int val;
     private Node left;
     private Node right;
     public Node(int val) {
@@ -137,6 +138,43 @@ public class BST2 {
     return p.val;
   }
 
+  public Node findMin() {
+    Node current = root;
+    while (current != null && current.left != null) {
+      current = current.left;
+    }
+    return current;
+  }
+
+/* 
+def replace_node_in_parent(self, new_value=None):
+    if self.parent:
+        if self == self.parent.left_child:
+            self.parent.left_child = new_value
+        else:
+            self.parent.right_child = new_value
+    if new_value:
+        new_value.parent = self.parent
+ 
+def binary_tree_delete(self, key):
+    if key < self.key:
+        self.left_child.binary_tree_delete(key)
+    elif key > self.key:
+        self.right_child.binary_tree_delete(key)
+    else: # delete the key here
+        if self.left_child and self.right_child: # if both children are present
+            successor = self.right_child.find_min()
+            self.key = successor.key
+            successor.binary_tree_delete(successor.key)
+        elif self.left_child:   # if the node has only a *left* child
+            self.replace_node_in_parent(self.left_child)
+        elif self.right_child:  # if the node has only a *right* child
+            self.replace_node_in_parent(self.right_child)
+        else: # this node has no children
+            self.replace_node_in_parent(None)
+*/
+
+
   public void preOrderTraversal() {
     preOrderHelper(root);
   }
@@ -213,9 +251,54 @@ public class BST2 {
       } 
     }
   }
-  public static void main(String[] args) {
+  //
+  static class NullNode extends Node {
+    NullNode() {
+      super(Integer.MIN_VALUE);
+    }
+  }
+  private static final NullNode NULL_NODE = new NullNode();
+
+  void serialize(File file) throws IOException {
+    DataOutputStream out = new DataOutputStream(new FileOutputStream(file));
+    serialize(file, root, out);
+    out.close();
+  }
+
+  void serialize(File file, Node node, DataOutputStream out) throws IOException {
+    if (node == null) {
+      out.writeInt(NULL_NODE.val);
+    } else {
+      out.writeInt(node.val);
+      serialize(file, node.left, out);
+      serialize(file, node.right, out);
+    }
+  }
+
+
+  static Node deserialize(File file) throws IOException {
+    DataInputStream in = new DataInputStream(new FileInputStream(file));
+    Node root = deserialize(in);
+    return root;
+  }
+
+  static Node deserialize(DataInputStream in) throws IOException {
+    Node node = null;
+    try {
+      int val = in.readInt();
+      if (val != Integer.MIN_VALUE) {
+        node = new Node(val);
+        node.left = deserialize(in);
+        node.right = deserialize(in);
+      }
+    } catch (EOFException e) {
+    }
+    return node;
+  }
+
+  public static void main(String[] args) throws Exception {
     //int[] a = {1,5,2,7,4};
-    int[] a = {15,5, 20,3,44};
+    int[] a = {15,5, 20,3,44, 100, 10, 30, 50};
     BST2 bst = new BST2();
     for(int n : a) bst.insert(n);
 
@@ -225,8 +308,13 @@ public class BST2 {
     //bst.root.right = new Node(5);
     //System.out.println(bst.validateBST());
     //System.out.println(bst.validateBSTViaBFS());
+    bst.printPreoderWithEachLevelOnSeparateLine();
+    System.out.println();
+    bst.serialize(new File("binary.dat"));
+    bst.root = deserialize(new File("binary.dat"));
     System.out.println();
     bst.printPreoderWithEachLevelOnSeparateLine();
+    System.out.println();
   }
 }
 

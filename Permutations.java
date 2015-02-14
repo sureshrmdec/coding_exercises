@@ -2,7 +2,7 @@ import java.util.*;
 
 
 public class Permutations {
-  public static List<String> getPerms(String s) { 
+  public static List<String> getPerms(String s) {
     List<String> permutations = new ArrayList<String>(); 
     if (s == null) { // error case
       return null;
@@ -18,13 +18,14 @@ public class Permutations {
         permutations.add(insertCharAt(word, first, j)); 
       }
     }
+    System.out.println("s " + s + ", first " + first + ", perms " + permutations);
     return permutations; 
   }
   public static String insertCharAt(String word, char c, int i) { 
     String start = word.substring(0, i);
     String end = word.substring(i);
     String str = start + c + end;
-    System.out.println("start '" + start + "', end '" + end + "', c " + c + ", i " + i + ", str '" + str + "'");
+    //System.out.println("start '" + start + "', end '" + end + "', c " + c + ", i " + i + ", str '" + str + "'");
     return str;
   }
   public static void main(String[] args) {

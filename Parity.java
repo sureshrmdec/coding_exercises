@@ -4,6 +4,7 @@ public class Parity {
     long result = 0;
     for (; a != 0; a = a >> 1) {
         result = result ^ (a & 1);
+        System.out.println(Integer.toBinaryString((int)a) + ", result " + result);
     }
     return (short) result;
   }

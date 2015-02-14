@@ -29,8 +29,46 @@ public class ThreeSum {
 
       return result;
    }
-
+   static int count = 0;
+  public static List<List<Integer>> getSubsets(List<Integer> set, int index) {
+    List<List<Integer>> allsubsets;
+    if (set.size() == index) {
+      allsubsets = new ArrayList<List<Integer>>();
+      allsubsets.add(new ArrayList<Integer>()); // Empty set 
+      count++;
+    } else {
+      allsubsets = getSubsets(set, index + 1);
+      int item = set.get(index);
+      ArrayList<List<Integer>> moresubsets = new ArrayList<List<Integer>>();
+      for (List<Integer> subset : allsubsets) {
+        List<Integer> newsubset = new ArrayList<Integer>(); 
+        newsubset.addAll(subset); //
+        newsubset.add(item);
+        moresubsets.add(newsubset);
+        count++;
+      }
+      allsubsets.addAll(moresubsets);
+    }
+    return allsubsets;
+  }
    public static List<List<Integer>> threeSum(int[] num) {
+      List<Integer> set = new ArrayList<>();
+      for (int n : num) {
+        set.add(n);
+      }
+      List<List<Integer>> result = new ArrayList<>();
+      List<List<Integer>> subsets = getSubsets(set, 0);
+      for (List<Integer> l : subsets) {
+        if (l.size() == 3) {
+          if (l.get(0) + l.get(1) + l.get(2) == 0) {
+            result.add(l);
+          }
+        }
+      }
+      return result;
+   }
+
+   public static List<List<Integer>> threeSum2(int[] num) {
       List<List<Integer>> result = new ArrayList<List<Integer>>();
 
       if (num.length < 3)
@@ -81,6 +119,9 @@ public class ThreeSum {
    }
    public static void main(String[] args) {
       List<List<Integer>> nums = threeSum(new int[] {-1, 0, 1, 2, -1, -4});
+      System.out.println(count);
+      System.out.println(nums);
+      nums = threeSum2(new int[] {-1, 0, 1, 2, -1, -4});
       System.out.println(nums);
    }
 }

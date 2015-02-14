@@ -78,7 +78,7 @@ public class SubTree {
     if (head == null) return;
     int tmp = sum;
     buffer.add(head.data);
-    for (int i = level;i >- 1; i--){
+    for (int i = level;i >=0; i--){
       tmp -= buffer.get(i);
       if (tmp == 0) print(buffer, i, level);
     }

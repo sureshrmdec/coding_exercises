@@ -31,6 +31,10 @@ public class Atoi {
     return (int) result;
   }
   public static void main(String[] args) {
+    System.out.println("Integer max " + atoi(Integer.MAX_VALUE + ""));
+    System.out.println("Integer min " + atoi(Integer.MIN_VALUE + ""));
+    System.out.println("Long max " + atoi(Long.MAX_VALUE + ""));
+    System.out.println("Long min " + atoi(Long.MIN_VALUE + ""));
     System.out.println(atoi(args[0]));
   }
 }

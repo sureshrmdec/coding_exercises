@@ -62,6 +62,17 @@
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+
+// Prim’s algorithm finds the minimum spanning tree using a greedy fashion.
+// It works as such:
+// 1. Pick an arbitrary node
+// 2. Find the closest node to that node
+// 3. Find the closest node to the 2 nodes
+// 4. Find the closest node to the 3 nodes
+// 5. ...
+// 6. Find the closest node to n-1 nodes
+// The closest node is the node with the lowest cost edge to the already connected nodes.
+
 public class PrimMST {
     private Edge[] edgeTo;        // edgeTo[v] = shortest edge from tree vertex to non-tree vertex
     private double[] distTo;      // distTo[v] = weight of shortest such edge

@@ -11,7 +11,29 @@ public class InorderString {
       }
       return false;
     }
-    if (target.length() != s1.length() + s2.length()) {
+    int i=0;
+    int j=0;
+    for (int k=0; k<target.length(); k++) {
+      char ch = target.charAt(k);
+      char s1ch = s1.charAt(i);
+      char s2ch = s2.charAt(j);
+      if (ch == s1ch && i<s1.length()-1) {
+        i++;
+      } 
+      if (ch == s2ch && j<s2.length()-1) {
+        j++;
+      }
+      if (ch != s1ch && ch != s2ch) {
+        return false;
+      }
+    }
+    return true;
+  }
+  static boolean _isInorder(String s1, String s2, String target) {
+    if (target.length() == 0) {
+      if (s1.length() == 0 && s2.length() == 0) {
+        return true;
+      }
       return false;
     }
     char tch = target.charAt(0);
@@ -38,9 +60,20 @@ public class InorderString {
 
   public static void main(String[] args) {
     System.out.println(isInorder("abc", "123", "ab1c23"));
+    System.out.println(isInorder("abc123", "123", "ab1c23"));
+    System.out.println(isInorder("abc123", "123", "abbb1c23"));
     System.out.println(isInorder("ab", "bc", "abcb"));
     System.out.println(isInorder("ab", "bc", "acbb"));
     System.out.println(isInorder("ab1", "bc12", "abcb121"));
+    System.out.println(isInorder("ab12", "bc12", "abcb1211"));
+    System.out.println();
+    System.out.println(_isInorder("abc", "123", "ab1c23"));
+    System.out.println(_isInorder("abc123", "123", "ab1c23"));
+    System.out.println(_isInorder("abc123", "123", "abbb1c23"));
+    System.out.println(_isInorder("ab", "bc", "abcb"));
+    System.out.println(_isInorder("ab", "bc", "acbb"));
+    System.out.println(_isInorder("ab1", "bc12", "abcb121"));
+    System.out.println(_isInorder("ab12", "bc12", "abcb1211"));
   }
 }
 

@@ -23,7 +23,7 @@
  *
  *************************************************************************/
 
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class BST<Key extends Comparable<Key>, Value> {
   private Node root;             // root of BST
@@ -38,6 +38,10 @@ public class BST<Key extends Comparable<Key>, Value> {
       this.key = key;
       this.val = val;
       this.N = N;
+    }
+    @Override
+    public String toString() {
+      return key + "=" + val + ";";
     }
   }
 
@@ -318,6 +322,54 @@ public class BST<Key extends Comparable<Key>, Value> {
     return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
   } 
 
+  // parent->right->left
+  private List<Node> preorder() {
+    List<Node> list = new ArrayList<>();
+    Node x = root;
+    if (x == null) {
+      return list;
+    }
+    Stack<Node> stack = new Stack<>();
+    stack.push(x);
+    while (!stack.isEmpty()) {
+      Node n = stack.pop();
+      list.add(n);
+      if (n.right != null) {
+        stack.push(n.right);
+      }
+      if (n.left != null) {
+        stack.push(n.left);
+      }
+    }
+    return list;
+  }
+
+  // left -> parent -> right
+  public void inOrder() {
+    inOrder(root);
+    System.out.println();
+  }
+  private void inOrder(Node r) {
+    if (r != null) {
+      inOrder(r.left);
+      System.out.print(r+" ");
+      inOrder(r.right);
+    }
+  }
+
+  // left -> right -> parent
+  public void postOrder() {
+    postOrder(root);
+    System.out.println();
+  }
+  private void postOrder(Node r) {
+    if (r != null) {
+      postOrder(r.left);
+      postOrder(r.right);
+      System.out.print(r+" ");
+    }
+  }
+
   // are the size fields correct?
   private boolean isSizeConsistent() { return isSizeConsistent(root); }
   private boolean isSizeConsistent(Node x) {
@@ -346,6 +398,10 @@ public class BST<Key extends Comparable<Key>, Value> {
       st.put(key, i);
     }
 
+    System.out.println(st.preorder());
+    st.inOrder();
+    st.postOrder();
+    if (true) return;
     for (String s : st.levelOrder())
       StdOut.println(s + " " + st.get(s));
 
