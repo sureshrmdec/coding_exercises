@@ -14,17 +14,13 @@ public class Dungeon {
   public static int calculateMinimumHP(int[][] dungeon) {
     List<Integer> sums = new ArrayList<>();
     calculateMinimumHP(dungeon, 0, 0, 0, sums);
+    int min = Integer.MAX_VALUE;
     for (int i=0; i<sums.size(); i++) {
       int sum = sums.get(i);
       if (sum <= 0) {
         sum = 0 - sum + 1;
-        sums.set(i, sum);
       }
-    }
-    //
-    int min = sums.get(0);
-    for (int i=1; i<sums.size(); i++) {
-      min = Math.min(sums.get(i), min);
+      min = Math.min(sum, min);
     }
     return min;
   }
