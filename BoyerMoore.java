@@ -37,7 +37,7 @@ public class BoyerMoore {
    public int search(String txt) {
       int M = pat.length();
       int N = txt.length();
-      int skip;
+      int skip = 0;
       for (int i = 0; i <= N - M; i += skip) {
          skip = 0;
          for (int j = M-1; j >= 0; j--) {

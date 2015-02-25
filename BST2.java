@@ -175,11 +175,10 @@ def binary_tree_delete(self, key):
 */
 
 
+  // parent->right->left
   public void preOrderTraversal() {
     preOrderHelper(root);
   }
-
-
   private void preOrderHelper(Node r) {
     if (r != null) {
       System.out.print(r+" ");
@@ -188,6 +187,7 @@ def binary_tree_delete(self, key):
     }
   }
 
+  // left -> parent -> right
   public void inOrderTraversal() {
     inOrderHelper(root);
   }

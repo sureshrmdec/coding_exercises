@@ -276,7 +276,7 @@ public class BST<Key extends Comparable<Key>, Value> {
   // height of this BST (one-node tree has height 0)
   public int height() { return height(root); }
   private int height(Node x) {
-    if (x == null) return -1;
+    if (x == null) return 0;
     return 1 + Math.max(height(x.left), height(x.right));
   }
 
@@ -397,6 +397,7 @@ public class BST<Key extends Comparable<Key>, Value> {
       String key = StdIn.readString();
       st.put(key, i);
     }
+    System.out.println(st.levelOrder());
 
     System.out.println(st.preorder());
     st.inOrder();
