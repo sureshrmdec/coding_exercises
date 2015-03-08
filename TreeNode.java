@@ -6,7 +6,8 @@ public class TreeNode {
    TreeNode right;
    TreeNode(int x) { val = x; }
 
-   // parent node is processed before its children
+   // parent node is processed before its children 
+   // parent -> right -> left
    public static List<Integer> preorderTraversal(TreeNode root) {
       List<Integer> returnList = new ArrayList<Integer>();
       if(root == null) return returnList;

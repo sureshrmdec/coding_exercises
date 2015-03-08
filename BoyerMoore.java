@@ -1,3 +1,8 @@
+// 
+// bad match table for pattern
+//   value = length - index - 1
+//   last letter (*) is given value equal to length
+//
 public class BoyerMoore {
    private final int R;     // the radix
    private int[] right;     // the bad-character skip array
