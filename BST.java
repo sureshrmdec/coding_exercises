@@ -399,6 +399,8 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
     System.out.println(st.levelOrder());
 
+    System.exit(0);
+
     System.out.println(st.preorder());
     st.inOrder();
     st.postOrder();
