@@ -15,17 +15,18 @@ class Dictionary
     return false
   end 
   #
-  def matching_words(letters, max_results=10)
+  def matching_words(letters, partial, max_results=10)
     matching = []
     self.words.each do |word|
+      next if partial && (word & partial) != partial
       if word == letters || subset?(word, letters)
         value = TileValues.value(word) 
         matching << [word, value] 
       end
     end 
-    #matching.sort_by { |letters, value| -value }.slice(0,max_results)
-    matching.sort_by { |letters, value| -value }
-  end 
+    matching.sort_by { |letters, value| -value }.slice(0,max_results)
+  end  
+  #
   def subset?(word, letters)
     copy_word = word.clone
     letters.each do |l| 
@@ -139,12 +140,12 @@ class Scrabble
     self.dictionary = Dictionary.new('dictionary.txt')
     self.tiles = Tiles.new
   end
-  def show_words(letters) 
+  def show_words(letters, partial) 
     letters ||= tiles.pick_random(7)
     word = letters.join("")
     puts "#{word} with value #{TileValues.value(letters)} exists in the dictionary" if dictionary.exists?(letters)
     puts "#{word} could be used to make up following words:"
-    matching = dictionary.matching_words(letters)
+    matching = dictionary.matching_words(letters, partial)
     matching.each do |letters, value| 
       puts "\t#{letters.join('')} #{value}"
     end
@@ -152,4 +153,4 @@ class Scrabble
 end
 
 scrabble = Scrabble.new
-scrabble.show_words(ARGV.length > 0 ? ARGV[0].upcase.chars : nil)
+scrabble.show_words(ARGV.length > 0 ? ARGV[0].upcase.chars : nil, ARGV.length > 1 ? ARGV[1].upcase.chars : nil)
