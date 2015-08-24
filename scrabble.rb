@@ -18,8 +18,8 @@ class Dictionary
   def matching_words(letters, partial, max_results=10)
     matching = []
     self.words.each do |word|
-      next if partial && (word & partial) != partial
-      if word == letters || subset?(word, letters)
+      next if !sub_word?(word, partial)
+      if word == letters || can_make_word?(word, letters)
         value = TileValues.value(word) 
         matching << [word, value] 
       end
@@ -27,7 +27,25 @@ class Dictionary
     matching.sort_by { |letters, value| -value }.slice(0,max_results)
   end  
   #
-  def subset?(word, letters)
+  def sub_word?(word, partial)
+    return true if partial.nil? || partial.length == 0
+    return false if partial.length > word.length 
+    indexes = word.each_index.select {|i| word[i] == partial[0]}
+    indexes.each do |i|
+      return false if word.length-i < partial.length  
+      matched = true
+      (0...partial.length).each do |j|
+        if partial[j] != word[i+j] 
+          matched = false 
+          break 
+        end
+      end  
+      return true if matched 
+    end
+    return false
+  end 
+  #
+  def can_make_word?(word, letters)
     copy_word = word.clone
     letters.each do |l| 
       ndx = copy_word.index(l)
