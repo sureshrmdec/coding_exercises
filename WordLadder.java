@@ -62,11 +62,6 @@ public class WordLadder {
          String currWord = wordQueue.pop();
          Integer currDistance = distanceQueue.pop();
 
-         if(currWord.equals(end)){
-            System.out.println("---" + currWord + ": " + currDistance);
-            return currDistance;
-         }
-
          for(int i=0; i<currWord.length(); i++){
             char[] currCharArr = currWord.toCharArray();
             for(char c='a'; c<='z'; c++){

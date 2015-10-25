@@ -279,6 +279,7 @@ def binary_tree_delete(self, key):
   static Node deserialize(File file) throws IOException {
     DataInputStream in = new DataInputStream(new FileInputStream(file));
     Node root = deserialize(in);
+    in.close();
     return root;
   }
 
