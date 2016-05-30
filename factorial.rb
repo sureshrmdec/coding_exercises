@@ -7,26 +7,6 @@
 # combinations: How many ways to choose combinations (divide by # of ways you
 # can arrange k things)
 # n Choose k  = nCk = n!/((n-k)! * k!) -- binomial coefficient -- order doesn't matter
-# e.g. handshakes with 4 people = 4C2 = ( 4 2 ) = 4! / ((4-2)! * 2!) = 6
-# card game using 36 cards, 4 suits, hand is collection of 9, how many
-# hands possible = ( 36 9) = 36! / ((36 - 9)! * 9!) = 
-# How many unique ways are there to arrange the letters in the word SONG?
-# 4! 
-# How many unique ways are there to arrange the letters in the word HATTER?
-# Ans: since T is duplicate, we divide the number of permutations we got by
-# the number of times we're overcounting each permutation, we get 6! / 2! = 360
-# You need to put your reindeer, Rudy, Ezekiel, Gloopin, Bloopin, and Prancer,
-# in a single-file line to pull your sleigh. However, Bloopin and Rudy are
-# fighting, so you have to keep them apart, or they won't fly.
-# Ans:
-# Permutations for 5 = 5! = 120
-# Let's treat Bloopin and Rudy as one so 4! = 24
-# Let's add them twice for both reindeers = 24 + 24 + 48
-# Subtract 48 from 120 = 120 = 48 = 72 ways 
-# How many numbers between 1 and 100 (inclusive) are divisible by 4 or 5 
-# Ans: There are 25 numbers divisible by 4 between 1 and 100 , and
-# 20 numbers divisible by 5 between 1 and 100, but we are over counting so we
-# need to subtract (5 * 4) or 20 = 25 + 20 - 5
 def fact(n)
   if n <= 1
     1
@@ -39,6 +19,9 @@ def permutations(n, k)
   return fact(N) / fact(N-K)
 end 
 
+# e.g. handshakes with 4 people = 4C2 = ( 4 2 ) = 4! / ((4-2)! * 2!) = 6
+# card game using 36 cards, 4 suits, hand is collection of 9, how many
+# hands possible = ( 36 9) = 36! / ((36 - 9)! * 9!) = 
 def combinations(n, k)
   return fact(N) / (fact(N-K) * fact(K))
 end 
@@ -47,10 +30,19 @@ def permutations_with_repeating(n, k)
   return n ** k
 end 
 
+# How many unique ways are there to arrange the letters in the word SONG?
+# 4! 
+# How many unique ways are there to arrange the letters in the word HATTER?
+# Ans: since T is duplicate, we divide the number of permutations we got by
+# the number of times we're overcounting each permutation, we get 6! / 2! = 360
 def uniq_words(n, k)
   return fact(n) / fact(k)
 end 
 
+# How many numbers between 1 and 100 (inclusive) are divisible by 4 or 5 
+# Ans: There are 25 numbers divisible by 4 between 1 and 100 , and
+# 20 numbers divisible by 5 between 1 and 100, but we are over counting so we
+# need to subtract (5 * 4) or 20 = 25 + 20 - 5
 def div_nums(max, div1, div2, min = 1)
   sum1 = max / div1
   sum2 = max / div2
@@ -58,6 +50,14 @@ def div_nums(max, div1, div2, min = 1)
   return sum1 + sum2 - sum3 
 end
 
+# You need to put your reindeer, Rudy, Ezekiel, Gloopin, Bloopin, and Prancer,
+# in a single-file line to pull your sleigh. However, Bloopin and Rudy are
+# fighting, so you have to keep them apart, or they won't fly.
+# Ans:
+# Permutations for 5 = 5! = 120
+# Let's treat Bloopin and Rudy as one so 4! = 24
+# Let's add them twice for both reindeers = 24 + 24 + 48
+# Subtract 48 from 120 = 120 = 48 = 72 ways 
 def perm_with_exception(n)
   return fact(n) - (fact(n-1)*2)
 end 
