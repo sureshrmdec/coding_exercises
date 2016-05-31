@@ -1,0 +1,8 @@
+See https://aphyr.com/tags/jepsen
+CAP: You can only pick consistency or availability
+Cluster Size: 2F + 1, 
+13 = 2F + 1 then F = 6, at max 6 nodes can fail
+Majority = F + 1 = 7
+Strong serializability requires consistency so you only accept work if connected to F + 1. Read must read from F+1 nodes and Write must go to F+1 nodes
+
+
