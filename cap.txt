@@ -5,4 +5,6 @@ Cluster Size: 2F + 1,
 Majority = F + 1 = 7
 Strong serializability requires consistency so you only accept work if connected to F + 1. Read must read from F+1 nodes and Write must go to F+1 nodes
 
+zookeeper sends request to leader, which takes care of order, consensus (raft/paxos)
+client based ordering: client verifies timestamp and rejects anything older than current timestamp for transaction
 
