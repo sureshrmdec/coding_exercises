@@ -1,0 +1,35 @@
+Kafka kernel config:
+all brokers must have the same config‐ uration for the zookeeper.connect parameter.
+all brokers in the cluster must have a unique value for the broker.id parameter.
+
+set vm.swappiness to 1
+set vm.dirty_background_ratio to 5
+set vm.dirty_ratio to 60-80, also clustering/replication should be used for higher values
+
+cat /proc/vmstat | egrep "dirty|writeback"
+XFS file system rather than ext4
+Setting the commit interval to a longer time than the default of 5 to force less frequent flushes is less safe
+
+Change the default and maximum amount of mem‐ ory allocated for the send and receive buffers for each socket
+
+set net.core.wmem_default and net.core.rmem_default to 131072, or 128KB. 
+The parameters for the send and receive buffer maximum sizes are net.core.wmem_max and net.core.rmem_max, and a reasonable setting is 2097152, or 2MB.
+set  net.ipv4.tcp_wmem and net.ipv4.tcp_rmem parameters, e.g. setting for each of these parameters is “4096 65536 2048000”
+enabling TCP window scaling by setting net.ipv4.tcp_window_scaling to 1 will allow clients to transfer data more efficiently
+Increasing the value of net.ipv4.tcp_max_syn_backlog above the default of 1024 will allow a greater number of simultaenous connections to be accepted
+Increasing the value of net.core.netdev_max_backlog to greater than the default of 1000 can assist with bursts of network traffic
+
+
+G1
+MaxGCPauseMillis default 200ms, it can be tuned to 20
+InitiatingHeapOccupancyPercent default is 45%, this can be lowered to 35
+
+# export JAVA_HOME=/usr/java/jdk1.8.0_51
+# export KAFKA_JVM_PERFORMANCE_OPTS="-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+DisableExplicitGC -Djava.awt.headless=true"
+# /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
+
+The best practice is to have each Kafka broker in a cluster installed in a different rack
+
+If the consumer uses Zookeeper for offsets, each consumer will perform a Zookeeper write every interval for every partition it consumes. A reasonable interval for offset commits is one minute,
+
+it is recommended that consumers using the latest Kafka libraries use Kafka for committing offsets, removing the dependency on Zookeeper.
