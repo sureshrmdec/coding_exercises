@@ -102,36 +102,27 @@ import java.util.regex.*;
 //   which limits the strength of whole lane to 1.
 //
 public class ServiceLane {
-  private static final int SERVICE_ENTER = 0;
-  private static final int SERVICE_EXIT = 1;
-  private static int min(int[] width, int from, int to) {
-    int min = Integer.MAX_VALUE;
-    for (int i=from; i<=to; i++) {
-      min = Math.min(width[i], min);
-    }
-    return min;
-  }
 
-  public static void main(String[] args) {
-    Scanner in = new Scanner(System.in);
-    String[] toks = in.nextLine().split("\\s+");
-    int N = Integer.parseInt(toks[0]); // N is the length of the freeway
-    int T = Integer.parseInt(toks[1]); // T is the number of test cases. 
-    toks = in.nextLine().split("\\s+");
-    int[] width = new int[N];
-    int[][] tests = new int[T][];
-    for (int i=0; i<N; i++) {
-      width[i] = Integer.parseInt(toks[i]);
+    static int min(int[] width, int from, int to) {
+        int min = width[from];
+        for (int i=from+1; i<=to; i++) {
+            min = Math.min(min, width[i]);
+        }
+        return min;
     }
-    for (int i=0; i<T; i++) {
-      toks = in.nextLine().split("\\s+");
-      tests[i] = new int[2];
-      tests[i][SERVICE_ENTER] = Integer.parseInt(toks[0]);
-      tests[i][SERVICE_EXIT] = Integer.parseInt(toks[1]);
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int t = in.nextInt();
+        int width[] = new int[n];
+        for(int width_i=0; width_i < n; width_i++){
+            width[width_i] = in.nextInt();
+        }
+        for(int a0 = 0; a0 < t; a0++){
+            int i = in.nextInt();
+            int j = in.nextInt();
+            System.out.println(min(width, i, j));
+        }
     }
-    for (int[] t : tests) {
-      System.out.println(min(width, t[SERVICE_ENTER], t[SERVICE_EXIT]));
-    }
-  }
 }
 
