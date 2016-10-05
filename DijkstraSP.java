@@ -29,6 +29,7 @@
  *
  *************************************************************************/
 
+// See http://algs4.cs.princeton.edu/41graph/BreadthFirstPaths.java.html
 public class DijkstraSP {
     private double[] distTo;          // distTo[v] = distance  of shortest s->v path
     private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on shortest s->v path
