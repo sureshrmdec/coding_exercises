@@ -17,16 +17,17 @@ public class Subset {
         newsubset.add(item);
         moresubsets.add(newsubset);
       }
-      System.out.println("ndx " + index + ", item " + item + " moresubsets " + moresubsets);
+      //System.out.println("ndx " + index + ", item " + item + " moresubsets " + moresubsets);
       allsubsets.addAll(moresubsets);
     }
     return allsubsets;
   }
   public static void main(String[] args) {
     //List<Integer> set = Arrays.asList(1, 2, 3, 4, 5, 6);
-    List<Integer> set = Arrays.asList(1, 2, 3, 4);
+    //List<Integer> set = Arrays.asList(1, 2, 3, 4);
+    List<Integer> set = Arrays.asList(3, 2, 1);
     List<List<Integer>>  result = getSubsets(set, 0);
-    System.out.println(result.size() + ", pow " + Math.pow(2, set.size()));
+    //System.out.println(result.size() + ", pow " + Math.pow(2, set.size()));
     System.out.println(result);
   }
 }

@@ -1,4 +1,5 @@
-/**
+/** 
+ * https://www.hackerrank.com/challenges/synchronous-shopping
   Bitville is a seaside city that has  shopping centers connected via  bidirectional roads. Each road connects exactly two distinct shopping centers and has a travel time associated with it.
 
   There are  different types of fish sold in Bitville. Historically, any shopping center has a fishmonger selling certain types of fish. Buying any amount of fish from any fishmonger takes no time.
@@ -263,7 +264,9 @@ public class SynchronousShoppingDijkstra {
       for (int i=1; i<path.size(); i++) {
         Edge e = new Edge(path.get(i-1), path.get(i), 0);
         Edge existing = edges.get(e);
-        if (existing != null) {
+        if (existing == null) {
+          return Integer.MAX_VALUE;
+        } else {
           weight += existing.weight;
         }
       }
@@ -332,14 +335,14 @@ public class SynchronousShoppingDijkstra {
             if (debug) System.out.println(">>>Got all types(" + node + ")>>>>> weight " + weight + ", found " + foundTypes + ", missing " + missingTypes);
           } else {
             int weight = getWeight(path);
-            if (debug) System.out.println(">>>Could not find all types (" + node + ")>>>>> weight " + weight + ", found " + foundTypes + ", missing " + missingTypes);
+            //if (debug) System.out.println(">>>Could not find all types (" + node + ")>>>>> weight " + weight + ", found " + foundTypes + ", missing " + missingTypes);
           }
           //continue;
         }
         //
         List<Vertex> nodes = getAdjacentNeighbors(node); 
         for (Vertex w : nodes) {
-          if (path.contains(w)) continue;
+          if (path.contains(w) && !w.equals(to)) continue;
           List<Vertex> newPath = new ArrayList<Vertex>(path);
           newPath.add(w);
           q.add(newPath);
