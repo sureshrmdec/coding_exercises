@@ -1,4 +1,5 @@
-/**
+/** 
+ * https://www.hackerrank.com/challenges/correctness-invariant
 Sorting 
 One common task for computers is to sort data. For example, people might want to see all their files on a computer sorted by size. Since sorting is a simple problem with many different possible solutions, it is often used to introduce the study of algorithms.
 
@@ -55,7 +56,19 @@ import java.math.*;
 import java.util.regex.*;
 
 public class InsertionSort {
-    
+       public static void insertionSort(int[] A){
+        for(int i = 1; i < A.length; i++){
+            int value = A[i];
+            int j = i - 1;
+            while(j >= 0 && A[j] > value){
+                A[j + 1] = A[j];
+                j = j - 1;
+            }
+            A[j + 1] = value;
+        }
+
+        printArray(A);
+    } 
     public static void insertIntoSorted2(int[] ar) {
         for (int i=1; i<ar.length; i++) {
             int x = ar[i];
