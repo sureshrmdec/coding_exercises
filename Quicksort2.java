@@ -97,6 +97,7 @@ public class Quicksort2 {
 	}
 
 	static int partition(int[] arr, int lowerIndex, int higherIndex) {
+	    printArray(arr);
  		int pivot = arr[lowerIndex];
     	int i = lowerIndex - 1;
     	int j = higherIndex + 1;
@@ -109,7 +110,6 @@ public class Quicksort2 {
         	} while (arr[j] > pivot);
         	if (i >= j) return j;
 			swap(arr, i, j);
-	        printArray(arr, lowerIndex, higherIndex); 
 		}
 	}
 
