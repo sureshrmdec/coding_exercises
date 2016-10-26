@@ -49,129 +49,85 @@ import java.text.*;
 public class EvenTree {
    private static class Vertex {
       private int val;
+      private int descendants;
       private Vertex _parent;
       private Set<Vertex> _children = new HashSet<>();
-      private Vertex _savedParent;
-      private Set<Vertex> _savedChildren = new HashSet<>();
       private Vertex(int val) {
          this.val = val;
       }
       public void addChild(Vertex child) {
          _children.add(child);
-         _savedChildren.add(child);
-         child._parent = this;
-         child._savedParent = this;
-      }
-      public void addTempChild(Vertex child) {
-         _children.add(child);
          child._parent = this;
       }
-      public void clear() {
-         _children.clear();
-         _parent = null;
-      }
-      public void reset() {
-         _children.clear();
-         _children.addAll(_savedChildren);
-         _parent = _savedParent;
+      public String toString() {
+        return String.valueOf(val);
       }
 
-      public String toString() {
-         StringBuilder sb = new StringBuilder();
-         toString(sb, 0);
-         return sb.toString() + "\n";
-      }
-      public void toString(StringBuilder sb, int indent) {
-         for (int i=0; i<indent; i++) {
-            sb.append(' ');
-         }
-         sb.append(String.valueOf(val) + "\n");
-         for (Vertex v : _children) {
-            v.toString(sb, indent+2);
-         } 
-      }
       public int hashCode() {
          return val;
       }
       public boolean equals(Object o) {
          Vertex other = (Vertex) o;
          return val == other.val;
+      } 
+      public int countDescendants() {
+        descendants = 1;
+        if (_children.size() == 0) {
+          return descendants;
+        }
+        for (Vertex v : _children) {
+          descendants += v.countDescendants();
+        }
+        return descendants;
       }
    }
-   private static class Edge {
-      final Vertex from;
-      final Vertex to;
-      Edge(Vertex from, Vertex to) {
-         this.from = from;
-         this.to = to;
-      }
-      public Vertex other(Vertex v) {
-         return v.equals(from) ? to : from;
-      }
-      public String toString() {
-         return from.val + "->" + to.val;
-      }
-      public int hashCode() {
-         return from.val * to.val;
-      }
-      public boolean equals(Object o) {
-         Edge other = (Edge) o;
-         return from.val == other.from.val && to.val == other.to.val;
-      }
-   }
-   private static Vertex get(Map<Integer, Vertex> cache, int n) {
-      Vertex v = cache.get(n);
-      if (v == null) {
-         v = new Vertex(n);
-         cache.put(n, v);
-      }
-      return v;
-   }
-   private static List<Vertex> buildTree(Collection<Edge> edges) {
-      for (Edge e : edges) {
-         e.from.reset();
-         e.to.clear();
-         e.from.addTempChild(e.to);
-      }
-      List<Vertex> head = new ArrayList<>();
-      for (Edge e : edges) {
-         if (e.from._parent == null) {
-            head.add(e.from);
-         }
-         if (e.to._parent == null) {
-            head.add(e.to);
-         }
-      }
-      return head;
-   }
+
+
    public static void main(String[] args) {
       Scanner in = new Scanner(System.in);
-      String[] toks = in.nextLine().split("\\s+");
-      int N = Integer.parseInt(toks[0]); // N is the number of vertices 
-      int M = Integer.parseInt(toks[1]); // M is the number of edges.
-      List<Edge> edges = new ArrayList<>();
-      Map<Integer, Vertex> cache = new HashMap<>();
+      int N = in.nextInt(); // # of vertices
+      int M = in.nextInt(); // # of edges  
+      Vertex root = new Vertex(1);
+      Map<Vertex, Vertex> vertices = new HashMap<>();
+      vertices.put(root, root);
       for (int i=0; i<M; i++) {
-         toks = in.nextLine().split("\\s+");
-         int to = Integer.parseInt(toks[0]);
-         int from = Integer.parseInt(toks[1]);
-         Vertex vto = get(cache, to);
-         Vertex vfrom = get(cache, from);
-         vfrom.addChild(vto);
-         edges.add(new Edge(vfrom, vto));
-      }
-      System.out.println(edges);
-      Vertex head = buildTree(edges).iterator().next();
-      System.out.println(head);
-      int max = -1;
-      for (int i=0; i<edges.size(); i++) {
-        Set<Edge> list = new HashSet<>();
-        for (int j=i; j<edges.size(); j++) {
-          list.add(edges.get(j));
+        Vertex v = new Vertex(in.nextInt());
+        Vertex w = new Vertex(in.nextInt());
+        if (vertices.get(v) == null) {
+          vertices.put(v, v); 
+        } else {
+          v = vertices.get(v);
         }
-        Collection<Vertex> heads = buildTree(list);
-        System.out.println("i " + i + ", list " + list.size() + ", count " + heads.size() + ": " + heads);
+        if (vertices.get(w) == null) {
+          vertices.put(w, w);
+        } else {
+          w = vertices.get(w);
+        } 
+        if (v.val <= w.val) {
+          v.addChild(w);
+        } else {
+          w.addChild(v);
+        } 
       }
+      root.countDescendants(); 
+      //System.out.println(children); 
+
+      List<Vertex[]> q = new ArrayList<>();
+      q.add(new Vertex[] {null, root});
+      int count = 0;
+      while (!q.isEmpty()) { 
+        Vertex[] arr = q.remove(0);
+        Vertex parent = arr[0];
+        Vertex v = arr[1];
+        if (parent != null && v.descendants % 2 == 0) {
+          count ++;
+          parent._children.remove(v);
+        }
+        for (Vertex child : v._children) {
+          q.add(new Vertex[] {v, child});
+        }
+      } 
+      System.out.println(count);
    }
 }
 
