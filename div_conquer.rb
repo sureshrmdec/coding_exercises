@@ -3,6 +3,7 @@
 # You want to divide this farm evenly into square 
 # plots. 
 # 
+# grocking alogrithm
 def square_size(width, height) 
   size = width * height
   min = [width, height].min 

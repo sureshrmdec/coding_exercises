@@ -40,6 +40,31 @@ public class RemoveDuplicates {
    }
 
 
+   public static String removeDuplicatesInPlace(String s) {
+     if (s == null) return s;
+     char[] str = s.toCharArray();
+     int len = str.length;
+     if (len < 2) return s;
+
+     int tail = 1;
+
+     for (int i=1; i<len; i++) {
+       int j;
+       for (j=0; j<tail; j++) {
+         if (str[i] == str[j]) break;
+       }
+       if (j == tail) {
+         str[tail] = str[i];
+         System.out.println("\t\tSetting str[" + tail + "] to str[" + i + "], original " + s);
+         ++tail;
+       }
+     }
+     for (int i=tail; i<len; i++) {
+      str[i] = 0;
+    }
+    return new String(str);
+   }
+
    public static int[] removeDuplicates(int[] A) {
       if (A.length < 2)
          return A;
@@ -63,11 +88,15 @@ public class RemoveDuplicates {
    }
 
    public static void main(String[] args) {
-      int[] arr = { 1, 2, 2, 3, 3 };
-      arr = removeDuplicates(arr);
-      System.out.println(arr.length);
-      for (int i=0; i<arr.length; i++) {
-         System.err.println("\t" + arr[i]);
-      }
+      System.out.println(removeDuplicatesInPlace("abcd"));
+      System.out.println(removeDuplicatesInPlace("aaaa"));
+      System.out.println(removeDuplicatesInPlace(null));
+      System.out.println(removeDuplicatesInPlace("aaabbb"));
+      //int[] arr = { 1, 2, 2, 3, 3 };
+      //arr = removeDuplicates(arr);
+      //System.out.println(arr.length);
+      //for (int i=0; i<arr.length; i++) {
+      //   System.err.println("\t" + arr[i]);
+      //}
    }
 }
