@@ -1,26 +1,26 @@
 /* PROBLEM STATEMENT:
 
-   The lowest common ancestor (LCA) of two nodes is the deepest node
-   common to the lineage of both nodes. For example, in this tree...
+	 The lowest common ancestor (LCA) of two nodes is the deepest node
+	 common to the lineage of both nodes. For example, in this tree...
 
-   R
-   / \
-   /   \ 
-   A     B
-   / \     \
-   X    Y     Z
-   C  D  L M   G  H
+	 R
+	 / \
+	 /   \ 
+	 A     B
+	 / \     \
+	 X    Y     Z
+	 C  D  L M   G  H
 
 
-   ... the LCA of nodes A and B is the root R.
-   ... the LCA of nodes X and Y is the node A.
-   ... the LCA of nodes A and Z is the root R.
+	 ... the LCA of nodes A and B is the root R.
+	 ... the LCA of nodes X and Y is the node A.
+	 ... the LCA of nodes A and Z is the root R.
 
-   Please implement a method that returns the lowest common ancestor
-   of two nodes given.
+	 Please implement a method that returns the lowest common ancestor
+	 of two nodes given.
 
-   You may not assume any organization for the tree, i.e. the tree 
-   is _not_ a BST. However, the nodes do have a parent reference.
+	 You may not assume any organization for the tree, i.e. the tree 
+	 is _not_ a BST. However, the nodes do have a parent reference.
 
 */
 
@@ -28,69 +28,49 @@ import java.util.*;
 
 
 public class LowestCommonAncestor {
-   public static class Node {
-      int val;
-      Node left;
-      Node right;
-      Node parent;
-      public Node(Node parent, int val) {
-         this.parent = parent;
-         this.val = val;
-      }
-   }
+	public static class Node {
+		int val;
+		Node left;
+		Node right;
+		public Node(int val) {
+			this.val = val;
+		}
+    public String toString() {
+      return String.valueOf(val);
+    }
+	}
 
 
-   public Node lowestCommonAncestor(Node foo, Node bar) {
-      Set<Node> visited = new HashSet<>();
-      return lowestCommonAncestor(foo, bar, visited);
-   }
+	public static Node findLCA(Node root, Node p, Node q) {
+		// both p and q are on left
+		if (covers(root.left, p) && covers(root.left, q)) {
+			return findLCA(root.left, p, q);
+		}
+		if (covers(root.right, p) && covers(root.right, q)) {
+			return findLCA(root.right, p, q);
+		}
+		return root;
+	}
 
-   public Node lowestCommonAncestor(Node foo, Node bar, Set<Node> visited) {
-      if (foo == null || bar == null) {
-         if (foo == null && bar == null) {
-            return null;
-         }
-         if (foo != null) {
-            return foo.parent;
-         }
-         if (bar != null) {
-            return bar.parent;
-         }
-      }
-      if (foo.parent == bar.parent) {
-         return foo.parent;
-      }
-
-      if (isChild(foo.parent, bar, visited)) {
-         return foo.parent;
-      }
-
-      return lowestCommonAncestor(foo.parent, bar);
-   }
-
-   private boolean isChild(Node parent, Node child, Set<Node> visited) {
-      if (child == null) {
-         return false;
-      }
-      if (visited.contains(parent)) {
-         return false;
-      }
-      visited.add(parent);
-      if (parent.left == child || parent.right == child) {
-         return true;
-      }
-      if (parent.left != null) {
-         if (isChild(parent.left, child, visited)) {
-            return true;
-         }
-      }
-      if (parent.right != null) {
-         if (isChild(parent.right, child, visited)) {
-            return true;
-         }
-      }
-      return false;
-   }
-
+	static boolean covers(Node root, Node p) {
+		if (root == null) return false;
+		if (root == p) return true;
+		return covers(root.left, p) || covers(root.right, p);
+	}
+	public static void main(String[] args) { 
+		// Driver program to test above function
+		// Let's create the Binary Tree shown in above diagram
+		Node root = new Node(1);
+		Node n2 = root.left = new Node(2);
+		Node n3 = root.right = new Node(3);
+		Node n4 = root.left.left = new Node(4);
+		Node n5 = root.left.right = new Node(5);
+		Node n6 = root.right.left = new Node(6);
+		root.right.right = new Node(7);
+		System.out.println("LCA[4, 5) " + findLCA(root, n4, n5)); 
+		System.out.println("LCA[4, 6) " + findLCA(root, n4, n6)); 
+		System.out.println("LCA[3, 4) " + findLCA(root, n3, n4)); 
+		System.out.println("LCA[2, 4) " + findLCA(root, n2, n4)); 
+	}
 }
 
