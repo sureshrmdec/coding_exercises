@@ -46,6 +46,7 @@ public class LowestCommonAncestor {
 		if (covers(root.left, p) && covers(root.left, q)) {
 			return findLCA(root.left, p, q);
 		}
+		// both p and q are on right
 		if (covers(root.right, p) && covers(root.right, q)) {
 			return findLCA(root.right, p, q);
 		}
