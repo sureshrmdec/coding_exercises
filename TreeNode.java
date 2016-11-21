@@ -188,6 +188,7 @@ public class TreeNode {
       return sortedArrayToBST(num, 0, num.length - 1);
    }
 
+   // create minimal depth BST
    public TreeNode sortedArrayToBST(int[] num, int start, int end) {
       if (start > end)
          return null;
