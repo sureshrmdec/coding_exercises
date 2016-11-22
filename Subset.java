@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Subset {
   public static List<List<Integer>> subsets(List<Integer> set) {
-    int max = (int) Math.pow(2, set.size());
+    int max = 1 << set.size(); //(int) Math.pow(2, set.size());
     List<List<Integer>> subsets = new ArrayList<>();
     for (int i=0; i<max; i++) {
       List<Integer> subset = new ArrayList<>();
