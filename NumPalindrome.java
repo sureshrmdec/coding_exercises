@@ -3,9 +3,6 @@ public class NumPalindrome {
     //boolean negative = x < 0;
     x = Math.abs(x);
     int y = palindrome(x, x);
-    if (y == -1) {
-      return false;
-    }
     return y != -1;
   }
   
